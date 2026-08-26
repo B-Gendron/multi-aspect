@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LLM Multi-Aspect Experiment Dashboard</title>
+    <title>Multi-Aspect Experiments</title>
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 20px; background-color: #f8f9fa; color: #212529; }
@@ -14,7 +14,7 @@
         .checkbox-panel { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; font-weight: normal; text-transform: none; }
         .checkbox-panel label { display: flex; align-items: center; gap: 4px; background: #f1f3f5; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; user-select: none; }
         .checkbox-panel label:hover { background: #e9ecef; }
-        
+        æ
         .metric-switch { background: #ebf5fb; border: 1px solid #aed6f1; padding: 8px 12px; border-radius: 6px; }
         .metric-switch select { margin-top: 4px; padding: 5px 8px; border-radius: 4px; border: 1px solid #3498db; font-weight: 600; font-size: 13px; background: #fff; cursor: pointer; }
         
@@ -35,7 +35,7 @@
 </head>
 <body>
 
-    <h1>LLM Multi-Aspect Fine-Tuning Dashboard</h1>
+    <h1>Multi-Aspect Controlled Generation Experiments Dashboard</h1>
     <div class="subtitle">Evaluated runs only. Config counterparts (Frozen vs. Defrozen Adapters) are placed side-by-side for direct visual comparison.</div>
 
     <div class="controls">
@@ -66,18 +66,18 @@
         </div>
 
         <div class="control-group">
-            <label>E.tr (Emb Trainable)</label>
+            <label>Embedding State</label>
             <div class="checkbox-panel">
-                <label><input type="checkbox" class="filter-etr" value="true" checked onchange="updateDashboard()"> E.tr</label>
-                <label><input type="checkbox" class="filter-etr" value="false" checked onchange="updateDashboard()"> E.frz</label>
+                <label><input type="checkbox" class="filter-etr" value="false" checked onchange="updateDashboard()"> Frozen</label>
+                <label><input type="checkbox" class="filter-etr" value="true" checked onchange="updateDashboard()"> Trained</label>
             </div>
         </div>
 
         <div class="control-group">
-            <label>A.tr (Adapter State)</label>
+            <label>Adapter State</label>
             <div class="checkbox-panel">
-                <label><input type="checkbox" class="filter-atr" value="false" checked onchange="updateDashboard()"> <span class="tag-blue">A.frz (Blue)</span></label>
-                <label><input type="checkbox" class="filter-atr" value="true" checked onchange="updateDashboard()"> <span class="tag-red">A.tr (Red)</span></label>
+                <label><input type="checkbox" class="filter-atr" value="false" checked onchange="updateDashboard()"> <span class="tag-blue">Frozen</span></label>
+                <label><input type="checkbox" class="filter-atr" value="true" checked onchange="updateDashboard()"> <span class="tag-red">Trained</span></label>
             </div>
         </div>
 
@@ -167,15 +167,15 @@
             ] : [
                 { key: 'CEFR_MAE', title: 'CEFR Level (MAE ↓)', axis: 'y' },
                 { key: 'Polarity_MCC', title: 'Emotion Polarity (MCC ↑)', axis: 'y2' },
-                { key: 'Load_MAE', title: 'Emotion Load (MAE ↓)', axis: 'y3' }
+                { key: 'Load_MAE', title: 'Emotion Load (MCC ↑)', axis: 'y3' }
             ];
 
             const groupKeys = Array.from(new Set(filtered.map(r => `${r.Emb_Init} | ${r.E_tr ? 'E.tr' : 'E.frz'} | ${formatAdapterInit(r.Adapter_Init)}`)));
 
             const traces = [];
             const states = [
-                { isAtr: false, name: 'Adapter Frozen (A.frz)', color: '#2b5c8f' },
-                { isAtr: true, name: 'Adapter Trainable (A.tr)', color: '#c0392b' }
+                { isAtr: false, name: 'Adapters Frozen (A.frz)', color: '#2b5c8f' },
+                { isAtr: true, name: 'Adapters Trained (A.tr)', color: '#c0392b' }
             ];
 
             states.forEach(state => {
@@ -237,3 +237,4 @@
     </script>
 </body>
 </html>
+
