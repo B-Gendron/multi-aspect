@@ -18,6 +18,9 @@
         .metric-switch { background: #ebf5fb; border: 1px solid #aed6f1; padding: 8px 12px; border-radius: 6px; }
         .metric-switch select { margin-top: 4px; padding: 5px 8px; border-radius: 4px; border: 1px solid #3498db; font-weight: 600; font-size: 13px; background: #fff; cursor: pointer; }
         
+        .group-switch { background: #fcf3cf; border: 1px solid #f9e79f; padding: 8px 12px; border-radius: 6px; }
+        .group-switch select { margin-top: 4px; padding: 5px 8px; border-radius: 4px; border: 1px solid #f39c12; font-weight: 600; font-size: 13px; background: #fff; cursor: pointer; }
+
         .stats-badge { margin-left: auto; background: #2c3e50; color: white; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; align-self: center; }
         
         #chart-container { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); margin-bottom: 25px; }
@@ -30,7 +33,7 @@
         tr:nth-child(even) { background-color: #f8f9fa; }
         tr:hover { background-color: #e8f4f8; }
         
-        .tag-blue { color: #2980b9; font-weight: bold; }
+        .tag-blue { color: #2b5c8f; font-weight: bold; }
         .tag-red { color: #c0392b; font-weight: bold; }
         .sort-icon { font-size: 10px; margin-left: 4px; opacity: 0.6; }
     </style>
@@ -38,7 +41,7 @@
 <body>
 
     <h1>Multi-Aspect Controlled Generation Experiments Dashboard</h1>
-    <div class="subtitle">Evaluated runs only. Config counterparts (Frozen vs. Defrozen Adapters) are placed side-by-side for direct visual comparison. Click any column header to sort.</div>
+    <div class="subtitle">Evaluated runs only. Config counterparts are placed side-by-side for direct visual comparison. Click any column header to sort.</div>
 
     <div class="controls">
         <div class="control-group metric-switch">
@@ -49,37 +52,47 @@
             </select>
         </div>
 
+        <div class="control-group group-switch">
+            <label style="color:#7d6608;">🎨 Group & Color By</label>
+            <select id="group-mode" onchange="updateDashboard()">
+                <option value="A_tr">Adapter State (A.frz vs A.tr)</option>
+                <option value="E_tr">Embedding State (E.frz vs E.tr)</option>
+                <option value="Adapter_Init">Adapter Init (Scratch vs Pretrained)</option>
+                <option value="Emb_Init">Embedding Init (NoEmb / Rand / Sem / CLM)</option>
+            </select>
+        </div>
+
         <div class="control-group">
             <label>Embedding Init</label>
             <div class="checkbox-panel">
-                <label><input type="checkbox" class="filter-emb" value="Sem" checked onchange="updateDashboard()"> Sem</label>
-                <label><input type="checkbox" class="filter-emb" value="CLM" checked onchange="updateDashboard()"> CLM</label>
-                <label><input type="checkbox" class="filter-emb" value="Rand" checked onchange="updateDashboard()"> Rand</label>
-                <label><input type="checkbox" class="filter-emb" value="NoEmb" checked onchange="updateDashboard()"> NoEmb</label>
+                <label><input type="checkbox" class="filter-emb" value="Sem" checked onchange="updateDashboard()"> <span id="lbl-emb-Sem">Sem</span></label>
+                <label><input type="checkbox" class="filter-emb" value="CLM" checked onchange="updateDashboard()"> <span id="lbl-emb-CLM">CLM</span></label>
+                <label><input type="checkbox" class="filter-emb" value="Rand" checked onchange="updateDashboard()"> <span id="lbl-emb-Rand">Rand</span></label>
+                <label><input type="checkbox" class="filter-emb" value="NoEmb" checked onchange="updateDashboard()"> <span id="lbl-emb-NoEmb">NoEmb</span></label>
             </div>
         </div>
 
         <div class="control-group">
             <label>Adapter Init</label>
             <div class="checkbox-panel">
-                <label><input type="checkbox" class="filter-adapter" value="Scratch" checked onchange="updateDashboard()"> Scratch</label>
-                <label><input type="checkbox" class="filter-adapter" value="Pretrained" checked onchange="updateDashboard()"> Pretrained</label>
+                <label><input type="checkbox" class="filter-adapter" value="Scratch" checked onchange="updateDashboard()"> <span id="lbl-adp-Scratch">Scratch</span></label>
+                <label><input type="checkbox" class="filter-adapter" value="Pretrained" checked onchange="updateDashboard()"> <span id="lbl-adp-Pretrained">Pretrained</span></label>
             </div>
         </div>
 
         <div class="control-group">
             <label>Embedding State</label>
             <div class="checkbox-panel">
-                <label><input type="checkbox" class="filter-etr" value="false" checked onchange="updateDashboard()"> Frozen</label>
-                <label><input type="checkbox" class="filter-etr" value="true" checked onchange="updateDashboard()"> Trained</label>
+                <label><input type="checkbox" class="filter-etr" value="false" checked onchange="updateDashboard()"> <span id="lbl-etr-false">Frozen</span></label>
+                <label><input type="checkbox" class="filter-etr" value="true" checked onchange="updateDashboard()"> <span id="lbl-etr-true">Trained</span></label>
             </div>
         </div>
 
         <div class="control-group">
             <label>Adapter State</label>
             <div class="checkbox-panel">
-                <label><input type="checkbox" class="filter-atr" value="false" checked onchange="updateDashboard()"> <span class="tag-blue">Frozen</span></label>
-                <label><input type="checkbox" class="filter-atr" value="true" checked onchange="updateDashboard()"> <span class="tag-red">Trained</span></label>
+                <label><input type="checkbox" class="filter-atr" value="false" checked onchange="updateDashboard()"> <span id="lbl-atr-false">Frozen</span></label>
+                <label><input type="checkbox" class="filter-atr" value="true" checked onchange="updateDashboard()"> <span id="lbl-atr-true">Trained</span></label>
             </div>
         </div>
 
@@ -134,8 +147,6 @@
                 currentSortAsc = !currentSortAsc;
             } else {
                 currentSortKey = key;
-                // MAE metric is better when lower -> default to ascending (lowest first)
-                // All other metrics/fields default to descending (highest/best first)
                 if (key === 'CEFR_MAE' || key === 'Config') {
                     currentSortAsc = true;
                 } else {
@@ -161,8 +172,46 @@
             });
         }
 
+        function updateCheckboxColors(groupMode) {
+            // Reset all checkbox label styles first
+            const allLabels = document.querySelectorAll('.checkbox-panel span');
+            allLabels.forEach(el => {
+                el.style.color = '';
+                el.style.fontWeight = '';
+            });
+
+            const applyStyle = (id, color) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.style.color = color;
+                    el.style.fontWeight = 'bold';
+                }
+            };
+
+            // Apply target group colors to active checkbox texts
+            if (groupMode === 'A_tr') {
+                applyStyle('lbl-atr-false', '#2b5c8f');
+                applyStyle('lbl-atr-true', '#c0392b');
+            } else if (groupMode === 'E_tr') {
+                applyStyle('lbl-etr-false', '#2b5c8f');
+                applyStyle('lbl-etr-true', '#c0392b');
+            } else if (groupMode === 'Adapter_Init') {
+                applyStyle('lbl-adp-Scratch', '#2b5c8f');
+                applyStyle('lbl-adp-Pretrained', '#c0392b');
+            } else if (groupMode === 'Emb_Init') {
+                applyStyle('lbl-emb-NoEmb', '#7f8c8d');
+                applyStyle('lbl-emb-Rand', '#e67e22');
+                applyStyle('lbl-emb-Sem', '#16a085');
+                applyStyle('lbl-emb-CLM', '#8e44ad');
+            }
+        }
+
         function updateDashboard() {
             const mode = document.getElementById('metric-mode').value;
+            const groupMode = document.getElementById('group-mode').value;
+
+            updateCheckboxColors(groupMode);
+
             const selectedEmbs = getCheckedValues('filter-emb');
             const selectedAdapters = getCheckedValues('filter-adapter');
             const selectedEtr = getCheckedValues('filter-etr');
@@ -228,13 +277,40 @@
                 { key: 'Load_MCC', title: 'Emotion Load (MCC ↑)', axis: 'y3' }
             ];
 
-            const groupKeys = Array.from(new Set(filtered.map(r => `${r.Emb_Init} | ${r.E_tr ? 'E.tr' : 'E.frz'} | ${formatAdapterInit(r.Adapter_Init)}`)));
+            let states = [];
+            let getGroupKey = (r) => '';
+
+            if (groupMode === 'A_tr') {
+                getGroupKey = r => `${r.Emb_Init} | ${r.E_tr ? 'E.tr' : 'E.frz'} | ${formatAdapterInit(r.Adapter_Init)}`;
+                states = [
+                    { match: r => r.A_tr === false, name: 'Adapters Frozen (A.frz)', color: '#2b5c8f' },
+                    { match: r => r.A_tr === true, name: 'Adapters Trained (A.tr)', color: '#c0392b' }
+                ];
+            } else if (groupMode === 'E_tr') {
+                getGroupKey = r => `${r.Emb_Init} | ${formatAdapterInit(r.Adapter_Init)} | ${r.A_tr ? 'A.tr' : 'A.frz'}`;
+                states = [
+                    { match: r => r.E_tr === false, name: 'Embedding Frozen (E.frz)', color: '#2b5c8f' },
+                    { match: r => r.E_tr === true, name: 'Embedding Trained (E.tr)', color: '#c0392b' }
+                ];
+            } else if (groupMode === 'Adapter_Init') {
+                getGroupKey = r => `${r.Emb_Init} | ${r.E_tr ? 'E.tr' : 'E.frz'} | ${r.A_tr ? 'A.tr' : 'A.frz'}`;
+                states = [
+                    { match: r => r.Adapter_Init === 'Scratch', name: 'Adapter: Scratch', color: '#2b5c8f' },
+                    { match: r => r.Adapter_Init === 'Pretrained', name: 'Adapter: Pretrained', color: '#c0392b' }
+                ];
+            } else if (groupMode === 'Emb_Init') {
+                getGroupKey = r => `${r.E_tr ? 'E.tr' : 'E.frz'} | ${formatAdapterInit(r.Adapter_Init)} | ${r.A_tr ? 'A.tr' : 'A.frz'}`;
+                states = [
+                    { match: r => r.Emb_Init === 'NoEmb', name: 'Emb: NoEmb', color: '#7f8c8d' },
+                    { match: r => r.Emb_Init === 'Rand', name: 'Emb: Rand', color: '#e67e22' },
+                    { match: r => r.Emb_Init === 'Sem', name: 'Emb: Sem', color: '#16a085' },
+                    { match: r => r.Emb_Init === 'CLM', name: 'Emb: CLM', color: '#8e44ad' }
+                ];
+            }
+
+            const groupKeys = Array.from(new Set(filtered.map(getGroupKey)));
 
             const traces = [];
-            const states = [
-                { isAtr: false, name: 'Adapters Frozen (A.frz)', color: '#2b5c8f' },
-                { isAtr: true, name: 'Adapters Trained (A.tr)', color: '#c0392b' }
-            ];
 
             states.forEach(state => {
                 metrics.forEach((m, mIdx) => {
@@ -243,7 +319,7 @@
                     const hoverTexts = [];
 
                     groupKeys.forEach(gKey => {
-                        const match = filtered.find(r => `${r.Emb_Init} | ${r.E_tr ? 'E.tr' : 'E.frz'} | ${formatAdapterInit(r.Adapter_Init)}` === gKey && r.A_tr === state.isAtr);
+                        const match = filtered.find(r => getGroupKey(r) === gKey && state.match(r));
                         if (match) {
                             xVals.push(gKey);
                             yVals.push(match[m.key]);
