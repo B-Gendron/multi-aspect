@@ -24,19 +24,21 @@
         #table-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); overflow-x: auto; }
         
         table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
-        th { background-color: #2c3e50; color: white; padding: 9px; font-weight: 600; }
+        th { background-color: #2c3e50; color: white; padding: 9px; font-weight: 600; cursor: pointer; user-select: none; }
+        th:hover { background-color: #34495e; }
         td { padding: 7px 9px; border-bottom: 1px solid #dee2e6; }
         tr:nth-child(even) { background-color: #f8f9fa; }
         tr:hover { background-color: #e8f4f8; }
         
         .tag-blue { color: #2980b9; font-weight: bold; }
         .tag-red { color: #c0392b; font-weight: bold; }
+        .sort-icon { font-size: 10px; margin-left: 4px; opacity: 0.6; }
     </style>
 </head>
 <body>
 
     <h1>Multi-Aspect Controlled Generation Experiments Dashboard</h1>
-    <div class="subtitle">Evaluated runs only. Config counterparts (Frozen vs. Defrozen Adapters) are placed side-by-side for direct visual comparison.</div>
+    <div class="subtitle">Evaluated runs only. Config counterparts (Frozen vs. Defrozen Adapters) are placed side-by-side for direct visual comparison. Click any column header to sort.</div>
 
     <div class="controls">
         <div class="control-group metric-switch">
@@ -93,17 +95,17 @@
         <table>
             <thead>
                 <tr>
-                    <th>Config #</th>
-                    <th>Emb Init</th>
-                    <th>E.tr</th>
-                    <th>Adapter Init</th>
-                    <th>A.tr</th>
-                    <th>CEFR wF1 ↑</th>
-                    <th>CEFR MAE ↓</th>
-                    <th>Polarity wF1 ↑</th>
-                    <th>Polarity MCC ↑</th>
-                    <th>Load wF1 ↑</th>
-                    <th>Load MCC ↑</th>
+                    <th onclick="handleSort('Config')">Config # <span id="sort-Config" class="sort-icon"></span></th>
+                    <th onclick="handleSort('Emb_Init')">Emb Init <span id="sort-Emb_Init" class="sort-icon"></span></th>
+                    <th onclick="handleSort('E_tr')">E.tr <span id="sort-E_tr" class="sort-icon"></span></th>
+                    <th onclick="handleSort('Adapter_Init')">Adapter Init <span id="sort-Adapter_Init" class="sort-icon"></span></th>
+                    <th onclick="handleSort('A_tr')">A.tr <span id="sort-A_tr" class="sort-icon"></span></th>
+                    <th onclick="handleSort('CEFR_wF1')">CEFR wF1 ↑ <span id="sort-CEFR_wF1" class="sort-icon"></span></th>
+                    <th onclick="handleSort('CEFR_MAE')">CEFR MAE ↓ <span id="sort-CEFR_MAE" class="sort-icon"></span></th>
+                    <th onclick="handleSort('Polarity_wF1')">Polarity wF1 ↑ <span id="sort-Polarity_wF1" class="sort-icon"></span></th>
+                    <th onclick="handleSort('Polarity_MCC')">Polarity MCC ↑ <span id="sort-Polarity_MCC" class="sort-icon"></span></th>
+                    <th onclick="handleSort('Load_wF1')">Load wF1 ↑ <span id="sort-Load_wF1" class="sort-icon"></span></th>
+                    <th onclick="handleSort('Load_MCC')">Load MCC ↑ <span id="sort-Load_MCC" class="sort-icon"></span></th>
                 </tr>
             </thead>
             <tbody id="table-body"></tbody>
@@ -112,6 +114,10 @@
 
     <script>
         const rawData = [{"Config": 1, "Emb_Init": "NoEmb", "E_tr": false, "Adapter_Init": "Scratch", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.27, "CEFR_MAE": 1.22, "Polarity_wF1": 0.57, "Polarity_MCC": 0.42, "Load_wF1": 0.44, "Load_MCC": -0.08}, {"Config": 2, "Emb_Init": "NoEmb", "E_tr": false, "Adapter_Init": "Scratch", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.44, "CEFR_MAE": 0.7, "Polarity_wF1": 0.69, "Polarity_MCC": 0.6, "Load_wF1": 0.64, "Load_MCC": 0.46}, {"Config": 3, "Emb_Init": "NoEmb", "E_tr": false, "Adapter_Init": "Pretrained", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.27, "CEFR_MAE": 1.06, "Polarity_wF1": 0.58, "Polarity_MCC": 0.59, "Load_wF1": 0.33, "Load_MCC": 0.0}, {"Config": 4, "Emb_Init": "NoEmb", "E_tr": false, "Adapter_Init": "Pretrained", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.5, "CEFR_MAE": 0.61, "Polarity_wF1": 0.7, "Polarity_MCC": 0.62, "Load_wF1": 0.8, "Load_MCC": 0.62}, {"Config": 5, "Emb_Init": "Rand", "E_tr": false, "Adapter_Init": "Scratch", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.14, "CEFR_MAE": 1.96, "Polarity_wF1": 0.3, "Polarity_MCC": -0.01, "Load_wF1": 0.46, "Load_MCC": 0.01}, {"Config": 6, "Emb_Init": "Rand", "E_tr": false, "Adapter_Init": "Scratch", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.26, "CEFR_MAE": 1.28, "Polarity_wF1": 0.35, "Polarity_MCC": 0.04, "Load_wF1": 0.51, "Load_MCC": 0.05}, {"Config": 7, "Emb_Init": "Rand", "E_tr": false, "Adapter_Init": "Pretrained", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.35, "CEFR_MAE": 0.81, "Polarity_wF1": 0.72, "Polarity_MCC": 0.58, "Load_wF1": 0.88, "Load_MCC": 0.78}, {"Config": 8, "Emb_Init": "Rand", "E_tr": false, "Adapter_Init": "Pretrained", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.48, "CEFR_MAE": 0.61, "Polarity_wF1": 0.68, "Polarity_MCC": 0.63, "Load_wF1": 0.74, "Load_MCC": 0.58}, {"Config": 9, "Emb_Init": "Rand", "E_tr": true, "Adapter_Init": "Scratch", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.21, "CEFR_MAE": 1.54, "Polarity_wF1": 0.3, "Polarity_MCC": 0.03, "Load_wF1": 0.51, "Load_MCC": 0.06}, {"Config": 10, "Emb_Init": "Rand", "E_tr": true, "Adapter_Init": "Scratch", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.3, "CEFR_MAE": 1.21, "Polarity_wF1": 0.56, "Polarity_MCC": 0.37, "Load_wF1": 0.43, "Load_MCC": -0.05}, {"Config": 11, "Emb_Init": "Rand", "E_tr": true, "Adapter_Init": "Pretrained", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.51, "CEFR_MAE": 0.58, "Polarity_wF1": 0.77, "Polarity_MCC": 0.7, "Load_wF1": 0.81, "Load_MCC": 0.67}, {"Config": 12, "Emb_Init": "Rand", "E_tr": true, "Adapter_Init": "Pretrained", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.51, "CEFR_MAE": 0.61, "Polarity_wF1": 0.8, "Polarity_MCC": 0.72, "Load_wF1": 0.81, "Load_MCC": 0.65}, {"Config": 13, "Emb_Init": "Sem", "E_tr": false, "Adapter_Init": "Scratch", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.25, "CEFR_MAE": 1.3, "Polarity_wF1": 0.45, "Polarity_MCC": 0.22, "Load_wF1": 0.46, "Load_MCC": -0.08}, {"Config": 14, "Emb_Init": "Sem", "E_tr": false, "Adapter_Init": "Scratch", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.4, "CEFR_MAE": 0.81, "Polarity_wF1": 0.66, "Polarity_MCC": 0.58, "Load_wF1": 0.78, "Load_MCC": 0.6}, {"Config": 15, "Emb_Init": "Sem", "E_tr": false, "Adapter_Init": "Pretrained", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.34, "CEFR_MAE": 0.81, "Polarity_wF1": 0.74, "Polarity_MCC": 0.61, "Load_wF1": 0.86, "Load_MCC": 0.74}, {"Config": 16, "Emb_Init": "Sem", "E_tr": false, "Adapter_Init": "Pretrained", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.51, "CEFR_MAE": 0.58, "Polarity_wF1": 0.74, "Polarity_MCC": 0.65, "Load_wF1": 0.78, "Load_MCC": 0.61}, {"Config": 17, "Emb_Init": "Sem", "E_tr": true, "Adapter_Init": "Scratch", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.39, "CEFR_MAE": 0.85, "Polarity_wF1": 0.6, "Polarity_MCC": 0.49, "Load_wF1": 0.56, "Load_MCC": 0.28}, {"Config": 18, "Emb_Init": "Sem", "E_tr": true, "Adapter_Init": "Scratch", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.47, "CEFR_MAE": 0.67, "Polarity_wF1": 0.62, "Polarity_MCC": 0.53, "Load_wF1": 0.91, "Load_MCC": 0.82}, {"Config": 19, "Emb_Init": "Sem", "E_tr": true, "Adapter_Init": "Pretrained", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.52, "CEFR_MAE": 0.62, "Polarity_wF1": 0.78, "Polarity_MCC": 0.71, "Load_wF1": 0.81, "Load_MCC": 0.67}, {"Config": 20, "Emb_Init": "Sem", "E_tr": true, "Adapter_Init": "Pretrained", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.54, "CEFR_MAE": 0.57, "Polarity_wF1": 0.75, "Polarity_MCC": 0.67, "Load_wF1": 0.83, "Load_MCC": 0.71}, {"Config": 21, "Emb_Init": "CLM", "E_tr": false, "Adapter_Init": "Scratch", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.2, "CEFR_MAE": 1.73, "Polarity_wF1": 0.48, "Polarity_MCC": 0.23, "Load_wF1": 0.41, "Load_MCC": -0.06}, {"Config": 22, "Emb_Init": "CLM", "E_tr": false, "Adapter_Init": "Scratch", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.4, "CEFR_MAE": 1.0, "Polarity_wF1": 0.93, "Polarity_MCC": 0.9, "Load_wF1": 0.84, "Load_MCC": 0.69}, {"Config": 23, "Emb_Init": "CLM", "E_tr": false, "Adapter_Init": "Pretrained", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.25, "CEFR_MAE": 1.5, "Polarity_wF1": 0.7, "Polarity_MCC": 0.66, "Load_wF1": 0.89, "Load_MCC": 0.8}, {"Config": 24, "Emb_Init": "CLM", "E_tr": false, "Adapter_Init": "Pretrained", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.44, "CEFR_MAE": 0.81, "Polarity_wF1": 0.92, "Polarity_MCC": 0.89, "Load_wF1": 0.86, "Load_MCC": 0.74}, {"Config": 25, "Emb_Init": "CLM", "E_tr": true, "Adapter_Init": "Scratch", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.17, "CEFR_MAE": 1.86, "Polarity_wF1": 0.49, "Polarity_MCC": 0.28, "Load_wF1": 0.38, "Load_MCC": -0.11}, {"Config": 26, "Emb_Init": "CLM", "E_tr": true, "Adapter_Init": "Scratch", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.45, "CEFR_MAE": 0.81, "Polarity_wF1": 0.97, "Polarity_MCC": 0.96, "Load_wF1": 0.84, "Load_MCC": 0.69}, {"Config": 27, "Emb_Init": "CLM", "E_tr": true, "Adapter_Init": "Pretrained", "A_tr": false, "Status": "EVALUATED", "CEFR_wF1": 0.24, "CEFR_MAE": 1.52, "Polarity_wF1": 0.66, "Polarity_MCC": 0.63, "Load_wF1": 0.84, "Load_MCC": 0.72}, {"Config": 28, "Emb_Init": "CLM", "E_tr": true, "Adapter_Init": "Pretrained", "A_tr": true, "Status": "EVALUATED", "CEFR_wF1": 0.44, "CEFR_MAE": 0.91, "Polarity_wF1": 0.9, "Polarity_MCC": 0.84, "Load_wF1": 0.94, "Load_MCC": 0.88}];
+        
+        // Sorting State Management
+        let currentSortKey = 'Config';
+        let currentSortAsc = true; // Default ascending by Config #
 
         function getCheckedValues(className) {
             return Array.from(document.querySelectorAll('.' + className + ':checked')).map(cb => cb.value);
@@ -121,6 +127,38 @@
             if (val === 'Scratch') return 'scr';
             if (val === 'Pretrained') return 'pre';
             return val;
+        }
+
+        function handleSort(key) {
+            if (currentSortKey === key) {
+                currentSortAsc = !currentSortAsc;
+            } else {
+                currentSortKey = key;
+                // MAE metric is better when lower -> default to ascending (lowest first)
+                // All other metrics/fields default to descending (highest/best first)
+                if (key === 'CEFR_MAE' || key === 'Config') {
+                    currentSortAsc = true;
+                } else {
+                    currentSortAsc = false;
+                }
+            }
+            updateDashboard();
+        }
+
+        function updateSortIcons() {
+            const keys = ['Config', 'Emb_Init', 'E_tr', 'Adapter_Init', 'A_tr', 'CEFR_wF1', 'CEFR_MAE', 'Polarity_wF1', 'Polarity_MCC', 'Load_wF1', 'Load_MCC'];
+            keys.forEach(k => {
+                const el = document.getElementById(`sort-${k}`);
+                if (el) {
+                    if (k === currentSortKey) {
+                        el.innerText = currentSortAsc ? '▲' : '▼';
+                        el.style.opacity = '1';
+                    } else {
+                        el.innerText = '';
+                        el.style.opacity = '0.3';
+                    }
+                }
+            });
         }
 
         function updateDashboard() {
@@ -140,9 +178,29 @@
 
             document.getElementById('stats-badge').innerText = `Showing ${filtered.length} / ${rawData.length} Evaluated Runs`;
 
+            // Sort filtered data for the table rendering
+            const sortedData = [...filtered].sort((a, b) => {
+                let valA = a[currentSortKey];
+                let valB = b[currentSortKey];
+
+                if (valA === undefined) valA = currentSortAsc ? Infinity : -Infinity;
+                if (valB === undefined) valB = currentSortAsc ? Infinity : -Infinity;
+
+                if (typeof valA === 'boolean') {
+                    valA = valA ? 1 : 0;
+                    valB = valB ? 1 : 0;
+                }
+
+                if (valA < valB) return currentSortAsc ? -1 : 1;
+                if (valA > valB) return currentSortAsc ? 1 : -1;
+                return 0;
+            });
+
+            updateSortIcons();
+
             const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
-            filtered.forEach(r => {
+            sortedData.forEach(r => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td><strong>#${r.Config}</strong></td>
@@ -237,3 +295,4 @@
     </script>
 </body>
 </html>
+
