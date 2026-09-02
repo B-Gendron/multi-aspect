@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Single-Aspect Multi-Task Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; margin: 20px; background-color: #f8f9fa; color: #212529; }
+        h1 { margin-bottom: 4px; font-size: 22px; color: #1a252f; }
+        .subtitle { margin-bottom: 18px; color: #6c757d; font-size: 13px; }
+        
+        .controls { display: flex; flex-wrap: wrap; gap: 15px; background: white; padding: 16px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); margin-bottom: 20px; align-items: flex-start; }
+        .control-group { display: flex; flex-direction: column; font-size: 12px; font-weight: 700; color: #34495e; text-transform: uppercase; letter-spacing: 0.5px; }
+        .checkbox-panel { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; font-weight: normal; text-transform: none; }
+        .checkbox-panel label { display: flex; align-items: center; gap: 4px; background: #f1f3f5; padding: 4px 8px; border-radius: 4px; font-size: 12px; cursor: pointer; user-select: none; }
+        .checkbox-panel label:hover { background: #e9ecef; }
+        
+        .metric-switch { background: #ebf5fb; border: 1px solid #aed6f1; padding: 8px 12px; border-radius: 6px; }
+        .metric-switch select { margin-top: 4px; padding: 5px 8px; border-radius: 4px; border: 1px solid #3498db; font-weight: 600; font-size: 13px; background: #fff; cursor: pointer; }
+        
+        .group-switch { background: #fcf3cf; border: 1px solid #f9e79f; padding: 8px 12px; border-radius: 6px; }
+        .group-switch select { margin-top: 4px; padding: 5px 8px; border-radius: 4px; border: 1px solid #f39c12; font-weight: 600; font-size: 13px; background: #fff; cursor: pointer; }
+
+        .stats-badge { margin-left: auto; background: #2c3e50; color: white; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; align-self: center; }
+        
+        #chart-container { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); margin-bottom: 25px; }
+        #table-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); overflow-x: auto; }
+        
+        .table-header-row { margin-bottom: 15px; }
+        .table-header-row h3 { margin: 0; font-size: 16px; color: #2c3e50; }
+
+        table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
+        th { background-color: #2c3e50; color: white; padding: 9px; font-weight: 600; cursor: pointer; user-select: none; white-space: nowrap; }
+        th:hover { background-color: #34495e; }
+        td { padding: 7px 9px; border-bottom: 1px solid #dee2e6; white-space: nowrap; }
+        tr:nth-child(even) { background-color: #f8f9fa; }
+        tr:hover { background-color: #e8f4f8; }
+        
+        .tag-blue { color: #2b5c8f; font-weight: bold; }
+        .tag-red { color: #c0392b; font-weight: bold; }
+        .sort-icon { font-size: 10px; margin-left: 4px; opacity: 0.6; }
+    </style>
+</head>
+<body>
+
+    <h1>Single-Aspect Experiments Dashboard (3-Task View)</h1>
+    <div class="subtitle">Comparing CEFR, Polarity, and Emotional Load side-by-side across initialization states.</div>
+
+    <div class="controls">
+        <div class="control-group metric-switch">
+            <label style="color:#1b4f72;">📊 Metric Suite</label>
+            <select id="metric-suite" onchange="updateDashboard()">
+                <option value="wf1">Primary Metrics (CEFR wF1 / Polarity wF1 / Load wF1)</option>
+                <option value="sec">Secondary Metrics (CEFR MAE / Polarity MCC / Load MCC)</option>
+            </select>
+        </div>
+
+        <div class="control-group group-switch">
+            <label style="color:#7d6608;">🎨 Group & Color By</label>
+            <select id="group-mode" onchange="updateDashboard()">
+                <option value="embTrain">Embedding State (Frozen vs Trained)</option>
+                <option value="embInit">Embedding Init (NoEmb / Rand / Sem / CLM)</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <label>Embedding Init</label>
+            <div class="checkbox-panel">
+                <label><input type="checkbox" class="filter-emb" value="NoEmb" checked onchange="updateDashboard()"> <span id="lbl-emb-NoEmb">NoEmb</span></label>
+                <label><input type="checkbox" class="filter-emb" value="Rand" checked onchange="updateDashboard()"> <span id="lbl-emb-Rand">Rand</span></label>
+                <label><input type="checkbox" class="filter-emb" value="Sem" checked onchange="updateDashboard()"> <span id="lbl-emb-Sem">Sem</span></label>
+                <label><input type="checkbox" class="filter-emb" value="CLM" checked onchange="updateDashboard()"> <span id="lbl-emb-CLM">CLM</span></label>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label>Embedding State</label>
+            <div class="checkbox-panel">
+                <label><input type="checkbox" class="filter-etr" value="false" checked onchange="updateDashboard()"> <span id="lbl-etr-false">Frozen</span></label>
+                <label><input type="checkbox" class="filter-etr" value="true" checked onchange="updateDashboard()"> <span id="lbl-etr-true">Trained</span></label>
+            </div>
+        </div>
+
+        <div class="stats-badge" id="stats-badge">Showing 0 / 0 Runs</div>
+    </div>
+
+    <div id="chart-container">
+        <div id="plotly-div" style="width:100%; height:850px;"></div>
+    </div>
+
+    <div id="table-container">
+        <div class="table-header-row">
+            <h3>Evaluated Single-Aspect Runs</h3>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th onclick="handleSort('id')">ID <span id="sort-id" class="sort-icon"></span></th>
+                    <th onclick="handleSort('embInit')">Emb Init <span id="sort-embInit" class="sort-icon"></span></th>
+                    <th onclick="handleSort('embTrain')">Emb Train <span id="sort-embTrain" class="sort-icon"></span></th>
+                    <th onclick="handleSort('cefr_wF1')">CEFR wF1 ↑ <span id="sort-cefr_wF1" class="sort-icon"></span></th>
+                    <th onclick="handleSort('cefr_mae')">CEFR MAE ↓ <span id="sort-cefr_mae" class="sort-icon"></span></th>
+                    <th onclick="handleSort('polarity_wF1')">Polarity wF1 ↑ <span id="sort-polarity_wF1" class="sort-icon"></span></th>
+                    <th onclick="handleSort('polarity_mcc')">Polarity MCC ↑ <span id="sort-polarity_mcc" class="sort-icon"></span></th>
+                    <th onclick="handleSort('load_wF1')">Load wF1 ↑ <span id="sort-load_wF1" class="sort-icon"></span></th>
+                    <th onclick="handleSort('load_mcc')">Load MCC ↑ <span id="sort-load_mcc" class="sort-icon"></span></th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+    <script>
+        const dataset = [{"id": 1, "embInit": "NoEmb", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.523, "std": 0.006}, "cefr_mae": {"mean": 0.556, "std": 0.006}, "polarity_wF1": {"mean": 0.807, "std": 0.004}, "polarity_mcc": {"mean": 0.744, "std": 0.005}, "load_wF1": {"mean": 0.897, "std": 0.006}, "load_mcc": {"mean": 0.813, "std": 0.009}}}, {"id": 2, "embInit": "Rand", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.205, "std": 0.001}, "cefr_mae": {"mean": 1.609, "std": 0.077}, "polarity_wF1": {"mean": 0.812, "std": 0.013}, "polarity_mcc": {"mean": 0.734, "std": 0.017}, "load_wF1": {"mean": 0.959, "std": 0.002}, "load_mcc": {"mean": 0.92, "std": 0.004}}}, {"id": 3, "embInit": "Rand", "embTrain": true, "metrics": {"cefr_wF1": {"mean": 0.464, "std": 0.016}, "cefr_mae": {"mean": 0.746, "std": 0.014}, "polarity_wF1": {"mean": 0.811, "std": 0.005}, "polarity_mcc": {"mean": 0.732, "std": 0.005}, "load_wF1": {"mean": 0.985, "std": 0.005}, "load_mcc": {"mean": 0.971, "std": 0.009}}}, {"id": 4, "embInit": "Sem", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.491, "std": 0.007}, "cefr_mae": {"mean": 0.659, "std": 0.023}, "polarity_wF1": {"mean": 0.805, "std": 0.015}, "polarity_mcc": {"mean": 0.736, "std": 0.015}, "load_wF1": {"mean": 0.978, "std": 0.022}, "load_mcc": {"mean": 0.955, "std": 0.045}}}, {"id": 5, "embInit": "Sem", "embTrain": true, "metrics": {"cefr_wF1": {"mean": 0.53, "std": 0.016}, "cefr_mae": {"mean": 0.595, "std": 0.011}, "polarity_wF1": {"mean": 0.796, "std": 0.0}, "polarity_mcc": {"mean": 0.743, "std": 0.0}, "load_wF1": {"mean": 1.0, "std": 0.0}, "load_mcc": {"mean": 0.999, "std": 0.001}}}, {"id": 6, "embInit": "CLM", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.412, "std": 0.007}, "cefr_mae": {"mean": 0.887, "std": 0.014}, "polarity_wF1": {"mean": 0.979, "std": 0.0}, "polarity_mcc": {"mean": 0.969, "std": 0.0}, "load_wF1": {"mean": 1.0, "std": 0.0}, "load_mcc": {"mean": 1.0, "std": 0.0}}}, {"id": 7, "embInit": "CLM", "embTrain": true, "metrics": {"cefr_wF1": {"mean": 0.505, "std": 0.009}, "cefr_mae": {"mean": 0.615, "std": 0.001}, "polarity_wF1": {"mean": 0.974, "std": 0.001}, "polarity_mcc": {"mean": 0.961, "std": 0.002}, "load_wF1": {"mean": 1.0, "std": 0.0}, "load_mcc": {"mean": 1.0, "std": 0.0}}}];
+
+        let currentSortKey = 'id';
+        let currentSortAsc = true;
+
+        function getCheckedValues(className) {
+            return Array.from(document.querySelectorAll('.' + className + ':checked')).map(cb => cb.value);
+        }
+
+        function getMetricObj(r, metricKey) {
+            return r.metrics && r.metrics[metricKey] ? r.metrics[metricKey] : null;
+        }
+
+        function formatMetricVal(r, metricKey) {
+            const m = getMetricObj(r, metricKey);
+            if (!m) return '-';
+            if (m.std !== undefined && m.std !== null) {
+                return `${m.mean.toFixed(3)} <span style="font-size: 0.8em; color: #6c757d;">± ${m.std.toFixed(3)}</span>`;
+            }
+            return m.mean.toFixed(3);
+        }
+
+        function handleSort(key) {
+            if (currentSortKey === key) {
+                currentSortAsc = !currentSortAsc;
+            } else {
+                currentSortKey = key;
+                currentSortAsc = key === 'id';
+            }
+            updateDashboard();
+        }
+
+        function updateSortIcons() {
+            const keys = ['id', 'embInit', 'embTrain', 'cefr_wF1', 'cefr_mae', 'polarity_wF1', 'polarity_mcc', 'load_wF1', 'load_mcc'];
+            keys.forEach(k => {
+                const el = document.getElementById(`sort-${k}`);
+                if (el) {
+                    if (k === currentSortKey) {
+                        el.innerText = currentSortAsc ? '▲' : '▼';
+                        el.style.opacity = '1';
+                    } else {
+                        el.innerText = '';
+                        el.style.opacity = '0.3';
+                    }
+                }
+            });
+        }
+
+        function updateCheckboxColors(groupMode) {
+            const allLabels = document.querySelectorAll('.checkbox-panel span');
+            allLabels.forEach(el => {
+                el.style.color = '';
+                el.style.fontWeight = '';
+            });
+
+            const applyStyle = (id, color) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.style.color = color;
+                    el.style.fontWeight = 'bold';
+                }
+            };
+
+            if (groupMode === 'embTrain') {
+                applyStyle('lbl-etr-false', '#2b5c8f');
+                applyStyle('lbl-etr-true', '#c0392b');
+            } else if (groupMode === 'embInit') {
+                applyStyle('lbl-emb-NoEmb', '#7f8c8d');
+                applyStyle('lbl-emb-Rand', '#e67e22');
+                applyStyle('lbl-emb-Sem', '#16a085');
+                applyStyle('lbl-emb-CLM', '#8e44ad');
+            }
+        }
+
+        function updateDashboard() {
+            const metricSuite = document.getElementById('metric-suite').value;
+            const groupMode = document.getElementById('group-mode').value;
+
+            // Map suite to target keys and labels
+            const cefrKey = metricSuite === 'wf1' ? 'cefr_wF1' : 'cefr_mae';
+            const polarityKey = metricSuite === 'wf1' ? 'polarity_wF1' : 'polarity_mcc';
+            const loadKey = metricSuite === 'wf1' ? 'load_wF1' : 'load_mcc';
+
+            updateCheckboxColors(groupMode);
+
+            const selectedEmbs = getCheckedValues('filter-emb');
+            const selectedEtr = getCheckedValues('filter-etr');
+
+            const filteredData = dataset.filter(d => {
+                const embMatch = selectedEmbs.includes(String(d.embInit));
+                const etrMatch = selectedEtr.includes(String(Boolean(d.embTrain)));
+                return embMatch && etrMatch;
+            });
+
+            document.getElementById('stats-badge').innerText = `Showing ${filteredData.length} / ${dataset.length} Runs`;
+
+            // Sort Table
+            const sortedData = [...filteredData].sort((a, b) => {
+                let valA, valB;
+
+                if (['id', 'embInit', 'embTrain'].includes(currentSortKey)) {
+                    valA = a[currentSortKey];
+                    valB = b[currentSortKey];
+                } else {
+                    const mA = getMetricObj(a, currentSortKey);
+                    const mB = getMetricObj(b, currentSortKey);
+                    valA = mA ? mA.mean : undefined;
+                    valB = mB ? mB.mean : undefined;
+                }
+
+                if (valA === undefined) valA = currentSortAsc ? Infinity : -Infinity;
+                if (valB === undefined) valB = currentSortAsc ? Infinity : -Infinity;
+
+                if (typeof valA === 'boolean') {
+                    valA = valA ? 1 : 0;
+                    valB = valB ? 1 : 0;
+                }
+
+                if (valA < valB) return currentSortAsc ? -1 : 1;
+                if (valA > valB) return currentSortAsc ? 1 : -1;
+                return 0;
+            });
+
+            updateSortIcons();
+
+            // Populate Table
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+            sortedData.forEach(r => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>#${r.id}</strong></td>
+                    <td>${r.embInit}</td>
+                    <td><span class="${r.embTrain ? 'tag-red' : 'tag-blue'}">${r.embTrain ? '✓' : ''}</span></td>
+                    <td>${formatMetricVal(r, 'cefr_wF1')}</td>
+                    <td>${formatMetricVal(r, 'cefr_mae')}</td>
+                    <td>${formatMetricVal(r, 'polarity_wF1')}</td>
+                    <td>${formatMetricVal(r, 'polarity_mcc')}</td>
+                    <td>${formatMetricVal(r, 'load_wF1')}</td>
+                    <td>${formatMetricVal(r, 'load_mcc')}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Construct 3 Subplot Traces
+            const traces = [];
+            const subplotConfigs = [
+                { metricKey: cefrKey, axisSuffix: '' },
+                { metricKey: polarityKey, axisSuffix: '2' },
+                { metricKey: loadKey, axisSuffix: '3' }
+            ];
+
+            subplotConfigs.forEach(config => {
+                const mKey = config.metricKey;
+                const yAxis = 'y' + config.axisSuffix;
+                const xAxis = 'x' + config.axisSuffix;
+
+                if (groupMode === 'embTrain') {
+                    const frozenRuns = filteredData.filter(r => !r.embTrain);
+                    const trainedRuns = filteredData.filter(r => r.embTrain);
+
+                    const createTrace = (runs, name, color) => ({
+                        x: runs.map(r => r.embInit),
+                        y: runs.map(r => getMetricObj(r, mKey)?.mean ?? 0),
+                        xaxis: xAxis,
+                        yaxis: yAxis,
+                        error_y: {
+                            type: 'data',
+                            array: runs.map(r => getMetricObj(r, mKey)?.std ?? 0),
+                            visible: true,
+                            color: '#2c3e50',
+                            thickness: 1.5,
+                            width: 4
+                        },
+                        name: name,
+                        legendgroup: name,
+                        showlegend: config.axisSuffix === '',
+                        type: 'bar',
+                        marker: { color: color },
+                        hovertext: runs.map(r => {
+                            const m = getMetricObj(r, mKey);
+                            return `<b>Run #${r.id}</b><br>Init: ${r.embInit}<br>${name}<br>${mKey}: ${m?.mean.toFixed(3)} ± ${m?.std.toFixed(3)}`;
+                        }),
+                        hoverinfo: 'text'
+                    });
+
+                    if (frozenRuns.length) traces.push(createTrace(frozenRuns, 'Embedding Frozen', '#2b5c8f'));
+                    if (trainedRuns.length) traces.push(createTrace(trainedRuns, 'Embedding Trained', '#c0392b'));
+
+                } else {
+                    const inits = [
+                        { key: 'NoEmb', color: '#7f8c8d' },
+                        { key: 'Rand', color: '#e67e22' },
+                        { key: 'Sem', color: '#16a085' },
+                        { key: 'CLM', color: '#8e44ad' }
+                    ];
+
+                    inits.forEach(init => {
+                        const runs = filteredData.filter(r => r.embInit === init.key);
+                        if (runs.length) {
+                            traces.push({
+                                x: runs.map(r => r.embTrain ? 'Trained' : 'Frozen'),
+                                y: runs.map(r => getMetricObj(r, mKey)?.mean ?? 0),
+                                xaxis: xAxis,
+                                yaxis: yAxis,
+                                error_y: {
+                                    type: 'data',
+                                    array: runs.map(r => getMetricObj(r, mKey)?.std ?? 0),
+                                    visible: true,
+                                    color: '#2c3e50',
+                                    thickness: 1.5,
+                                    width: 4
+                                },
+                                name: init.key,
+                                legendgroup: init.key,
+                                showlegend: config.axisSuffix === '',
+                                type: 'bar',
+                                marker: { color: init.color },
+                                hovertext: runs.map(r => {
+                                    const m = getMetricObj(r, mKey);
+                                    return `<b>Run #${r.id}</b><br>Init: ${r.embInit}<br>State: ${r.embTrain ? 'Trained' : 'Frozen'}<br>${mKey}: ${m?.mean.toFixed(3)} ± ${m?.std.toFixed(3)}`;
+                                }),
+                                hoverinfo: 'text'
+                            });
+                        }
+                    });
+                }
+            });
+
+            const layout = {
+                margin: { t: 40, b: 50, l: 60, r: 40 },
+                showlegend: true,
+                legend: { orientation: 'h', x: 0, y: 1.08 },
+                barmode: 'group',
+                template: 'plotly_white',
+                grid: { rows: 3, columns: 1, pattern: 'independent', roworder: 'top to bottom' },
+                
+                yaxis: { title: `CEFR (${cefrKey})` },
+                xaxis: { title: groupMode === 'embTrain' ? 'Embedding Init' : 'State' },
+                
+                yaxis2: { title: `Polarity (${polarityKey})` },
+                xaxis2: { title: groupMode === 'embTrain' ? 'Embedding Init' : 'State' },
+                
+                yaxis3: { title: `Load (${loadKey})` },
+                xaxis3: { title: groupMode === 'embTrain' ? 'Embedding Init' : 'State' }
+            };
+
+            Plotly.react('plotly-div', traces, layout);
+        }
+
+        updateDashboard();
+    </script>
+</body>
+</html>
