@@ -168,9 +168,9 @@
         function formatValWithStd(val, std) {
             if (val === undefined || val === null) return '-';
             if (std !== undefined && std !== null) {
-                return `${val.toFixed(2)} <span style="font-size: 0.8em; color: #6c757d;">± ${std.toFixed(2)}</span>`;
+                return `${val.toFixed(3)} <span style="font-size: 0.8em; color: #6c757d;">± ${std.toFixed(3)}</span>`;
             }
-            return val.toFixed(2);
+            return val.toFixed(3);
         }
 
         function switchTableTab(tab) {
@@ -372,6 +372,7 @@
                     const xVals = [];
                     const yVals = [];
                     const stdVals = [];
+                    const textLabels = [];
                     const hoverTexts = [];
 
                     groupKeys.forEach(gKey => {
@@ -382,7 +383,8 @@
                             xVals.push(gKey);
                             yVals.push(val);
                             stdVals.push(std);
-                            hoverTexts.push(`<b>Config #${match.Config}</b><br>${gKey}<br>${state.name}<br>${m.title}: ${val.toFixed(2)} ± ${std.toFixed(2)}`);
+                            textLabels.push(val !== undefined && val !== null ? val.toFixed(3) : '');
+                            hoverTexts.push(`<b>Config #${match.Config}</b><br>${gKey}<br>${state.name}<br>${m.title}: ${val.toFixed(3)} ± ${std.toFixed(3)}`);
                         }
                     });
 
@@ -390,6 +392,9 @@
                         traces.push({
                             x: xVals,
                             y: yVals,
+                            text: textLabels,
+                            textposition: 'outside',
+                            textfont: { size: 10, color: '#333' },
                             cliponaxis: false,
                             name: state.name,
                             legendgroup: state.name,
@@ -420,9 +425,9 @@
                 legend: { orientation: 'h', x: 0, y: 1.05 },
                 barmode: 'group',
                 template: 'plotly_white',
-                yaxis: { title: metrics[0].title },
-                yaxis2: { title: metrics[1].title },
-                yaxis3: { title: metrics[2].title },
+                yaxis: { title: metrics[0].title, autorange: true, automargin: true },
+                yaxis2: { title: metrics[1].title, autorange: true, automargin: true },
+                yaxis3: { title: metrics[2].title, autorange: true, automargin: true },
                 xaxis: { showticklabels: true, tickangle: 0 },
                 xaxis2: { showticklabels: true, tickangle: 0 },
                 xaxis3: { showticklabels: true, tickangle: 0 }
