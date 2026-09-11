@@ -21,13 +21,16 @@
         .group-switch { background: #fcf3cf; border: 1px solid #f9e79f; padding: 8px 12px; border-radius: 6px; }
         .group-switch select { margin-top: 4px; padding: 5px 8px; border-radius: 4px; border: 1px solid #f39c12; font-weight: 600; font-size: 13px; background: #fff; cursor: pointer; }
 
+        .notice-banner { background: #e8f8f5; border: 1px solid #a3e4d7; border-left: 4px solid #16a085; padding: 8px 12px; border-radius: 4px; font-size: 12px; color: #117a65; font-weight: 600; flex: 1 1 100%; display: flex; align-items: center; gap: 6px; }
+
         .stats-badge { margin-left: auto; background: #2c3e50; color: white; padding: 8px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; align-self: center; }
         
         #chart-container { background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); margin-bottom: 25px; }
         #table-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.06); overflow-x: auto; }
         
-        .table-header-row { margin-bottom: 15px; }
+        .table-header-row { margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
         .table-header-row h3 { margin: 0; font-size: 16px; color: #2c3e50; }
+        .table-note { font-size: 11px; color: #16a085; font-weight: 600; background: #e8f8f5; padding: 3px 8px; border-radius: 4px; border: 1px solid #a3e4d7; }
 
         table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
         th { background-color: #2c3e50; color: white; padding: 9px; font-weight: 600; cursor: pointer; user-select: none; white-space: nowrap; }
@@ -52,6 +55,7 @@
             <select id="metric-suite" onchange="updateDashboard()">
                 <option value="wf1">Primary Metrics (CEFR wF1 / Polarity wF1 / Load wF1)</option>
                 <option value="sec">Secondary Metrics (CEFR MAE / Polarity MCC / Load MCC)</option>
+                <option value="llm_all">Full LLM Suite (All 5 Metrics Grouped)</option>
             </select>
         </div>
 
@@ -82,15 +86,20 @@
         </div>
 
         <div class="stats-badge" id="stats-badge">Showing 0 / 0 Runs</div>
+
+        <div class="notice-banner">
+            <span><code>GEN_GRADE</code> metric has been rescaled from /10 to /5 in order to match the scale of the other metrics.</span>
+        </div>
     </div>
 
     <div id="chart-container">
-        <div id="plotly-div" style="width:100%; height:880px;"></div>
+        <div id="plotly-div" style="width:100%; height:920px;"></div>
     </div>
 
     <div id="table-container">
         <div class="table-header-row">
             <h3>Evaluated Single-Aspect Runs</h3>
+            <div class="table-note">GEN_GRADE values converted to scale /5</div>
         </div>
         <table>
             <thead>
@@ -98,12 +107,12 @@
                     <th onclick="handleSort('id')">ID <span id="sort-id" class="sort-icon"></span></th>
                     <th onclick="handleSort('embInit')">Emb Init <span id="sort-embInit" class="sort-icon"></span></th>
                     <th onclick="handleSort('embTrain')">Emb Train <span id="sort-embTrain" class="sort-icon"></span></th>
-                    <th onclick="handleSort('cefr_wF1')">CEFR wF1 ↑ <span id="sort-cefr_wF1" class="sort-icon"></span></th>
-                    <th onclick="handleSort('cefr_mae')">CEFR MAE ↓ <span id="sort-cefr_mae" class="sort-icon"></span></th>
-                    <th onclick="handleSort('polarity_wF1')">Polarity wF1 ↑ <span id="sort-polarity_wF1" class="sort-icon"></span></th>
-                    <th onclick="handleSort('polarity_mcc')">Polarity MCC ↑ <span id="sort-polarity_mcc" class="sort-icon"></span></th>
-                    <th onclick="handleSort('load_wF1')">Load wF1 ↑ <span id="sort-load_wF1" class="sort-icon"></span></th>
-                    <th onclick="handleSort('load_mcc')">Load MCC ↑ <span id="sort-load_mcc" class="sort-icon"></span></th>
+                    <th onclick="handleSort('cefr_gen_grade')">CEFR Grade (/5) <span id="sort-cefr_gen_grade" class="sort-icon"></span></th>
+                    <th onclick="handleSort('polarity_gen_grade')">Polarity Grade (/5) <span id="sort-polarity_gen_grade" class="sort-icon"></span></th>
+                    <th onclick="handleSort('load_gen_grade')">Load Grade (/5) <span id="sort-load_gen_grade" class="sort-icon"></span></th>
+                    <th onclick="handleSort('cefr_wF1')">CEFR wF1 <span id="sort-cefr_wF1" class="sort-icon"></span></th>
+                    <th onclick="handleSort('polarity_wF1')">Polarity wF1 <span id="sort-polarity_wF1" class="sort-icon"></span></th>
+                    <th onclick="handleSort('load_wF1')">Load wF1 <span id="sort-load_wF1" class="sort-icon"></span></th>
                 </tr>
             </thead>
             <tbody id="table-body"></tbody>
@@ -111,7 +120,7 @@
     </div>
 
     <script>
-        const dataset = [{"id": 1, "embInit": "NoEmb", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.523, "std": 0.006}, "cefr_mae": {"mean": 0.556, "std": 0.006}, "polarity_wF1": {"mean": 0.807, "std": 0.004}, "polarity_mcc": {"mean": 0.744, "std": 0.005}, "load_wF1": {"mean": 0.897, "std": 0.006}, "load_mcc": {"mean": 0.813, "std": 0.009}}}, {"id": 2, "embInit": "Rand", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.205, "std": 0.001}, "cefr_mae": {"mean": 1.609, "std": 0.077}, "polarity_wF1": {"mean": 0.812, "std": 0.013}, "polarity_mcc": {"mean": 0.734, "std": 0.017}, "load_wF1": {"mean": 0.959, "std": 0.002}, "load_mcc": {"mean": 0.92, "std": 0.004}}}, {"id": 3, "embInit": "Rand", "embTrain": true, "metrics": {"cefr_wF1": {"mean": 0.464, "std": 0.016}, "cefr_mae": {"mean": 0.746, "std": 0.014}, "polarity_wF1": {"mean": 0.811, "std": 0.005}, "polarity_mcc": {"mean": 0.732, "std": 0.005}, "load_wF1": {"mean": 0.985, "std": 0.005}, "load_mcc": {"mean": 0.971, "std": 0.009}}}, {"id": 4, "embInit": "Sem", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.491, "std": 0.007}, "cefr_mae": {"mean": 0.659, "std": 0.023}, "polarity_wF1": {"mean": 0.805, "std": 0.015}, "polarity_mcc": {"mean": 0.736, "std": 0.015}, "load_wF1": {"mean": 0.978, "std": 0.022}, "load_mcc": {"mean": 0.955, "std": 0.045}}}, {"id": 5, "embInit": "Sem", "embTrain": true, "metrics": {"cefr_wF1": {"mean": 0.53, "std": 0.016}, "cefr_mae": {"mean": 0.595, "std": 0.011}, "polarity_wF1": {"mean": 0.796, "std": 0.0}, "polarity_mcc": {"mean": 0.743, "std": 0.0}, "load_wF1": {"mean": 1.0, "std": 0.0}, "load_mcc": {"mean": 0.999, "std": 0.001}}}, {"id": 6, "embInit": "CLM", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.412, "std": 0.007}, "cefr_mae": {"mean": 0.887, "std": 0.014}, "polarity_wF1": {"mean": 0.979, "std": 0.0}, "polarity_mcc": {"mean": 0.969, "std": 0.0}, "load_wF1": {"mean": 1.0, "std": 0.0}, "load_mcc": {"mean": 1.0, "std": 0.0}}}, {"id": 7, "embInit": "CLM", "embTrain": true, "metrics": {"cefr_wF1": {"mean": 0.505, "std": 0.009}, "cefr_mae": {"mean": 0.615, "std": 0.001}, "polarity_wF1": {"mean": 0.974, "std": 0.001}, "polarity_mcc": {"mean": 0.961, "std": 0.002}, "load_wF1": {"mean": 1.0, "std": 0.0}, "load_mcc": {"mean": 1.0, "std": 0.0}}}];
+        const dataset = [{"id": 1, "embInit": "NoEmb", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.523, "std": 0.006}, "cefr_mae": {"mean": 0.556, "std": 0.006}, "polarity_wF1": {"mean": 0.807, "std": 0.004}, "polarity_mcc": {"mean": 0.744, "std": 0.005}, "load_wF1": {"mean": 0.897, "std": 0.006}, "load_mcc": {"mean": 0.813, "std": 0.009}, "cefr_gen_grade": {"mean": 3.925, "std": 0.6005}, "cefr_topic_consistency": {"mean": 4.13, "std": 0.661}, "load_gen_grade": {"mean": 2.655, "std": 1.2115}, "load_topic_consistency": {"mean": 2.61, "std": 1.399}, "polarity_gen_grade": {"mean": 3.75, "std": 0.764}, "polarity_topic_consistency": {"mean": 4.29, "std": 0.671}, "cefr_likelihood": {"mean": 4.95, "std": 0.359}, "cefr_punct_usage": {"mean": 4.99, "std": 0.1}, "cefr_artefact_usage": {"mean": 5.0, "std": 0.0}, "load_likelihood": {"mean": 3.7, "std": 1.314}, "load_punct_usage": {"mean": 4.75, "std": 0.575}, "load_artefact_usage": {"mean": 4.98, "std": 0.141}, "polarity_likelihood": {"mean": 4.93, "std": 0.355}, "polarity_punct_usage": {"mean": 4.98, "std": 0.141}, "polarity_artefact_usage": {"mean": 5.0, "std": 0.0}}}, {"id": 2, "embInit": "Rand", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.205, "std": 0.001}, "cefr_mae": {"mean": 1.609, "std": 0.077}, "polarity_wF1": {"mean": 0.812, "std": 0.013}, "polarity_mcc": {"mean": 0.734, "std": 0.017}, "load_wF1": {"mean": 0.959, "std": 0.002}, "load_mcc": {"mean": 0.92, "std": 0.004}, "cefr_gen_grade": {"mean": 2.365, "std": 1.7565}, "cefr_topic_consistency": {"mean": 2.52, "std": 1.894}, "load_gen_grade": {"mean": 2.25, "std": 1.2525}, "load_topic_consistency": {"mean": 2.5, "std": 1.389}, "polarity_gen_grade": {"mean": 2.295, "std": 1.4125}, "polarity_topic_consistency": {"mean": 2.41, "std": 1.491}, "cefr_likelihood": {"mean": 2.97, "std": 2.276}, "cefr_punct_usage": {"mean": 3.09, "std": 2.305}, "cefr_artefact_usage": {"mean": 3.27, "std": 2.192}, "load_likelihood": {"mean": 3.05, "std": 1.336}, "load_punct_usage": {"mean": 3.75, "std": 0.903}, "load_artefact_usage": {"mean": 4.12, "std": 1.274}, "polarity_likelihood": {"mean": 2.83, "std": 1.897}, "polarity_punct_usage": {"mean": 4.06, "std": 1.108}, "polarity_artefact_usage": {"mean": 4.35, "std": 1.038}}}, {"id": 3, "embInit": "Rand", "embTrain": true, "metrics": {"cefr_wF1": {"mean": 0.464, "std": 0.016}, "cefr_mae": {"mean": 0.746, "std": 0.014}, "polarity_wF1": {"mean": 0.811, "std": 0.005}, "polarity_mcc": {"mean": 0.732, "std": 0.005}, "load_wF1": {"mean": 0.985, "std": 0.005}, "load_mcc": {"mean": 0.971, "std": 0.009}, "cefr_gen_grade": {"mean": 3.96, "std": 0.367}, "cefr_topic_consistency": {"mean": 4.1, "std": 0.414}, "load_gen_grade": {"mean": 2.365, "std": 1.0245}, "load_topic_consistency": {"mean": 2.55, "std": 1.184}, "polarity_gen_grade": {"mean": 2.715, "std": 1.3675}, "polarity_topic_consistency": {"mean": 2.91, "std": 1.525}, "cefr_likelihood": {"mean": 4.95, "std": 0.261}, "cefr_punct_usage": {"mean": 4.97, "std": 0.171}, "cefr_artefact_usage": {"mean": 5.0, "std": 0.0}, "load_likelihood": {"mean": 3.41, "std": 1.129}, "load_punct_usage": {"mean": 4.89, "std": 0.314}, "load_artefact_usage": {"mean": 5.0, "std": 0.0}, "polarity_likelihood": {"mean": 3.44, "std": 1.822}, "polarity_punct_usage": {"mean": 4.48, "std": 0.882}, "polarity_artefact_usage": {"mean": 4.94, "std": 0.278}}}, {"id": 4, "embInit": "Sem", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.491, "std": 0.007}, "cefr_mae": {"mean": 0.659, "std": 0.023}, "polarity_wF1": {"mean": 0.805, "std": 0.015}, "polarity_mcc": {"mean": 0.736, "std": 0.015}, "load_wF1": {"mean": 0.978, "std": 0.022}, "load_mcc": {"mean": 0.955, "std": 0.045}, "cefr_gen_grade": {"mean": 3.955, "std": 0.5865}, "cefr_topic_consistency": {"mean": 4.14, "std": 0.652}, "load_gen_grade": {"mean": 1.795, "std": 0.959}, "load_topic_consistency": {"mean": 1.73, "std": 1.072}, "polarity_gen_grade": {"mean": 3.775, "std": 0.802}, "polarity_topic_consistency": {"mean": 4.28, "std": 0.78}, "cefr_likelihood": {"mean": 4.91, "std": 0.404}, "cefr_punct_usage": {"mean": 4.99, "std": 0.1}, "cefr_artefact_usage": {"mean": 5.0, "std": 0.0}, "load_likelihood": {"mean": 2.57, "std": 1.233}, "load_punct_usage": {"mean": 4.15, "std": 0.845}, "load_artefact_usage": {"mean": 4.7, "std": 0.56}, "polarity_likelihood": {"mean": 4.86, "std": 0.513}, "polarity_punct_usage": {"mean": 4.99, "std": 0.1}, "polarity_artefact_usage": {"mean": 5.0, "std": 0.0}}}, {"id": 5, "embInit": "Sem", "embTrain": true, "metrics": {"cefr_wF1": {"mean": 0.53, "std": 0.016}, "cefr_mae": {"mean": 0.595, "std": 0.011}, "polarity_wF1": {"mean": 0.796, "std": 0.0}, "polarity_mcc": {"mean": 0.743, "std": 0.0}, "load_wF1": {"mean": 1.0, "std": 0.0}, "load_mcc": {"mean": 0.999, "std": 0.001}, "cefr_gen_grade": {"mean": 3.99, "std": 0.4205}, "cefr_topic_consistency": {"mean": 4.23, "std": 0.423}, "load_gen_grade": {"mean": 1.84, "std": 1.2185}, "load_topic_consistency": {"mean": 2.16, "std": 1.301}, "polarity_gen_grade": {"mean": 3.67, "std": 0.746}, "polarity_topic_consistency": {"mean": 4.24, "std": 0.638}, "cefr_likelihood": {"mean": 4.99, "std": 0.1}, "cefr_punct_usage": {"mean": 4.97, "std": 0.171}, "cefr_artefact_usage": {"mean": 5.0, "std": 0.0}, "load_likelihood": {"mean": 2.76, "std": 1.688}, "load_punct_usage": {"mean": 4.03, "std": 0.979}, "load_artefact_usage": {"mean": 3.62, "std": 1.734}, "polarity_likelihood": {"mean": 4.89, "std": 0.469}, "polarity_punct_usage": {"mean": 4.99, "std": 0.1}, "polarity_artefact_usage": {"mean": 5.0, "std": 0.0}}}, {"id": 6, "embInit": "CLM", "embTrain": false, "metrics": {"cefr_wF1": {"mean": 0.412, "std": 0.007}, "cefr_mae": {"mean": 0.887, "std": 0.014}, "polarity_wF1": {"mean": 0.979, "std": 0.0}, "polarity_mcc": {"mean": 0.969, "std": 0.0}, "load_wF1": {"mean": 1.0, "std": 0.0}, "load_mcc": {"mean": 1.0, "std": 0.0}, "cefr_gen_grade": {"mean": 3.555, "std": 1.054}, "cefr_topic_consistency": {"mean": 3.7, "std": 1.21}, "load_gen_grade": {"mean": 1.055, "std": 0.3005}, "load_topic_consistency": {"mean": 1.1, "std": 0.302}, "polarity_gen_grade": {"mean": 2.97, "std": 1.363}, "polarity_topic_consistency": {"mean": 3.2, "std": 1.531}, "cefr_likelihood": {"mean": 4.46, "std": 1.167}, "cefr_punct_usage": {"mean": 4.98, "std": 0.141}, "cefr_artefact_usage": {"mean": 5.0, "std": 0.0}, "load_likelihood": {"mean": 1.91, "std": 0.668}, "load_punct_usage": {"mean": 4.09, "std": 0.83}, "load_artefact_usage": {"mean": 4.86, "std": 0.349}, "polarity_likelihood": {"mean": 3.96, "std": 1.456}, "polarity_punct_usage": {"mean": 4.83, "std": 0.551}, "polarity_artefact_usage": {"mean": 5.0, "std": 0.0}}}, {"id": 7, "embInit": "CLM", "embTrain": true, "metrics": {"cefr_wF1": {"mean": 0.505, "std": 0.009}, "cefr_mae": {"mean": 0.615, "std": 0.001}, "polarity_wF1": {"mean": 0.974, "std": 0.001}, "polarity_mcc": {"mean": 0.961, "std": 0.002}, "load_wF1": {"mean": 1.0, "std": 0.0}, "load_mcc": {"mean": 1.0, "std": 0.0}, "cefr_gen_grade": {"mean": 3.625, "std": 0.97}, "cefr_topic_consistency": {"mean": 3.8, "std": 1.025}, "load_gen_grade": {"mean": 1.025, "std": 0.719}, "load_topic_consistency": {"mean": 1.24, "std": 0.698}, "polarity_gen_grade": {"mean": 2.8, "std": 1.2245}, "polarity_topic_consistency": {"mean": 3.14, "std": 1.371}, "cefr_likelihood": {"mean": 4.62, "std": 0.951}, "cefr_punct_usage": {"mean": 4.94, "std": 0.239}, "cefr_artefact_usage": {"mean": 5.0, "std": 0.0}, "load_likelihood": {"mean": 1.62, "std": 0.896}, "load_punct_usage": {"mean": 3.68, "std": 1.004}, "load_artefact_usage": {"mean": 3.1, "std": 1.888}, "polarity_likelihood": {"mean": 3.87, "std": 1.397}, "polarity_punct_usage": {"mean": 4.99, "std": 0.1}, "polarity_artefact_usage": {"mean": 5.0, "std": 0.0}}}];
 
         let currentSortKey = 'id';
         let currentSortAsc = true;
@@ -128,9 +137,9 @@
             const m = getMetricObj(r, metricKey);
             if (!m) return '-';
             if (m.std !== undefined && m.std !== null) {
-                return `${m.mean.toFixed(3)} <span style="font-size: 0.8em; color: #6c757d;">± ${m.std.toFixed(3)}</span>`;
+                return `${m.mean.toFixed(2)} <span style="font-size: 0.8em; color: #6c757d;">± ${m.std.toFixed(2)}</span>`;
             }
-            return m.mean.toFixed(3);
+            return m.mean.toFixed(2);
         }
 
         function handleSort(key) {
@@ -144,7 +153,7 @@
         }
 
         function updateSortIcons() {
-            const keys = ['id', 'embInit', 'embTrain', 'cefr_wF1', 'cefr_mae', 'polarity_wF1', 'polarity_mcc', 'load_wF1', 'load_mcc'];
+            const keys = ['id', 'embInit', 'embTrain', 'cefr_gen_grade', 'polarity_gen_grade', 'load_gen_grade', 'cefr_wF1', 'polarity_wF1', 'load_wF1'];
             keys.forEach(k => {
                 const el = document.getElementById(`sort-${k}`);
                 if (el) {
@@ -189,10 +198,6 @@
             const metricSuite = document.getElementById('metric-suite').value;
             const groupMode = document.getElementById('group-mode').value;
 
-            const cefrKey = metricSuite === 'wf1' ? 'cefr_wF1' : 'cefr_mae';
-            const polarityKey = metricSuite === 'wf1' ? 'polarity_wF1' : 'polarity_mcc';
-            const loadKey = metricSuite === 'wf1' ? 'load_wF1' : 'load_mcc';
-
             updateCheckboxColors(groupMode);
 
             const selectedEmbs = getCheckedValues('filter-emb');
@@ -206,7 +211,6 @@
 
             document.getElementById('stats-badge').innerText = `Showing ${filteredData.length} / ${dataset.length} Runs`;
 
-            // Sort Table
             const sortedData = [...filteredData].sort((a, b) => {
                 let valA, valB;
 
@@ -235,7 +239,6 @@
 
             updateSortIcons();
 
-            // Populate Table
             const tbody = document.getElementById('table-body');
             tbody.innerHTML = '';
             sortedData.forEach(r => {
@@ -244,129 +247,192 @@
                     <td><strong>#${r.id}</strong></td>
                     <td>${r.embInit}</td>
                     <td><span class="${r.embTrain ? 'tag-red' : 'tag-blue'}">${r.embTrain ? '✓' : ''}</span></td>
+                    <td>${formatMetricVal(r, 'cefr_gen_grade')}</td>
+                    <td>${formatMetricVal(r, 'polarity_gen_grade')}</td>
+                    <td>${formatMetricVal(r, 'load_gen_grade')}</td>
                     <td>${formatMetricVal(r, 'cefr_wF1')}</td>
-                    <td>${formatMetricVal(r, 'cefr_mae')}</td>
                     <td>${formatMetricVal(r, 'polarity_wF1')}</td>
-                    <td>${formatMetricVal(r, 'polarity_mcc')}</td>
                     <td>${formatMetricVal(r, 'load_wF1')}</td>
-                    <td>${formatMetricVal(r, 'load_mcc')}</td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            // Construct 3 Subplot Traces
             const traces = [];
             const subplotConfigs = [
-                { metricKey: cefrKey, axisSuffix: '' },
-                { metricKey: polarityKey, axisSuffix: '2' },
-                { metricKey: loadKey, axisSuffix: '3' }
+                { prefix: 'cefr', title: 'CEFR', axisSuffix: '' },
+                { prefix: 'polarity', title: 'Polarity', axisSuffix: '2' },
+                { prefix: 'load', title: 'Load', axisSuffix: '3' }
             ];
 
-            subplotConfigs.forEach(config => {
-                const mKey = config.metricKey;
-                const yAxis = 'y' + config.axisSuffix;
-                const xAxis = 'x' + config.axisSuffix;
+            if (metricSuite === 'llm_all') {
+                const llmMetricsList = [
+                    { suffix: 'gen_grade', label: 'GEN_GRADE (scale /5)', color: '#2980b9' },
+                    { suffix: 'topic_consistency', label: 'TOPIC_CONSISTENCY', color: '#27ae60' },
+                    { suffix: 'likelihood', label: 'LIKELIHOOD', color: '#8e44ad' },
+                    { suffix: 'punct_usage', label: 'PUNCT_USAGE', color: '#f39c12' },
+                    { suffix: 'artefact_usage', label: 'ARTEFACT_USAGE', color: '#c0392b' }
+                ];
 
-                if (groupMode === 'embTrain') {
-                    const frozenRuns = filteredData.filter(r => !r.embTrain);
-                    const trainedRuns = filteredData.filter(r => r.embTrain);
+                const xLabels = filteredData.map(r => 
+                    groupMode === 'embTrain' 
+                        ? `${r.embInit} (${r.embTrain ? 'Trained' : 'Frozen'})` 
+                        : `${r.embInit} - ${r.embTrain ? 'T' : 'F'}`
+                );
 
-                    const createTrace = (runs, name, color) => ({
-                        x: runs.map(r => r.embInit),
-                        y: runs.map(r => getMetricObj(r, mKey)?.mean ?? 0),
-                        xaxis: xAxis,
-                        yaxis: yAxis,
-                        text: runs.map(r => {
-                            const m = getMetricObj(r, mKey);
-                            return m ? m.mean.toFixed(3) : '';
-                        }),
-                        textposition: 'outside',
-                        textfont: { size: 10, color: '#333' },
-                        error_y: {
-                            type: 'data',
-                            array: runs.map(r => getMetricObj(r, mKey)?.std ?? 0),
-                            visible: true,
-                            color: '#2c3e50',
-                            thickness: 1.5,
-                            width: 4
-                        },
-                        name: name,
-                        legendgroup: name,
-                        showlegend: config.axisSuffix === '',
-                        type: 'bar',
-                        marker: { color: color },
-                        hovertext: runs.map(r => {
-                            const m = getMetricObj(r, mKey);
-                            return `<b>Run #${r.id}</b><br>Init: ${r.embInit}<br>${name}<br>${mKey}: ${m?.mean.toFixed(3)} ± ${m?.std.toFixed(3)}`;
-                        }),
-                        hoverinfo: 'text'
+                subplotConfigs.forEach(config => {
+                    const yAxis = 'y' + config.axisSuffix;
+                    const xAxis = 'x' + config.axisSuffix;
+
+                    llmMetricsList.forEach(mMeta => {
+                        const fullMetricKey = `${config.prefix}_${mMeta.suffix}`;
+
+                        traces.push({
+                            x: xLabels,
+                            y: filteredData.map(r => getMetricObj(r, fullMetricKey)?.mean ?? 0),
+                            xaxis: xAxis,
+                            yaxis: yAxis,
+                            text: filteredData.map(r => {
+                                const m = getMetricObj(r, fullMetricKey);
+                                return m ? m.mean.toFixed(2) : '';
+                            }),
+                            textposition: 'outside',
+                            textfont: { size: 9, color: '#333' },
+                            error_y: {
+                                type: 'data',
+                                array: filteredData.map(r => getMetricObj(r, fullMetricKey)?.std ?? 0),
+                                visible: true,
+                                color: '#2c3e50',
+                                thickness: 1.2,
+                                width: 3
+                            },
+                            name: mMeta.label,
+                            legendgroup: mMeta.label,
+                            showlegend: config.axisSuffix === '',
+                            type: 'bar',
+                            marker: { color: mMeta.color },
+                            hovertext: filteredData.map((r, idx) => {
+                                const m = getMetricObj(r, fullMetricKey);
+                                return `<b>Run #${r.id} (${xLabels[idx]})</b><br>Metric: ${mMeta.label}<br>Mean: ${m?.mean.toFixed(2)} ± ${m?.std.toFixed(2)}`;
+                            }),
+                            hoverinfo: 'text'
+                        });
                     });
+                });
 
-                    if (frozenRuns.length) traces.push(createTrace(frozenRuns, 'Embedding Frozen', '#2b5c8f'));
-                    if (trainedRuns.length) traces.push(createTrace(trainedRuns, 'Embedding Trained', '#c0392b'));
-
-                } else {
-                    const inits = [
-                        { key: 'NoEmb', color: '#7f8c8d' },
-                        { key: 'Rand', color: '#e67e22' },
-                        { key: 'Sem', color: '#16a085' },
-                        { key: 'CLM', color: '#8e44ad' }
-                    ];
-
-                    inits.forEach(init => {
-                        const runs = filteredData.filter(r => r.embInit === init.key);
-                        if (runs.length) {
-                            traces.push({
-                                x: runs.map(r => r.embTrain ? 'Trained' : 'Frozen'),
-                                y: runs.map(r => getMetricObj(r, mKey)?.mean ?? 0),
-                                xaxis: xAxis,
-                                yaxis: yAxis,
-                                text: runs.map(r => {
-                                    const m = getMetricObj(r, mKey);
-                                    return m ? m.mean.toFixed(3) : '';
-                                }),
-                                textposition: 'outside',
-                                textfont: { size: 10, color: '#333' },
-                                error_y: {
-                                    type: 'data',
-                                    array: runs.map(r => getMetricObj(r, mKey)?.std ?? 0),
-                                    visible: true,
-                                    color: '#2c3e50',
-                                    thickness: 1.5,
-                                    width: 4
-                                },
-                                name: init.key,
-                                legendgroup: init.key,
-                                showlegend: config.axisSuffix === '',
-                                type: 'bar',
-                                marker: { color: init.color },
-                                hovertext: runs.map(r => {
-                                    const m = getMetricObj(r, mKey);
-                                    return `<b>Run #${r.id}</b><br>Init: ${r.embInit}<br>State: ${r.embTrain ? 'Trained' : 'Frozen'}<br>${mKey}: ${m?.mean.toFixed(3)} ± ${m?.std.toFixed(3)}`;
-                                }),
-                                hoverinfo: 'text'
-                            });
-                        }
-                    });
+            } else {
+                let cefrKey, polarityKey, loadKey;
+                if (metricSuite === 'wf1') {
+                    cefrKey = 'cefr_wF1'; polarityKey = 'polarity_wF1'; loadKey = 'load_wF1';
+                } else if (metricSuite === 'sec') {
+                    cefrKey = 'cefr_mae'; polarityKey = 'polarity_mcc'; loadKey = 'load_mcc';
                 }
-            });
+
+                subplotConfigs.forEach(config => {
+                    const mKey = config.prefix === 'cefr' ? cefrKey : (config.prefix === 'polarity' ? polarityKey : loadKey);
+                    const yAxis = 'y' + config.axisSuffix;
+                    const xAxis = 'x' + config.axisSuffix;
+
+                    if (groupMode === 'embTrain') {
+                        const frozenRuns = filteredData.filter(r => !r.embTrain);
+                        const trainedRuns = filteredData.filter(r => r.embTrain);
+
+                        const createTrace = (runs, name, color) => ({
+                            x: runs.map(r => r.embInit),
+                            y: runs.map(r => getMetricObj(r, mKey)?.mean ?? 0),
+                            xaxis: xAxis,
+                            yaxis: yAxis,
+                            text: runs.map(r => {
+                                const m = getMetricObj(r, mKey);
+                                return m ? m.mean.toFixed(2) : '';
+                            }),
+                            textposition: 'outside',
+                            textfont: { size: 10, color: '#333' },
+                            error_y: {
+                                type: 'data',
+                                array: runs.map(r => getMetricObj(r, mKey)?.std ?? 0),
+                                visible: true,
+                                color: '#2c3e50',
+                                thickness: 1.5,
+                                width: 4
+                            },
+                            name: name,
+                            legendgroup: name,
+                            showlegend: config.axisSuffix === '',
+                            type: 'bar',
+                            marker: { color: color },
+                            hovertext: runs.map(r => {
+                                const m = getMetricObj(r, mKey);
+                                return `<b>Run #${r.id}</b><br>Init: ${r.embInit}<br>${name}<br>${mKey}: ${m?.mean.toFixed(2)} ± ${m?.std.toFixed(2)}`;
+                            }),
+                            hoverinfo: 'text'
+                        });
+
+                        if (frozenRuns.length) traces.push(createTrace(frozenRuns, 'Embedding Frozen', '#2b5c8f'));
+                        if (trainedRuns.length) traces.push(createTrace(trainedRuns, 'Embedding Trained', '#c0392b'));
+
+                    } else {
+                        const inits = [
+                            { key: 'NoEmb', color: '#7f8c8d' },
+                            { key: 'Rand', color: '#e67e22' },
+                            { key: 'Sem', color: '#16a085' },
+                            { key: 'CLM', color: '#8e44ad' }
+                        ];
+
+                        inits.forEach(init => {
+                            const runs = filteredData.filter(r => r.embInit === init.key);
+                            if (runs.length) {
+                                traces.push({
+                                    x: runs.map(r => r.embTrain ? 'Trained' : 'Frozen'),
+                                    y: runs.map(r => getMetricObj(r, mKey)?.mean ?? 0),
+                                    xaxis: xAxis,
+                                    yaxis: yAxis,
+                                    text: runs.map(r => {
+                                        const m = getMetricObj(r, mKey);
+                                        return m ? m.mean.toFixed(2) : '';
+                                    }),
+                                    textposition: 'outside',
+                                    textfont: { size: 10, color: '#333' },
+                                    error_y: {
+                                        type: 'data',
+                                        array: runs.map(r => getMetricObj(r, mKey)?.std ?? 0),
+                                        visible: true,
+                                        color: '#2c3e50',
+                                        thickness: 1.5,
+                                        width: 4
+                                    },
+                                    name: init.key,
+                                    legendgroup: init.key,
+                                    showlegend: config.axisSuffix === '',
+                                    type: 'bar',
+                                    marker: { color: init.color },
+                                    hovertext: runs.map(r => {
+                                        const m = getMetricObj(r, mKey);
+                                        return `<b>Run #${r.id}</b><br>Init: ${r.embInit}<br>State: ${r.embTrain ? 'Trained' : 'Frozen'}<br>${mKey}: ${m?.mean.toFixed(2)} ± ${m?.std.toFixed(2)}`;
+                                    }),
+                                    hoverinfo: 'text'
+                                });
+                            }
+                        });
+                    }
+                });
+            }
 
             const layout = {
-                margin: { t: 40, b: 50, l: 60, r: 40 },
+                margin: { t: 40, b: 70, l: 60, r: 40 },
                 showlegend: true,
                 legend: { orientation: 'h', x: 0, y: 1.08 },
                 barmode: 'group',
                 template: 'plotly_white',
                 grid: { rows: 3, columns: 1, pattern: 'independent', roworder: 'top to bottom' },
                 
-                yaxis: { title: `CEFR (${cefrKey})`, autorange: true, automargin: true },
-                xaxis: { title: groupMode === 'embTrain' ? 'Embedding Init' : 'State' },
+                yaxis: { title: 'CEFR Task', autorange: true, automargin: true },
+                xaxis: { title: metricSuite === 'llm_all' ? 'Configurations' : (groupMode === 'embTrain' ? 'Embedding Init' : 'State') },
                 
-                yaxis2: { title: `Polarity (${polarityKey})`, autorange: true, automargin: true },
-                xaxis2: { title: groupMode === 'embTrain' ? 'Embedding Init' : 'State' },
+                yaxis2: { title: 'Polarity Task', autorange: true, automargin: true },
+                xaxis2: { title: metricSuite === 'llm_all' ? 'Configurations' : (groupMode === 'embTrain' ? 'Embedding Init' : 'State') },
                 
-                yaxis3: { title: `Load (${loadKey})`, autorange: true, automargin: true },
-                xaxis3: { title: groupMode === 'embTrain' ? 'Embedding Init' : 'State' }
+                yaxis3: { title: 'Emotional Load Task', autorange: true, automargin: true },
+                xaxis3: { title: metricSuite === 'llm_all' ? 'Configurations' : (groupMode === 'embTrain' ? 'Embedding Init' : 'State') }
             };
 
             Plotly.react('plotly-div', traces, layout);
@@ -376,3 +442,4 @@
     </script>
 </body>
 </html>
+
