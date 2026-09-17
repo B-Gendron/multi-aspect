@@ -137,6 +137,10 @@
                     <th onclick="handleSort('Load_wF1')">Load wF1 ↑ <span id="sort-Load_wF1" class="sort-icon"></span></th>
                     <th onclick="handleSort('Load_MCC')">Load MCC ↑ <span id="sort-Load_MCC" class="sort-icon"></span></th>
                     <th onclick="handleSort('GEN_GRADE_mean')">GEN Grade (/5) ↑ <span id="sort-GEN_GRADE_mean" class="sort-icon"></span></th>
+                    <th onclick="handleSort('TOPIC_CONSISTENCY_mean')">Topic Consistency ↑ <span id="sort-TOPIC_CONSISTENCY_mean" class="sort-icon"></span></th>
+                    <th onclick="handleSort('LIKELIHOOD_mean')">Likelihood ↑ <span id="sort-LIKELIHOOD_mean" class="sort-icon"></span></th>
+                    <th onclick="handleSort('PUNCT_USAGE_mean')">Punct Usage ↑ <span id="sort-PUNCT_USAGE_mean" class="sort-icon"></span></th>
+                    <th onclick="handleSort('ARTEFACT_USAGE_mean')">Artefact Usage ↑ <span id="sort-ARTEFACT_USAGE_mean" class="sort-icon"></span></th>
                 </tr>
             </thead>
             <tbody id="table-body"></tbody>
@@ -200,7 +204,7 @@
             const keys = [
                 'Config', 'Emb_Init', 'E_tr', 'Adapter_Init', 'A_tr', 
                 'CEFR_wF1', 'CEFR_MAE', 'Polarity_wF1', 'Polarity_MCC', 'Load_wF1', 'Load_MCC',
-                'GEN_GRADE_mean'
+                'GEN_GRADE_mean', 'TOPIC_CONSISTENCY_mean', 'LIKELIHOOD_mean', 'PUNCT_USAGE_mean', 'ARTEFACT_USAGE_mean'
             ];
             keys.forEach(k => {
                 const el = document.getElementById(`sort-${k}`);
@@ -308,6 +312,10 @@
                     <td>${formatValWithStd(r.Load_wF1, r.Load_wF1_std)}</td>
                     <td>${formatValWithStd(r.Load_MCC, r.Load_MCC_std)}</td>
                     <td>${formatValWithStd(r.GEN_GRADE_mean, r.GEN_GRADE_std)}</td>
+                    <td>${formatValWithStd(r.TOPIC_CONSISTENCY_mean, r.TOPIC_CONSISTENCY_std)}</td>
+                    <td>${formatValWithStd(r.LIKELIHOOD_mean, r.LIKELIHOOD_std)}</td>
+                    <td>${formatValWithStd(r.PUNCT_USAGE_mean, r.PUNCT_USAGE_std)}</td>
+                    <td>${formatValWithStd(r.ARTEFACT_USAGE_mean, r.ARTEFACT_USAGE_std)}</td>
                 `;
                 tbody.appendChild(tr);
             });
