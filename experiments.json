@@ -1,0 +1,673 @@
+{
+ "experiments": {
+  "clm/falcon3/cefr": {
+   "status": "done"
+  },
+  "clm/falcon3/load": {
+   "status": "failed",
+   "note": "memory overflow on a single GPU"
+  },
+  "clm/falcon3/polarity": {
+   "status": "todo"
+  },
+  "merge/falcon3": {
+   "status": "todo"
+  },
+  "sa/falcon3/noemb/cefr": {
+   "status": "todo"
+  },
+  "sa/falcon3/noemb/pol": {
+   "status": "todo"
+  },
+  "sa/falcon3/noemb/load": {
+   "status": "todo"
+  },
+  "sa/falcon3/init/cefr": {
+   "status": "todo"
+  },
+  "sa/falcon3/init/pol": {
+   "status": "todo"
+  },
+  "sa/falcon3/init/load": {
+   "status": "todo"
+  },
+  "sa/falcon3/clm/cefr": {
+   "status": "todo"
+  },
+  "sa/falcon3/clm/pol": {
+   "status": "todo"
+  },
+  "sa/falcon3/clm/load": {
+   "status": "todo"
+  },
+  "prep/falcon3": {
+   "status": "todo"
+  },
+  "ma/falcon3/noemb": {
+   "status": "todo"
+  },
+  "ma/falcon3/rand": {
+   "status": "todo"
+  },
+  "ma/falcon3/init": {
+   "status": "todo"
+  },
+  "ma/falcon3/clm": {
+   "status": "todo"
+  },
+  "ma/falcon3/init_pre_aF": {
+   "status": "todo"
+  },
+  "ma/falcon3/init_scr_aT": {
+   "status": "todo"
+  },
+  "clm/ministral3/cefr": {
+   "status": "done"
+  },
+  "clm/ministral3/load": {
+   "status": "done"
+  },
+  "clm/ministral3/polarity": {
+   "status": "done"
+  },
+  "merge/ministral3": {
+   "status": "todo"
+  },
+  "sa/ministral3/noemb/cefr": {
+   "status": "todo"
+  },
+  "sa/ministral3/noemb/pol": {
+   "status": "todo"
+  },
+  "sa/ministral3/noemb/load": {
+   "status": "todo"
+  },
+  "sa/ministral3/init/cefr": {
+   "status": "todo"
+  },
+  "sa/ministral3/init/pol": {
+   "status": "todo"
+  },
+  "sa/ministral3/init/load": {
+   "status": "todo"
+  },
+  "sa/ministral3/clm/cefr": {
+   "status": "todo"
+  },
+  "sa/ministral3/clm/pol": {
+   "status": "todo"
+  },
+  "sa/ministral3/clm/load": {
+   "status": "todo"
+  },
+  "prep/ministral3": {
+   "status": "todo"
+  },
+  "ma/ministral3/noemb": {
+   "status": "todo"
+  },
+  "ma/ministral3/rand": {
+   "status": "todo"
+  },
+  "ma/ministral3/init": {
+   "status": "todo"
+  },
+  "ma/ministral3/clm": {
+   "status": "todo"
+  },
+  "ma/ministral3/init_pre_aF": {
+   "status": "todo"
+  },
+  "ma/ministral3/init_scr_aT": {
+   "status": "todo"
+  },
+  "clm/gemma3/cefr": {
+   "status": "todo"
+  },
+  "clm/gemma3/load": {
+   "status": "todo"
+  },
+  "clm/gemma3/polarity": {
+   "status": "todo"
+  },
+  "merge/gemma3": {
+   "status": "todo"
+  },
+  "sa/gemma3/noemb/cefr": {
+   "status": "todo"
+  },
+  "sa/gemma3/noemb/pol": {
+   "status": "todo"
+  },
+  "sa/gemma3/noemb/load": {
+   "status": "todo"
+  },
+  "sa/gemma3/init/cefr": {
+   "status": "todo"
+  },
+  "sa/gemma3/init/pol": {
+   "status": "todo"
+  },
+  "sa/gemma3/init/load": {
+   "status": "todo"
+  },
+  "sa/gemma3/clm/cefr": {
+   "status": "todo"
+  },
+  "sa/gemma3/clm/pol": {
+   "status": "todo"
+  },
+  "sa/gemma3/clm/load": {
+   "status": "todo"
+  },
+  "prep/gemma3": {
+   "status": "todo"
+  },
+  "ma/gemma3/noemb": {
+   "status": "todo"
+  },
+  "ma/gemma3/rand": {
+   "status": "todo"
+  },
+  "ma/gemma3/init": {
+   "status": "todo"
+  },
+  "ma/gemma3/clm": {
+   "status": "todo"
+  },
+  "ma/gemma3/init_pre_aF": {
+   "status": "todo"
+  },
+  "ma/gemma3/init_scr_aT": {
+   "status": "todo"
+  },
+  "clm/olmo3/cefr": {
+   "status": "done"
+  },
+  "clm/olmo3/load": {
+   "status": "done"
+  },
+  "clm/olmo3/polarity": {
+   "status": "done"
+  },
+  "merge/olmo3": {
+   "status": "todo"
+  },
+  "sa/olmo3/noemb/cefr": {
+   "status": "todo"
+  },
+  "sa/olmo3/noemb/pol": {
+   "status": "todo"
+  },
+  "sa/olmo3/noemb/load": {
+   "status": "todo"
+  },
+  "sa/olmo3/init/cefr": {
+   "status": "todo"
+  },
+  "sa/olmo3/init/pol": {
+   "status": "todo"
+  },
+  "sa/olmo3/init/load": {
+   "status": "todo"
+  },
+  "sa/olmo3/clm/cefr": {
+   "status": "todo"
+  },
+  "sa/olmo3/clm/pol": {
+   "status": "todo"
+  },
+  "sa/olmo3/clm/load": {
+   "status": "todo"
+  },
+  "prep/olmo3": {
+   "status": "todo"
+  },
+  "ma/olmo3/noemb": {
+   "status": "todo"
+  },
+  "ma/olmo3/rand": {
+   "status": "todo"
+  },
+  "ma/olmo3/init": {
+   "status": "todo"
+  },
+  "ma/olmo3/clm": {
+   "status": "todo"
+  },
+  "ma/olmo3/init_pre_aF": {
+   "status": "todo"
+  },
+  "ma/olmo3/init_scr_aT": {
+   "status": "todo"
+  },
+  "clm/qwen35_4b/cefr": {
+   "status": "todo"
+  },
+  "clm/qwen35_4b/load": {
+   "status": "todo"
+  },
+  "clm/qwen35_4b/polarity": {
+   "status": "todo"
+  },
+  "merge/qwen35_4b": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/noemb/cefr": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/noemb/pol": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/noemb/load": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/init/cefr": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/init/pol": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/init/load": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/clm/cefr": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/clm/pol": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/clm/load": {
+   "status": "todo"
+  },
+  "prep/qwen35_4b": {
+   "status": "todo"
+  },
+  "ma/qwen35_4b/noemb": {
+   "status": "todo"
+  },
+  "ma/qwen35_4b/rand": {
+   "status": "todo"
+  },
+  "ma/qwen35_4b/init": {
+   "status": "todo"
+  },
+  "ma/qwen35_4b/clm": {
+   "status": "todo"
+  },
+  "ma/qwen35_4b/init_pre_aF": {
+   "status": "todo"
+  },
+  "ma/qwen35_4b/init_scr_aT": {
+   "status": "todo"
+  },
+  "clm/qwen35_9b/cefr": {
+   "status": "todo"
+  },
+  "clm/qwen35_9b/load": {
+   "status": "todo"
+  },
+  "clm/qwen35_9b/polarity": {
+   "status": "todo"
+  },
+  "merge/qwen35_9b": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/noemb/cefr": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/noemb/pol": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/noemb/load": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/init/cefr": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/init/pol": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/init/load": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/clm/cefr": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/clm/pol": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/clm/load": {
+   "status": "todo"
+  },
+  "prep/qwen35_9b": {
+   "status": "todo"
+  },
+  "ma/qwen35_9b/noemb": {
+   "status": "todo"
+  },
+  "ma/qwen35_9b/rand": {
+   "status": "todo"
+  },
+  "ma/qwen35_9b/init": {
+   "status": "todo"
+  },
+  "ma/qwen35_9b/clm": {
+   "status": "todo"
+  },
+  "ma/qwen35_9b/init_pre_aF": {
+   "status": "todo"
+  },
+  "ma/qwen35_9b/init_scr_aT": {
+   "status": "todo"
+  }
+ },
+ "layout": {
+  "sections": [
+   {
+    "id": "clm",
+    "title": "CLM control-token embeddings",
+    "desc": "clm_train_embs.py per aspect, then merge_clm_embeddings.py. Qwen configs use gradient checkpointing.",
+    "columns": [
+     "CEFR",
+     "Load",
+     "Polarity",
+     "Merged"
+    ],
+    "rows": [
+     {
+      "label": "Falcon3-10B",
+      "cells": [
+       "clm/falcon3/cefr",
+       "clm/falcon3/load",
+       "clm/falcon3/polarity",
+       "merge/falcon3"
+      ]
+     },
+     {
+      "label": "Ministral-3-8B",
+      "cells": [
+       "clm/ministral3/cefr",
+       "clm/ministral3/load",
+       "clm/ministral3/polarity",
+       "merge/ministral3"
+      ]
+     },
+     {
+      "label": "Gemma-3-12B",
+      "cells": [
+       "clm/gemma3/cefr",
+       "clm/gemma3/load",
+       "clm/gemma3/polarity",
+       "merge/gemma3"
+      ]
+     },
+     {
+      "label": "Olmo-3-7B",
+      "cells": [
+       "clm/olmo3/cefr",
+       "clm/olmo3/load",
+       "clm/olmo3/polarity",
+       "merge/olmo3"
+      ]
+     },
+     {
+      "label": "Qwen3.5-4B",
+      "cells": [
+       "clm/qwen35_4b/cefr",
+       "clm/qwen35_4b/load",
+       "clm/qwen35_4b/polarity",
+       "merge/qwen35_4b"
+      ]
+     },
+     {
+      "label": "Qwen3.5-9B",
+      "cells": [
+       "clm/qwen35_9b/cefr",
+       "clm/qwen35_9b/load",
+       "clm/qwen35_9b/polarity",
+       "merge/qwen35_9b"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "sa",
+    "title": "Prerequisites: single-aspect runs",
+    "desc": "Adapters the pre_* multi-aspect runs start from. Each cell is one run (CEFR · Polarity · Load); last column: best checkpoints picked and PRETRAINED_TRIPLE_PATHS filled in train.py (manual).",
+    "columns": [
+     "noemb · CEFR",
+     "noemb · Pol",
+     "noemb · Load",
+     "init · CEFR",
+     "init · Pol",
+     "init · Load",
+     "clm · CEFR",
+     "clm · Pol",
+     "clm · Load",
+     "ckpts picked"
+    ],
+    "rows": [
+     {
+      "label": "Falcon3-10B",
+      "cells": [
+       "sa/falcon3/noemb/cefr",
+       "sa/falcon3/noemb/pol",
+       "sa/falcon3/noemb/load",
+       "sa/falcon3/init/cefr",
+       "sa/falcon3/init/pol",
+       "sa/falcon3/init/load",
+       "sa/falcon3/clm/cefr",
+       "sa/falcon3/clm/pol",
+       "sa/falcon3/clm/load",
+       "prep/falcon3"
+      ]
+     },
+     {
+      "label": "Ministral-3-8B",
+      "cells": [
+       "sa/ministral3/noemb/cefr",
+       "sa/ministral3/noemb/pol",
+       "sa/ministral3/noemb/load",
+       "sa/ministral3/init/cefr",
+       "sa/ministral3/init/pol",
+       "sa/ministral3/init/load",
+       "sa/ministral3/clm/cefr",
+       "sa/ministral3/clm/pol",
+       "sa/ministral3/clm/load",
+       "prep/ministral3"
+      ]
+     },
+     {
+      "label": "Gemma-3-12B",
+      "cells": [
+       "sa/gemma3/noemb/cefr",
+       "sa/gemma3/noemb/pol",
+       "sa/gemma3/noemb/load",
+       "sa/gemma3/init/cefr",
+       "sa/gemma3/init/pol",
+       "sa/gemma3/init/load",
+       "sa/gemma3/clm/cefr",
+       "sa/gemma3/clm/pol",
+       "sa/gemma3/clm/load",
+       "prep/gemma3"
+      ]
+     },
+     {
+      "label": "Olmo-3-7B",
+      "cells": [
+       "sa/olmo3/noemb/cefr",
+       "sa/olmo3/noemb/pol",
+       "sa/olmo3/noemb/load",
+       "sa/olmo3/init/cefr",
+       "sa/olmo3/init/pol",
+       "sa/olmo3/init/load",
+       "sa/olmo3/clm/cefr",
+       "sa/olmo3/clm/pol",
+       "sa/olmo3/clm/load",
+       "prep/olmo3"
+      ]
+     },
+     {
+      "label": "Qwen3.5-4B",
+      "cells": [
+       "sa/qwen35_4b/noemb/cefr",
+       "sa/qwen35_4b/noemb/pol",
+       "sa/qwen35_4b/noemb/load",
+       "sa/qwen35_4b/init/cefr",
+       "sa/qwen35_4b/init/pol",
+       "sa/qwen35_4b/init/load",
+       "sa/qwen35_4b/clm/cefr",
+       "sa/qwen35_4b/clm/pol",
+       "sa/qwen35_4b/clm/load",
+       "prep/qwen35_4b"
+      ]
+     },
+     {
+      "label": "Qwen3.5-9B",
+      "cells": [
+       "sa/qwen35_9b/noemb/cefr",
+       "sa/qwen35_9b/noemb/pol",
+       "sa/qwen35_9b/noemb/load",
+       "sa/qwen35_9b/init/cefr",
+       "sa/qwen35_9b/init/pol",
+       "sa/qwen35_9b/init/load",
+       "sa/qwen35_9b/clm/cefr",
+       "sa/qwen35_9b/clm/pol",
+       "sa/qwen35_9b/clm/load",
+       "prep/qwen35_9b"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "claim1",
+    "title": "Claim 1: the presence and the nature of the embedding matters",
+    "desc": "Multi-aspect, eT_pre_aT, all four embedding inits. Expected: same trend as Llama.",
+    "columns": [
+     "noEmb",
+     "rand",
+     "init",
+     "CLM"
+    ],
+    "rows": [
+     {
+      "label": "Falcon3-10B",
+      "cells": [
+       "ma/falcon3/noemb",
+       "ma/falcon3/rand",
+       "ma/falcon3/init",
+       "ma/falcon3/clm"
+      ]
+     },
+     {
+      "label": "Ministral-3-8B",
+      "cells": [
+       "ma/ministral3/noemb",
+       "ma/ministral3/rand",
+       "ma/ministral3/init",
+       "ma/ministral3/clm"
+      ]
+     },
+     {
+      "label": "Gemma-3-12B",
+      "cells": [
+       "ma/gemma3/noemb",
+       "ma/gemma3/rand",
+       "ma/gemma3/init",
+       "ma/gemma3/clm"
+      ]
+     },
+     {
+      "label": "Olmo-3-7B",
+      "cells": [
+       "ma/olmo3/noemb",
+       "ma/olmo3/rand",
+       "ma/olmo3/init",
+       "ma/olmo3/clm"
+      ]
+     },
+     {
+      "label": "Qwen3.5-4B",
+      "cells": [
+       "ma/qwen35_4b/noemb",
+       "ma/qwen35_4b/rand",
+       "ma/qwen35_4b/init",
+       "ma/qwen35_4b/clm"
+      ]
+     },
+     {
+      "label": "Qwen3.5-9B",
+      "cells": [
+       "ma/qwen35_9b/noemb",
+       "ma/qwen35_9b/rand",
+       "ma/qwen35_9b/init",
+       "ma/qwen35_9b/clm"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "claim2",
+    "title": "Claim 2: adapter initialization and training",
+    "desc": "Multi-aspect, init embeddings. Expected ordering: pre_aT > pre_aF > scr_aT. pre_aT is the same run as the init column of claim 1.",
+    "columns": [
+     "pre_aT",
+     "pre_aF",
+     "scr_aT"
+    ],
+    "rows": [
+     {
+      "label": "Falcon3-10B",
+      "cells": [
+       "ma/falcon3/init",
+       "ma/falcon3/init_pre_aF",
+       "ma/falcon3/init_scr_aT"
+      ]
+     },
+     {
+      "label": "Ministral-3-8B",
+      "cells": [
+       "ma/ministral3/init",
+       "ma/ministral3/init_pre_aF",
+       "ma/ministral3/init_scr_aT"
+      ]
+     },
+     {
+      "label": "Gemma-3-12B",
+      "cells": [
+       "ma/gemma3/init",
+       "ma/gemma3/init_pre_aF",
+       "ma/gemma3/init_scr_aT"
+      ]
+     },
+     {
+      "label": "Olmo-3-7B",
+      "cells": [
+       "ma/olmo3/init",
+       "ma/olmo3/init_pre_aF",
+       "ma/olmo3/init_scr_aT"
+      ]
+     },
+     {
+      "label": "Qwen3.5-4B",
+      "cells": [
+       "ma/qwen35_4b/init",
+       "ma/qwen35_4b/init_pre_aF",
+       "ma/qwen35_4b/init_scr_aT"
+      ]
+     },
+     {
+      "label": "Qwen3.5-9B",
+      "cells": [
+       "ma/qwen35_9b/init",
+       "ma/qwen35_9b/init_pre_aF",
+       "ma/qwen35_9b/init_scr_aT"
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "updated_at": "2026-10-02T12:04:08Z"
+}

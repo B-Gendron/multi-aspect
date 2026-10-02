@@ -122,6 +122,7 @@
 
         .dash-card.sa { --accent: var(--blue); }
         .dash-card.ma { --accent: var(--amber); }
+        .dash-card.xp { --accent: #27ae60; grid-column: 1 / -1; }
 
         .dash-card-head {
             display: flex;
@@ -144,6 +145,7 @@
 
         .dash-card.sa .dash-icon { background: var(--blue-bg); }
         .dash-card.ma .dash-icon { background: var(--amber-bg); }
+        .dash-card.xp .dash-icon { background: #e8f6ee; }
 
         .dash-icon span {
             display: block;
@@ -369,6 +371,18 @@
                 </div>
 
                 <span class="dash-cta">Open dashboard</span>
+            </a>
+            <a class="dash-card xp" href="experiments.html">
+                <div class="dash-card-head">
+                    <div class="dash-icon">
+                        <span style="height: 85%;"></span>
+                        <span style="height: 85%;"></span>
+                        <span style="height: 40%;"></span>
+                    </div>
+                    <h2>Experiment Tracker</h2>
+                </div>
+                <span class="meta-badge">Live progress of the multi-model experiments</span>
+                <span class="dash-cta">Open tracker</span>
             </a>
         </div>
     </div>

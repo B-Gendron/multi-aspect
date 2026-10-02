@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Experiment Tracker</title>
+    <style>
+        :root {
+            --bg: #f8f9fa; --surface: #ffffff; --ink: #212529;
+            --navy: #2c3e50; --navy-dark: #1a252f; --muted: #6c757d; --border: #dee2e6;
+            --blue: #3498db; --blue-bg: #ebf5fb;
+            --amber: #f39c12; --amber-bg: #fcf3cf;
+            --green: #27ae60; --green-bg: #e8f6ee;
+            --red: #c0392b; --red-bg: #fbeae5;
+            --todo: #adb5bd;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; padding: 40px 20px; background: var(--bg); color: var(--ink); min-height: 100vh;
+        }
+        .page { max-width: 1100px; margin: 0 auto; }
+        .back { font-size: 13px; color: var(--muted); text-decoration: none; }
+        .back:hover { color: var(--navy); }
+        h1 { margin: 10px 0 4px; font-size: 24px; color: var(--navy-dark); }
+        .subtitle { margin: 0 0 18px; color: var(--muted); font-size: 13px; }
+
+        .topbar {
+            display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; justify-content: space-between;
+            background: var(--surface); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.06);
+            border-top: 4px solid var(--blue); padding: 16px 20px; margin-bottom: 22px;
+        }
+        .progress { flex: 1 1 340px; min-width: 260px; }
+        .progress-label { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 6px; }
+        .progress-label span { color: var(--muted); font-weight: 400; }
+        .bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; background: #eef0f2; }
+        .bar > div { transition: width .4s ease; }
+        .legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 8px; font-size: 12px; color: var(--muted); }
+        .legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: baseline; }
+        .controls { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 12px; color: var(--muted); }
+        button.btn {
+            font: inherit; font-size: 13px; font-weight: 600; padding: 7px 14px; border-radius: 6px; cursor: pointer;
+            background: var(--navy); color: #fff; border: 1px solid var(--navy);
+        }
+        button.btn:hover { background: #34495e; }
+        button.btn.ghost { background: transparent; color: var(--navy); border-color: var(--border); }
+        .live { display: inline-flex; align-items: center; gap: 6px; }
+        .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--todo); }
+        .live.on::before { background: var(--green); animation: pulse 2s infinite; }
+
+        section.card {
+            background: var(--surface); border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,.06);
+            padding: 20px 22px 14px; margin-bottom: 20px;
+        }
+        section.card h2 { margin: 0 0 4px; font-size: 16px; color: var(--navy-dark); }
+        section.card p.desc { margin: 0 0 14px; font-size: 13px; color: var(--muted); max-width: 80ch; }
+        .scroll { overflow-x: auto; margin: 0 -6px; padding: 0 6px 8px; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 13px; }
+        th, td { padding: 7px 8px; text-align: center; white-space: nowrap; }
+        th { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; border-bottom: 1px solid var(--border); }
+        th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface); }
+        td:first-child { font-weight: 600; color: var(--navy); }
+        tr + tr td { border-top: 1px solid #f0f1f3; }
+
+        .cell {
+            font: inherit; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            min-width: 34px; height: 28px; padding: 0 9px; border-radius: 14px; border: 1.5px solid var(--c, var(--todo));
+            color: var(--c, var(--todo)); background: var(--bg-c, transparent); font-size: 12px; font-weight: 600; cursor: default;
+        }
+        .editable .cell { cursor: pointer; }
+        .editable .cell:hover { box-shadow: 0 0 0 3px rgba(44,62,80,.12); }
+        .cell:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+        .s-todo { --c: var(--todo); }
+        .s-running { --c: var(--blue); --bg-c: var(--blue-bg); }
+        .s-awaiting_check { --c: #b9770e; --bg-c: var(--amber-bg); border-color: var(--amber); }
+        .s-done { --c: var(--green); --bg-c: var(--green-bg); }
+        .s-failed { --c: var(--red); --bg-c: var(--red-bg); }
+        .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); animation: pulse 1.6s infinite; }
+        .has-note { position: relative; }
+        .has-note::after { content: ""; position: absolute; top: -2px; right: -2px; width: 7px; height: 7px; border-radius: 50%; background: var(--navy); border: 1.5px solid #fff; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+
+        .menu {
+            position: absolute; z-index: 20; background: var(--surface); border: 1px solid var(--border);
+            border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,.14); padding: 6px; min-width: 250px;
+        }
+        .menu .mhead { font-size: 11px; color: var(--muted); padding: 4px 8px 6px; word-break: break-all; }
+        .menu button {
+            display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; font: inherit; font-size: 13px;
+            background: none; border: 0; padding: 7px 8px; border-radius: 5px; cursor: pointer; color: var(--ink);
+        }
+        .menu button:hover, .menu button:focus-visible { background: var(--bg); outline: none; }
+        .menu button i { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+        .menu hr { border: 0; border-top: 1px solid var(--border); margin: 4px 0; }
+        .tip {
+            position: fixed; z-index: 30; max-width: 280px; background: var(--navy-dark); color: #fff;
+            font-size: 12px; line-height: 1.45; padding: 8px 10px; border-radius: 6px; pointer-events: none; white-space: pre-line;
+        }
+        .toast {
+            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--navy-dark); color: #fff;
+            padding: 10px 16px; border-radius: 6px; font-size: 13px; box-shadow: 0 6px 18px rgba(0,0,0,.25); z-index: 40;
+        }
+        .toast.err { background: var(--red); }
+        .hidden { display: none !important; }
+        .err-banner { background: var(--red-bg); color: var(--red); border-radius: 6px; padding: 12px 16px; font-size: 13px; }
+        @media (prefers-reduced-motion: reduce) { .dot, .live.on::before { animation: none; } .bar > div { transition: none; } }
+    </style>
+</head>
+<body>
+<div class="page">
+    <a class="back" href="index.html">&larr; Dashboards</a>
+    <h1>Experiment Tracker</h1>
+    <p class="subtitle" id="updated">Loading&hellip;</p>
+
+    <div class="topbar">
+        <div class="progress">
+            <div class="progress-label" id="plabel"></div>
+            <div class="bar" id="bar" role="img" aria-label="Progress"></div>
+            <div class="legend" id="legend"></div>
+        </div>
+        <div class="controls">
+            <button class="btn" id="unlock">Unlock editing</button>
+            <span class="live" id="live">static snapshot</span>
+        </div>
+    </div>
+
+    <div id="error" class="err-banner hidden"></div>
+    <div id="sections"></div>
+</div>
+<div class="toast hidden" id="toast"></div>
+<div class="tip hidden" id="tip"></div>
+
+<script>
+(function () {
+    "use strict";
+    var REPO = "B-Gendron/multi-aspect", PATH = "experiments.json", BRANCH = "main";
+    var API = "https://api.github.com/repos/" + REPO + "/contents/" + PATH;
+    var STATUSES = [
+        { key: "todo",           label: "To do",                          color: "var(--todo)" },
+        { key: "running",        label: "Running",                        color: "var(--blue)" },
+        { key: "awaiting_check", label: "Finished — final check awaiting", color: "var(--amber)" },
+        { key: "done",           label: "Done (verified)",                color: "var(--green)" },
+        { key: "failed",         label: "Failed",                         color: "var(--red)" }
+    ];
+    var SHORT = { todo: "", running: "running", awaiting_check: "check", done: "✓", failed: "✕" };
+    var state = null;             // {experiments, layout, updated_at}
+    var token = null;
+    try { token = localStorage.getItem("ma_tracker_token"); } catch (e) {}
+    var $ = function (id) { return document.getElementById(id); };
+
+    // ---------- helpers
+    function toast(msg, err) {
+        var t = $("toast"); t.textContent = msg; t.className = "toast" + (err ? " err" : "");
+        clearTimeout(toast.h); toast.h = setTimeout(function () { t.className = "toast hidden"; }, 3500);
+    }
+    function ago(iso) {
+        var s = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
+        if (s < 90) return "just now";
+        if (s < 5400) return Math.round(s / 60) + " min ago";
+        if (s < 129600) return Math.round(s / 3600) + " h ago";
+        return Math.round(s / 86400) + " d ago";
+    }
+    function dur(iso) {
+        var m = Math.floor((Date.now() - Date.parse(iso)) / 60000);
+        return m < 60 ? m + " min" : Math.floor(m / 60) + " h " + (m % 60) + " min";
+    }
+    function fmt(iso) { return new Date(iso).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }); }
+    function b64enc(s) { return btoa(unescape(encodeURIComponent(s))); }
+    function b64dec(s) { return decodeURIComponent(escape(atob(s.replace(/\n/g, "")))); }
+    function ghHeaders(raw) {
+        var h = { "Accept": raw ? "application/vnd.github.raw+json" : "application/vnd.github+json" };
+        if (token) h["Authorization"] = "Bearer " + token;
+        return h;
+    }
+
+    // ---------- data loading
+    function load(url, opts) { return fetch(url, opts).then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); }); }
+    function initialLoad() {
+        return load(PATH + "?t=" + Date.now(), { cache: "no-store" }).then(setState).catch(function (e) {
+            var el = $("error"); el.classList.remove("hidden"); el.textContent = "Could not load experiments.json (" + e.message + ").";
+            $("updated").textContent = "";
+        });
+    }
+    // Pages redeploys take ~1 min after each commit; the contents API shows the commit immediately.
+    function refreshLive() {
+        if (document.hidden) return;
+        load(API + "?ref=" + BRANCH, { headers: ghHeaders(true), cache: "no-store" })
+            .then(function (d) { $("live").className = "live on"; $("live").textContent = "live"; setState(d, true); })
+            .catch(function () { $("live").className = "live"; $("live").textContent = "static snapshot"; });
+    }
+    var pending = 0;  // don't clobber optimistic edits with a stale poll
+    function setState(d, fromPoll) {
+        if (fromPoll && pending > 0) return;
+        state = d; render();
+    }
+
+    // ---------- rendering
+    function counts() {
+        var seen = {}, c = { todo: 0, running: 0, awaiting_check: 0, done: 0, failed: 0 }, n = 0;
+        state.layout.sections.forEach(function (s) { s.rows.forEach(function (r) { r.cells.forEach(function (id) {
+            if (!id || seen[id]) return; seen[id] = 1; n++;
+            c[(state.experiments[id] || {}).status || "todo"]++;
+        }); }); });
+        return { c: c, n: n };
+    }
+    function renderProgress() {
+        var k = counts(), c = k.c, n = k.n, bar = $("bar"); bar.textContent = "";
+        ["done", "awaiting_check", "running", "failed"].forEach(function (s) {
+            var d = document.createElement("div"); d.style.width = (100 * c[s] / n) + "%";
+            d.style.background = STATUSES.filter(function (x) { return x.key === s; })[0].color; bar.appendChild(d);
+        });
+        $("plabel").innerHTML = c.done + " / " + n + " done <span>· " + c.awaiting_check + " awaiting final check · " + c.running + " running · " + c.failed + " failed</span>";
+        var lg = $("legend"); lg.textContent = "";
+        STATUSES.forEach(function (s) {
+            var sp = document.createElement("span"), i = document.createElement("i"); i.style.background = s.color;
+            sp.appendChild(i); sp.appendChild(document.createTextNode(s.label + " (" + c[s.key] + ")")); lg.appendChild(sp);
+        });
+    }
+    function cellButton(id) {
+        var ex = state.experiments[id] || { status: "todo" };
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "cell s-" + ex.status + (ex.note ? " has-note" : ""); b.dataset.id = id;
+        var label = STATUSES.filter(function (s) { return s.key === ex.status; })[0].label;
+        b.setAttribute("aria-label", id + ": " + label);
+        if (ex.status === "running") {
+            var d = document.createElement("span"); d.className = "dot"; b.appendChild(d);
+            if (ex.started_at) b.appendChild(document.createTextNode(dur(ex.started_at)));
+        } else if (SHORT[ex.status]) b.textContent = SHORT[ex.status];
+        else b.textContent = " ";
+        return b;
+    }
+    function render() {
+        $("updated").textContent = state.updated_at ? "Last update " + ago(state.updated_at) + " (" + fmt(state.updated_at) + ")" : "";
+        renderProgress();
+        var root = $("sections"); root.textContent = "";
+        state.layout.sections.forEach(function (s) {
+            var card = document.createElement("section"); card.className = "card" + (token ? " editable" : "");
+            var h = document.createElement("h2"); h.textContent = s.title; card.appendChild(h);
+            var p = document.createElement("p"); p.className = "desc"; p.textContent = s.desc; card.appendChild(p);
+            var wrap = document.createElement("div"); wrap.className = "scroll";
+            var t = document.createElement("table"), tr = document.createElement("tr");
+            ["Model"].concat(s.columns).forEach(function (c) { var th = document.createElement("th"); th.textContent = c; tr.appendChild(th); });
+            var thead = document.createElement("thead"); thead.appendChild(tr); t.appendChild(thead);
+            var tb = document.createElement("tbody");
+            s.rows.forEach(function (r) {
+                var row = document.createElement("tr"), td = document.createElement("td"); td.textContent = r.label; row.appendChild(td);
+                r.cells.forEach(function (id) { var c = document.createElement("td"); if (id) c.appendChild(cellButton(id)); row.appendChild(c); });
+                tb.appendChild(row);
+            });
+            t.appendChild(tb); wrap.appendChild(t); card.appendChild(wrap); root.appendChild(card);
+        });
+        $("unlock").textContent = token ? "Lock editing" : "Unlock editing";
+        $("unlock").className = "btn" + (token ? " ghost" : "");
+    }
+
+    // ---------- tooltip
+    function tipText(id) {
+        var ex = state.experiments[id] || { status: "todo" }, L = [id];
+        L.push(STATUSES.filter(function (s) { return s.key === ex.status; })[0].label);
+        if (ex.started_at) L.push("started " + fmt(ex.started_at) + (ex.gpu != null ? " · GPU " + ex.gpu : "") + (ex.host ? " · " + ex.host : ""));
+        if (ex.finished_at) L.push("finished " + fmt(ex.finished_at));
+        if (ex.note) L.push(ex.note);
+        return L.join("\n");
+    }
+    document.addEventListener("mouseover", function (e) {
+        var b = e.target.closest && e.target.closest(".cell"), tip = $("tip");
+        if (!b || !state) { tip.classList.add("hidden"); return; }
+        tip.textContent = tipText(b.dataset.id); tip.classList.remove("hidden");
+        var r = b.getBoundingClientRect();
+        tip.style.left = Math.min(r.left, innerWidth - 300) + "px"; tip.style.top = (r.bottom + 6) + "px";
+    });
+    document.addEventListener("scroll", function () { $("tip").classList.add("hidden"); }, true);
+
+    // ---------- editing (GitHub contents API; the token only ever lives in this browser's localStorage)
+    function closeMenu() { var m = document.querySelector(".menu"); if (m) m.remove(); }
+    function openMenu(btn) {
+        closeMenu();
+        var id = btn.dataset.id, m = document.createElement("div"); m.className = "menu";
+        var hd = document.createElement("div"); hd.className = "mhead"; hd.textContent = id; m.appendChild(hd);
+        STATUSES.forEach(function (s) {
+            var o = document.createElement("button"), i = document.createElement("i"); i.style.background = s.color;
+            o.appendChild(i); o.appendChild(document.createTextNode(s.label));
+            o.onclick = function () { closeMenu(); applyChange(id, { status: s.key }); };
+            m.appendChild(o);
+        });
+        m.appendChild(document.createElement("hr"));
+        var n = document.createElement("button"); n.textContent = "Edit note…";
+        n.onclick = function () {
+            closeMenu(); var cur = (state.experiments[id] || {}).note || "";
+            var v = prompt("Note for " + id, cur); if (v !== null) applyChange(id, { note: v.trim() || null });
+        };
+        m.appendChild(n); document.body.appendChild(m);
+        var r = btn.getBoundingClientRect();
+        m.style.left = Math.max(8, Math.min(r.left + scrollX, scrollX + innerWidth - 270)) + "px"; m.style.top = (r.bottom + scrollY + 6) + "px";
+        m.querySelector("button").focus();
+    }
+    function patch(ex, ch) {
+        ex = ex || {};
+        Object.keys(ch).forEach(function (k) { if (ch[k] === null) delete ex[k]; else ex[k] = ch[k]; });
+        if (ch.status === "todo") ["started_at", "finished_at", "exit_code", "host", "gpu"].forEach(function (k) { delete ex[k]; });
+        if (ch.status === "done" || ch.status === "awaiting_check") { if (!ex.finished_at) ex.finished_at = new Date().toISOString().replace(/\.\d+Z$/, "Z"); }
+        return ex;
+    }
+    function applyChange(id, ch) {
+        var before = JSON.parse(JSON.stringify(state.experiments[id] || { status: "todo" }));
+        state.experiments[id] = patch(state.experiments[id], ch); render();   // optimistic
+        pending++;
+        var msg = "tracker: " + id + " -> " + (ch.status || "note") + " (web)";
+        (function attempt(n) {
+            fetch(API + "?ref=" + BRANCH, { headers: ghHeaders(false), cache: "no-store" })
+            .then(function (r) { if (!r.ok) throw new Error("read " + r.status); return r.json(); })
+            .then(function (d) {
+                var data = JSON.parse(b64dec(d.content));
+                data.experiments[id] = patch(data.experiments[id], ch);
+                data.updated_at = new Date().toISOString().replace(/\.\d+Z$/, "Z");
+                return fetch(API, { method: "PUT", headers: ghHeaders(false), body: JSON.stringify({
+                    message: msg, branch: BRANCH, sha: d.sha, content: b64enc(JSON.stringify(data, null, 1)) }) })
+                .then(function (r) {
+                    if ((r.status === 409 || r.status === 422) && n < 4) return new Promise(function (ok) { setTimeout(ok, 600 + Math.random() * 1200); }).then(function () { return attempt(n + 1); });
+                    if (!r.ok) throw new Error("write " + r.status);
+                    state = data; pending--; render(); toast("Saved — site redeploys in about a minute");
+                });
+            })
+            .catch(function (e) {
+                pending--; state.experiments[id] = before; render();
+                toast("Could not save (" + e.message + "). " + (e.message.indexOf("40") >= 0 ? "Check the token." : ""), true);
+            });
+        })(0);
+    }
+    document.addEventListener("click", function (e) {
+        var b = e.target.closest && e.target.closest(".cell");
+        if (!e.target.closest(".menu") && !(b && token)) closeMenu();
+        if (b && token) { e.stopPropagation(); openMenu(b); }
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+    $("unlock").onclick = function () {
+        if (token) {
+            token = null; try { localStorage.removeItem("ma_tracker_token"); } catch (e) {}
+            toast("Editing locked; token removed from this browser"); render(); return;
+        }
+        var t = prompt("Paste a fine-grained GitHub token with Contents read/write on " + REPO + ".\nIt is stored only in this browser (localStorage), never in the repo.");
+        if (!t) return; t = t.trim();
+        fetch(API + "?ref=" + BRANCH, { headers: { "Authorization": "Bearer " + t, "Accept": "application/vnd.github+json" } })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); token = t; try { localStorage.setItem("ma_tracker_token", t); } catch (e) {} render(); toast("Editing unlocked: click a cell to change its status"); refreshLive(); })
+        .catch(function (e) { toast("Token rejected (" + e.message + ")", true); });
+    };
+
+    // ---------- go
+    initialLoad().then(function () {
+        refreshLive();
+        setInterval(refreshLive, token ? 45000 : 120000);
+        setInterval(function () { if (state && !document.hidden) render(); }, 60000);  // running timers, "x min ago"
+        document.addEventListener("visibilitychange", function () { if (!document.hidden) refreshLive(); });
+    });
+})();
+</script>
+</body>
+</html>
