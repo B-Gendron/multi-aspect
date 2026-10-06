@@ -144,6 +144,7 @@
     ];
     var SHORT = { todo: "", running: "running", awaiting_check: "check", done: "✓", failed: "✕" };
     var state = null;             // {experiments, layout, updated_at}
+    var progress = {};            // run id -> {step,total,elapsed_s,t}, published by the training machine (data branch)
     var token = null;
     try { token = localStorage.getItem("ma_tracker_token"); } catch (e) {}
     var $ = function (id) { return document.getElementById(id); };
@@ -163,6 +164,23 @@
     function dur(iso) {
         var m = Math.floor((Date.now() - Date.parse(iso)) / 60000);
         return m < 60 ? m + " min" : Math.floor(m / 60) + " h " + (m % 60) + " min";
+    }
+    // Estimated time left: remaining steps at the run's average speed so far (evaluation time included),
+    // minus the time since the progress was published. null when no fresh progress for this run.
+    function eta(id) {
+        var p = progress[id], ex = state.experiments[id];
+        if (!p || !ex || ex.status !== "running" || !(p.step > 0) || !(p.elapsed_s > 0)) return null;
+        var t = Date.parse(p.t), age = Date.now() - t;
+        if (age > 40 * 60000 || (ex.started_at && t < Date.parse(ex.started_at))) return null;   // stale / previous run
+        return Math.max(0, (p.total - p.step) * p.elapsed_s / p.step - age / 1000);
+    }
+    function fmtLeft(sec) {
+        var m = Math.round(sec / 60);
+        if (m < 1) return "<1 min";
+        if (m < 60) return m + " min";
+        var h = Math.floor(m / 60); m = m % 60;
+        if (h < 48) return h + " h" + (m ? " " + m + " min" : "");
+        return Math.floor(h / 24) + " d " + (h % 24) + " h";
     }
     function fmt(iso) { return new Date(iso).toLocaleString([], { dateStyle: "medium", timeStyle: "short" }); }
     function b64enc(s) { return btoa(unescape(encodeURIComponent(s))); }
@@ -185,8 +203,15 @@
     function refreshLive() {
         if (document.hidden) return;
         load(API + "?ref=" + BRANCH, { headers: ghHeaders(true), cache: "no-store" })
-            .then(function (d) { $("live").className = "live on"; $("live").textContent = "live"; setState(d, true); })
+            .then(function (d) { $("live").className = "live on"; $("live").textContent = "live"; setState(d, true); refreshProgress(); })
             .catch(function () { $("live").className = "live"; $("live").textContent = "static snapshot"; });
+    }
+    // progress.json lives on its own branch so frequent updates never redeploy the site
+    function refreshProgress() {
+        if (!state || counts().c.running === 0) return;
+        load("https://api.github.com/repos/" + REPO + "/contents/progress.json?ref=tracker-data", { headers: ghHeaders(true), cache: "no-store" })
+            .then(function (d) { progress = d.runs || {}; render(); })
+            .catch(function () { /* no progress published yet: cells fall back to elapsed time */ });
     }
     var pending = 0;  // don't clobber optimistic edits with a stale poll
     function setState(d, fromPoll) {
@@ -224,7 +249,9 @@
         b.setAttribute("aria-label", id + ": " + label);
         if (ex.status === "running") {
             var d = document.createElement("span"); d.className = "dot"; b.appendChild(d);
-            if (ex.started_at) b.appendChild(document.createTextNode(dur(ex.started_at)));
+            var left = eta(id);
+            if (left !== null) b.appendChild(document.createTextNode("~" + fmtLeft(left)));
+            else b.appendChild(document.createTextNode("\u2026"));   // no (fresh) progress yet: don't show elapsed time, it reads like time left
         } else if (SHORT[ex.status]) b.textContent = SHORT[ex.status];
         else b.textContent = " ";
         return b;
@@ -257,6 +284,8 @@
     function tipText(id) {
         var ex = state.experiments[id] || { status: "todo" }, L = [id];
         L.push(STATUSES.filter(function (s) { return s.key === ex.status; })[0].label);
+        if (eta(id) !== null) L.push("~" + fmtLeft(eta(id)) + " left (estimate), step " + progress[id].step + " / " + progress[id].total);
+        if (ex.status === "running" && ex.started_at) L.push("running for " + dur(ex.started_at));
         if (ex.started_at) L.push("started " + fmt(ex.started_at) + (ex.gpu != null ? " · GPU " + ex.gpu : "") + (ex.host ? " · " + ex.host : ""));
         if (ex.finished_at) L.push("finished " + fmt(ex.finished_at));
         if (ex.note) L.push(ex.note);
@@ -348,7 +377,7 @@
     // ---------- go
     initialLoad().then(function () {
         refreshLive();
-        setInterval(refreshLive, token ? 45000 : 120000);
+        setInterval(refreshLive, token ? 45000 : 150000);
         setInterval(function () { if (state && !document.hidden) render(); }, 60000);  // running timers, "x min ago"
         document.addEventListener("visibilitychange", function () { if (!document.hidden) refreshLive(); });
     });
