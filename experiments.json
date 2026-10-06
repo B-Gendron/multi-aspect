@@ -253,10 +253,12 @@
    "host": "henrihost"
   },
   "clm/qwen35_4b/polarity": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-06T08:05:47Z",
    "gpu": "1",
-   "host": "henrihost"
+   "host": "henrihost",
+   "finished_at": "2026-10-06T17:20:42Z",
+   "exit_code": 0
   },
   "merge/qwen35_4b": {
    "status": "todo"
@@ -679,5 +681,5 @@
    }
   ]
  },
- "updated_at": "2026-10-06T09:38:52Z"
+ "updated_at": "2026-10-06T17:20:43Z"
 }
