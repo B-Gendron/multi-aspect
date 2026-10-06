@@ -255,7 +255,7 @@
    "exit_code": 0
   },
   "clm/qwen35_4b/polarity": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-06T08:05:47Z",
    "gpu": "1",
    "host": "henrihost",
@@ -689,5 +689,5 @@
    }
   ]
  },
- "updated_at": "2026-10-06T17:31:02Z"
+ "updated_at": "2026-10-06T17:31:04Z"
 }
