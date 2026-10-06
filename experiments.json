@@ -310,7 +310,7 @@
    "status": "todo"
   },
   "clm/qwen35_9b/cefr": {
-   "status": "awaiting_check",
+   "status": "done",
    "finished_at": "2026-10-06T08:10:47Z",
    "note": "stopped manually at step ~169k/235k (14.3 epochs): eval loss flat (best 2.0539 at step 166000, <0.003 gain over last 20k steps). Embeddings copied from checkpoint-166000."
   },
@@ -679,5 +679,5 @@
    }
   ]
  },
- "updated_at": "2026-10-06T09:38:50Z"
+ "updated_at": "2026-10-06T09:38:52Z"
 }
