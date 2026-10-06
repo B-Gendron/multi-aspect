@@ -242,13 +242,21 @@
    "status": "todo"
   },
   "clm/qwen35_4b/cefr": {
-   "status": "todo"
+   "status": "awaiting_check",
+   "finished_at": "2026-10-04T13:05:00Z",
+   "note": "completed all 20 epochs (235,720 steps, 44h), final eval loss 2.067; embeddings in embeddings/clm_multitoken/qwen35_4b_cefr.pt"
   },
   "clm/qwen35_4b/load": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-06T08:05:47Z",
+   "gpu": "0",
+   "host": "henrihost"
   },
   "clm/qwen35_4b/polarity": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-06T08:05:47Z",
+   "gpu": "1",
+   "host": "henrihost"
   },
   "merge/qwen35_4b": {
    "status": "todo"
@@ -302,7 +310,9 @@
    "status": "todo"
   },
   "clm/qwen35_9b/cefr": {
-   "status": "todo"
+   "status": "awaiting_check",
+   "finished_at": "2026-10-06T08:10:47Z",
+   "note": "stopped manually at step ~169k/235k (14.3 epochs): eval loss flat (best 2.0539 at step 166000, <0.003 gain over last 20k steps). Embeddings copied from checkpoint-166000."
   },
   "clm/qwen35_9b/load": {
    "status": "todo"
@@ -669,5 +679,5 @@
    }
   ]
  },
- "updated_at": "2026-10-02T12:04:08Z"
+ "updated_at": "2026-10-06T08:14:23Z"
 }
