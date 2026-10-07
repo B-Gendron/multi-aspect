@@ -122,10 +122,13 @@
    "status": "todo"
   },
   "clm/gemma3/cefr": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-07T06:04:31Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-07T06:04:39Z",
+   "exit_code": 1,
+   "note": "exit code 1: AttributeError: 'Gemma3Config' object has no attribute 'pad_token_id'. Did you mean: 'eos_token_id'?"
   },
   "clm/gemma3/load": {
    "status": "todo"
@@ -696,5 +699,5 @@
    }
   ]
  },
- "updated_at": "2026-10-07T06:04:31Z"
+ "updated_at": "2026-10-07T06:04:40Z"
 }
