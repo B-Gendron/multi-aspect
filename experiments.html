@@ -19,7 +19,7 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             margin: 0; padding: 40px 20px; background: var(--bg); color: var(--ink); min-height: 100vh;
         }
-        .page { max-width: 1100px; margin: 0 auto; }
+        .page { max-width: 1480px; margin: 0 auto; }
         .back { font-size: 13px; color: var(--muted); text-decoration: none; }
         .back:hover { color: var(--navy); }
         h1 { margin: 10px 0 4px; font-size: 24px; color: var(--navy-dark); }
@@ -56,11 +56,18 @@
         section.card p.desc { margin: 0 0 14px; font-size: 13px; color: var(--muted); max-width: 80ch; }
         .scroll { overflow-x: auto; margin: 0 -6px; padding: 0 6px 8px; }
         table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: 13px; }
-        th, td { padding: 7px 8px; text-align: center; white-space: nowrap; }
+        th, td { padding: 9px 12px; text-align: center; white-space: nowrap; }
         th { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; border-bottom: 1px solid var(--border); }
         th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface); }
         td:first-child { font-weight: 600; color: var(--navy); }
         tr + tr td { border-top: 1px solid #f0f1f3; }
+        th.grp { color: var(--navy); font-size: 12px; letter-spacing: .6px; border-bottom: 1px solid var(--border); }
+        .gstart { border-left: 2px solid var(--border); }
+        thead tr.sub th { border-bottom: 1px solid var(--border); }
+        thead tr.top th { border-bottom: 0; padding-bottom: 2px; }
+        thead tr.top th.grp { border-bottom: 2px solid var(--border); }
+        th:first-child, td:first-child { min-width: 150px; }
+        .cell .alias { font-size: 11px; font-weight: 500; opacity: .85; }
 
         .cell {
             font: inherit; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
@@ -220,9 +227,11 @@
     }
 
     // ---------- rendering
+    function cid(c) { return c && typeof c === "object" ? c.id : c; }
     function counts() {
         var seen = {}, c = { todo: 0, running: 0, awaiting_check: 0, done: 0, failed: 0 }, n = 0;
-        state.layout.sections.forEach(function (s) { s.rows.forEach(function (r) { r.cells.forEach(function (id) {
+        state.layout.sections.forEach(function (s) { s.rows.forEach(function (r) { r.cells.forEach(function (cell) {
+            var id = cid(cell);
             if (!id || seen[id]) return; seen[id] = 1; n++;
             c[(state.experiments[id] || {}).status || "todo"]++;
         }); }); });
@@ -241,13 +250,18 @@
             sp.appendChild(i); sp.appendChild(document.createTextNode(s.label + " (" + c[s.key] + ")")); lg.appendChild(sp);
         });
     }
-    function cellButton(id) {
+    function cellButton(cell) {
+        var id = cid(cell), alias = cell && typeof cell === "object" ? cell.label : null;
         var ex = state.experiments[id] || { status: "todo" };
         var b = document.createElement("button");
         b.type = "button"; b.className = "cell s-" + ex.status + (ex.note ? " has-note" : ""); b.dataset.id = id;
         var label = STATUSES.filter(function (s) { return s.key === ex.status; })[0].label;
         b.setAttribute("aria-label", id + ": " + label);
-        if (ex.status === "running") {
+        if (alias) {  // same experiment as another cell: state glyph + a small "from ..." tag (ETA stays in the tooltip)
+            if (ex.status === "running") { var dd = document.createElement("span"); dd.className = "dot"; b.appendChild(dd); }
+            else if (SHORT[ex.status]) b.appendChild(document.createTextNode(SHORT[ex.status]));
+            var al = document.createElement("span"); al.className = "alias"; al.textContent = alias; b.appendChild(al);
+        } else if (ex.status === "running") {
             var d = document.createElement("span"); d.className = "dot"; b.appendChild(d);
             var left = eta(id);
             if (left !== null) b.appendChild(document.createTextNode("~" + fmtLeft(left)));
@@ -265,13 +279,31 @@
             var h = document.createElement("h2"); h.textContent = s.title; card.appendChild(h);
             var p = document.createElement("p"); p.className = "desc"; p.textContent = s.desc; card.appendChild(p);
             var wrap = document.createElement("div"); wrap.className = "scroll";
-            var t = document.createElement("table"), tr = document.createElement("tr");
-            ["Model"].concat(s.columns).forEach(function (c) { var th = document.createElement("th"); th.textContent = c; tr.appendChild(th); });
-            var thead = document.createElement("thead"); thead.appendChild(tr); t.appendChild(thead);
+            var t = document.createElement("table"), thead = document.createElement("thead");
+            var starts = {};   // column index (0-based, after "Model") -> true when a group begins there
+            function th(txt, cls, extra) { var e = document.createElement("th"); e.textContent = txt; if (cls) e.className = cls; if (extra) extra(e); return e; }
+            if (s.groups) {
+                var top = document.createElement("tr"), sub = document.createElement("tr"), col = 0;
+                top.className = "top"; sub.className = "sub";
+                top.appendChild(th("Model", "", function (e) { e.rowSpan = 2; }));
+                s.groups.forEach(function (g) {
+                    top.appendChild(th(g.label, "grp gstart", function (e) { e.colSpan = g.size; }));
+                    starts[col] = true; col += g.size;
+                });
+                s.columns.forEach(function (c, i) { sub.appendChild(th(c, starts[i] ? "gstart" : "")); });
+                thead.appendChild(top); thead.appendChild(sub);
+            } else {
+                var tr = document.createElement("tr");
+                tr.appendChild(th("Model")); s.columns.forEach(function (c) { tr.appendChild(th(c)); }); thead.appendChild(tr);
+            }
+            t.appendChild(thead);
             var tb = document.createElement("tbody");
             s.rows.forEach(function (r) {
                 var row = document.createElement("tr"), td = document.createElement("td"); td.textContent = r.label; row.appendChild(td);
-                r.cells.forEach(function (id) { var c = document.createElement("td"); if (id) c.appendChild(cellButton(id)); row.appendChild(c); });
+                r.cells.forEach(function (cell, i) {
+                    var c = document.createElement("td"); if (starts[i]) c.className = "gstart";
+                    if (cell) c.appendChild(cellButton(cell)); row.appendChild(c);
+                });
                 tb.appendChild(row);
             });
             t.appendChild(tb); wrap.appendChild(t); card.appendChild(wrap); root.appendChild(card);
