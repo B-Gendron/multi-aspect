@@ -122,13 +122,9 @@
    "status": "todo"
   },
   "clm/gemma3/cefr": {
-   "status": "failed",
-   "started_at": "2026-10-07T06:39:05Z",
-   "host": "henrihost",
-   "gpu": "0",
-   "finished_at": "2026-10-07T07:14:26Z",
-   "exit_code": 1,
-   "note": "exit code 1: 1%|          | 2842/235720 [34:41<47:22:18,  1.37it/s]"
+   "status": "running",
+   "started_at": "2026-10-07T07:56:18Z",
+   "host": "henrihost"
   },
   "clm/gemma3/load": {
    "status": "todo"
@@ -814,5 +810,5 @@
    }
   ]
  },
- "updated_at": "2026-10-07T07:14:27Z"
+ "updated_at": "2026-10-07T07:56:18Z"
 }
