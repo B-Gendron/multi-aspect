@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Experiment Tracker</title>
+    <meta name="theme-color" content="#2c3e50">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <style>
         :root {
             --bg: #f8f9fa; --surface: #ffffff; --ink: #212529;
@@ -110,6 +114,30 @@
         .toast.err { background: var(--red); }
         .hidden { display: none !important; }
         .err-banner { background: var(--red-bg); color: var(--red); border-radius: 6px; padding: 12px 16px; font-size: 13px; }
+        html { -webkit-text-size-adjust: 100%; }
+        @media (max-width: 640px) {
+            body { padding: 16px 10px 28px; }
+            h1 { font-size: 21px; }
+            .topbar { padding: 14px; gap: 12px; }
+            .controls { flex-direction: row; width: 100%; align-items: center; justify-content: space-between; }
+            section.card { padding: 14px 12px 8px; }
+            section.card p.desc { font-size: 12.5px; }
+            .scroll { overflow: visible; margin: 0; padding: 0; }
+            table, tbody { display: block; }
+            thead { display: none; }
+            tbody tr { display: grid; grid-template-columns: repeat(var(--mc, 3), minmax(0, 1fr)); gap: 14px 6px;   /* groups are exactly one row of the card, so the row gap separates them */
+                       padding: 12px 0 14px; border-top: 1px solid var(--border); }
+            tbody tr:first-child { border-top: 0; }
+            tr + tr td { border-top: 0; }
+            td { padding: 0; border: 0 !important; display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0; }
+            td::before { content: attr(data-label); font-size: 10px; font-weight: 700; color: var(--muted);
+                         text-transform: uppercase; letter-spacing: .3px; text-align: center; white-space: normal; line-height: 1.2; }
+            td.mcol { grid-column: 1 / -1; position: static; min-width: 0; align-items: flex-start; font-size: 15px; }
+            td.mcol::before { content: none; }
+            .cell { min-height: 36px; min-width: 44px; border-radius: 18px; }
+            td.mcol { margin-bottom: 2px; }
+            .menu { min-width: 0; width: min(280px, calc(100vw - 20px)); }
+        }
         @media (prefers-reduced-motion: reduce) { .dot, .live.on::before { animation: none; } .bar > div { transition: none; } }
     </style>
 </head>
@@ -280,7 +308,7 @@
             var p = document.createElement("p"); p.className = "desc"; p.textContent = s.desc; card.appendChild(p);
             var wrap = document.createElement("div"); wrap.className = "scroll";
             var t = document.createElement("table"), thead = document.createElement("thead");
-            var starts = {};   // column index (0-based, after "Model") -> true when a group begins there
+            var starts = {}, groupOf = {};   // column index (0-based, after "Model") -> group start flag / group label
             function th(txt, cls, extra) { var e = document.createElement("th"); e.textContent = txt; if (cls) e.className = cls; if (extra) extra(e); return e; }
             if (s.groups) {
                 var top = document.createElement("tr"), sub = document.createElement("tr"), col = 0;
@@ -288,7 +316,9 @@
                 top.appendChild(th("Model", "mcol", function (e) { e.rowSpan = 2; }));
                 s.groups.forEach(function (g) {
                     top.appendChild(th(g.label, "grp gstart", function (e) { e.colSpan = g.size; }));
-                    starts[col] = true; col += g.size;
+                    starts[col] = true;
+                    for (var k = 0; k < g.size; k++) if (g.label) groupOf[col + k] = g.label;
+                    col += g.size;
                 });
                 s.columns.forEach(function (c, i) { sub.appendChild(th(c, starts[i] ? "gstart" : "")); });
                 thead.appendChild(top); thead.appendChild(sub);
@@ -302,10 +332,12 @@
                 var row = document.createElement("tr"), td = document.createElement("td"); td.className = "mcol"; td.textContent = r.label; row.appendChild(td);
                 r.cells.forEach(function (cell, i) {
                     var c = document.createElement("td"); if (starts[i]) c.className = "gstart";
+                    c.dataset.label = (groupOf[i] ? groupOf[i] + " \u00b7 " : "") + s.columns[i];   // shown above the cell on phones
                     if (cell) c.appendChild(cellButton(cell)); row.appendChild(c);
                 });
                 tb.appendChild(row);
             });
+            tb.style.setProperty("--mc", s.groups ? 3 : Math.min(s.columns.length, 4));   // cells per row in the phone card layout
             t.appendChild(tb); wrap.appendChild(t); card.appendChild(wrap); root.appendChild(card);
         });
         $("unlock").textContent = token ? "Lock editing" : "Unlock editing";
@@ -323,7 +355,13 @@
         if (ex.note) L.push(ex.note);
         return L.join("\n");
     }
+    var lastTouch = 0;   // a tap is followed by emulated mouse events; they must not hide the tap tooltip
+    document.addEventListener("touchstart", function (e) {
+        lastTouch = Date.now();
+        if (!(e.target.closest && e.target.closest(".cell"))) $("tip").classList.add("hidden");   // tap elsewhere closes it
+    }, { passive: true });
     document.addEventListener("mouseover", function (e) {
+        if (Date.now() - lastTouch < 1000) return;
         var b = e.target.closest && e.target.closest(".cell"), tip = $("tip");
         if (!b || !state) { tip.classList.add("hidden"); return; }
         tip.textContent = tipText(b.dataset.id); tip.classList.remove("hidden");
@@ -351,8 +389,10 @@
             var v = prompt("Note for " + id, cur); if (v !== null) applyChange(id, { note: v.trim() || null });
         };
         m.appendChild(n); document.body.appendChild(m);
-        var r = btn.getBoundingClientRect();
-        m.style.left = Math.max(8, Math.min(r.left + scrollX, scrollX + innerWidth - 270)) + "px"; m.style.top = (r.bottom + scrollY + 6) + "px";
+        var r = btn.getBoundingClientRect(), mw = m.offsetWidth, vw = document.documentElement.clientWidth;
+        m.style.left = Math.max(8, Math.min(r.left + scrollX, scrollX + vw - mw - 8)) + "px";
+        var mh = m.offsetHeight, above = r.bottom + 6 + mh > innerHeight && r.top - 6 - mh > 0;   // not enough room below: open above the cell
+        m.style.top = (above ? r.top + scrollY - mh - 6 : r.bottom + scrollY + 6) + "px";
         m.querySelector("button").focus();
     }
     function patch(ex, ch) {
@@ -390,6 +430,12 @@
     }
     document.addEventListener("click", function (e) {
         var b = e.target.closest && e.target.closest(".cell");
+        if (b && !token && state) {   // no hover on touch screens: show the tooltip on tap, hide it after a few seconds
+            var tip = $("tip"); tip.textContent = tipText(b.dataset.id); tip.classList.remove("hidden");
+            var r = b.getBoundingClientRect();
+            tip.style.left = Math.max(8, Math.min(r.left, innerWidth - 300)) + "px"; tip.style.top = (r.bottom + 6) + "px";
+            clearTimeout(tip.h); tip.h = setTimeout(function () { tip.classList.add("hidden"); }, 5000);
+        }
         if (!e.target.closest(".menu") && !(b && token)) closeMenu();
         if (b && token) { e.stopPropagation(); openMenu(b); }
     });
