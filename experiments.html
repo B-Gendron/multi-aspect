@@ -208,7 +208,7 @@
         var p = progress[id], ex = state.experiments[id];
         if (!p || !ex || ex.status !== "running" || !(p.step > 0) || !(p.elapsed_s > 0)) return null;
         var t = Date.parse(p.t), age = Date.now() - t;
-        if (age > 40 * 60000 || (ex.started_at && t < Date.parse(ex.started_at))) return null;   // stale / previous run
+        if (age > 130 * 60000 || (ex.started_at && t < Date.parse(ex.started_at))) return null;   // stale (updates are hourly: tolerate one missed) / previous run
         return Math.max(0, (p.total - p.step) * p.elapsed_s / p.step - age / 1000);
     }
     function fmtLeft(sec) {
