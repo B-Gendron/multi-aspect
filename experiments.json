@@ -122,7 +122,9 @@
    "status": "todo"
   },
   "clm/gemma3/cefr": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-07T07:56:18Z",
+   "host": "henrihost"
   },
   "clm/gemma3/load": {
    "status": "todo"
@@ -247,7 +249,7 @@
    "note": "completed all 20 epochs (235,720 steps, 44h), final eval loss 2.067; embeddings in embeddings/clm_multitoken/qwen35_4b_cefr.pt"
   },
   "clm/qwen35_4b/load": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-06T08:05:47Z",
    "gpu": "0",
    "host": "henrihost",
@@ -255,7 +257,7 @@
    "exit_code": 0
   },
   "clm/qwen35_4b/polarity": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-06T08:05:47Z",
    "gpu": "1",
    "host": "henrihost",
@@ -319,16 +321,20 @@
    "note": "stopped manually at step ~169k/235k (14.3 epochs): eval loss flat (best 2.0539 at step 166000, <0.003 gain over last 20k steps). Embeddings copied from checkpoint-166000."
   },
   "clm/qwen35_9b/load": {
-   "status": "running",
+   "status": "done",
    "started_at": "2026-10-06T17:26:48Z",
    "host": "henrihost",
-   "gpu": "1"
+   "gpu": "1",
+   "finished_at": "2026-10-07T04:59:33Z",
+   "exit_code": 0
   },
   "clm/qwen35_9b/polarity": {
-   "status": "running",
+   "status": "done",
    "started_at": "2026-10-06T17:27:00Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-07T04:40:00Z",
+   "exit_code": 0
   },
   "merge/qwen35_9b": {
    "status": "todo"
@@ -379,6 +385,60 @@
    "status": "todo"
   },
   "ma/qwen35_9b/init_scr_aT": {
+   "status": "todo"
+  },
+  "sa/falcon3/rand/cefr": {
+   "status": "todo"
+  },
+  "sa/falcon3/rand/pol": {
+   "status": "todo"
+  },
+  "sa/falcon3/rand/load": {
+   "status": "todo"
+  },
+  "sa/ministral3/rand/cefr": {
+   "status": "todo"
+  },
+  "sa/ministral3/rand/pol": {
+   "status": "todo"
+  },
+  "sa/ministral3/rand/load": {
+   "status": "todo"
+  },
+  "sa/gemma3/rand/cefr": {
+   "status": "todo"
+  },
+  "sa/gemma3/rand/pol": {
+   "status": "todo"
+  },
+  "sa/gemma3/rand/load": {
+   "status": "todo"
+  },
+  "sa/olmo3/rand/cefr": {
+   "status": "todo"
+  },
+  "sa/olmo3/rand/pol": {
+   "status": "todo"
+  },
+  "sa/olmo3/rand/load": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/rand/cefr": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/rand/pol": {
+   "status": "todo"
+  },
+  "sa/qwen35_4b/rand/load": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/rand/cefr": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/rand/pol": {
+   "status": "todo"
+  },
+  "sa/qwen35_9b/rand/load": {
    "status": "todo"
   }
  },
@@ -454,18 +514,43 @@
    {
     "id": "sa",
     "title": "Prerequisites: single-aspect runs",
-    "desc": "Adapters the pre_* multi-aspect runs start from. Each cell is one run (CEFR · Polarity · Load); last column: best checkpoints picked and PRETRAINED_TRIPLE_PATHS filled in train.py (manual).",
+    "desc": "One run per cell. The pre_* multi-aspect runs start from the noEmb, init and CLM adapters (rand multi-aspect runs reuse the init ones); the rand runs are tracked here for completeness. Last column: best checkpoints picked and PRETRAINED_TRIPLE_PATHS filled in train.py (manual).",
+    "groups": [
+     {
+      "label": "noEmb",
+      "size": 3
+     },
+     {
+      "label": "rand",
+      "size": 3
+     },
+     {
+      "label": "init",
+      "size": 3
+     },
+     {
+      "label": "CLM",
+      "size": 3
+     },
+     {
+      "label": "",
+      "size": 1
+     }
+    ],
     "columns": [
-     "noemb · CEFR",
-     "noemb · Pol",
-     "noemb · Load",
-     "init · CEFR",
-     "init · Pol",
-     "init · Load",
-     "clm · CEFR",
-     "clm · Pol",
-     "clm · Load",
-     "ckpts picked"
+     "CEFR",
+     "Polarity",
+     "Load",
+     "CEFR",
+     "Polarity",
+     "Load",
+     "CEFR",
+     "Polarity",
+     "Load",
+     "CEFR",
+     "Polarity",
+     "Load",
+     "Ckpts picked"
     ],
     "rows": [
      {
@@ -474,6 +559,9 @@
        "sa/falcon3/noemb/cefr",
        "sa/falcon3/noemb/pol",
        "sa/falcon3/noemb/load",
+       "sa/falcon3/rand/cefr",
+       "sa/falcon3/rand/pol",
+       "sa/falcon3/rand/load",
        "sa/falcon3/init/cefr",
        "sa/falcon3/init/pol",
        "sa/falcon3/init/load",
@@ -489,6 +577,9 @@
        "sa/ministral3/noemb/cefr",
        "sa/ministral3/noemb/pol",
        "sa/ministral3/noemb/load",
+       "sa/ministral3/rand/cefr",
+       "sa/ministral3/rand/pol",
+       "sa/ministral3/rand/load",
        "sa/ministral3/init/cefr",
        "sa/ministral3/init/pol",
        "sa/ministral3/init/load",
@@ -504,6 +595,9 @@
        "sa/gemma3/noemb/cefr",
        "sa/gemma3/noemb/pol",
        "sa/gemma3/noemb/load",
+       "sa/gemma3/rand/cefr",
+       "sa/gemma3/rand/pol",
+       "sa/gemma3/rand/load",
        "sa/gemma3/init/cefr",
        "sa/gemma3/init/pol",
        "sa/gemma3/init/load",
@@ -519,6 +613,9 @@
        "sa/olmo3/noemb/cefr",
        "sa/olmo3/noemb/pol",
        "sa/olmo3/noemb/load",
+       "sa/olmo3/rand/cefr",
+       "sa/olmo3/rand/pol",
+       "sa/olmo3/rand/load",
        "sa/olmo3/init/cefr",
        "sa/olmo3/init/pol",
        "sa/olmo3/init/load",
@@ -534,6 +631,9 @@
        "sa/qwen35_4b/noemb/cefr",
        "sa/qwen35_4b/noemb/pol",
        "sa/qwen35_4b/noemb/load",
+       "sa/qwen35_4b/rand/cefr",
+       "sa/qwen35_4b/rand/pol",
+       "sa/qwen35_4b/rand/load",
        "sa/qwen35_4b/init/cefr",
        "sa/qwen35_4b/init/pol",
        "sa/qwen35_4b/init/load",
@@ -549,6 +649,9 @@
        "sa/qwen35_9b/noemb/cefr",
        "sa/qwen35_9b/noemb/pol",
        "sa/qwen35_9b/noemb/load",
+       "sa/qwen35_9b/rand/cefr",
+       "sa/qwen35_9b/rand/pol",
+       "sa/qwen35_9b/rand/load",
        "sa/qwen35_9b/init/cefr",
        "sa/qwen35_9b/init/pol",
        "sa/qwen35_9b/init/load",
@@ -630,7 +733,7 @@
    {
     "id": "claim2",
     "title": "Claim 2: adapter initialization and training",
-    "desc": "Multi-aspect, init embeddings. Expected ordering: pre_aT > pre_aF > scr_aT. pre_aT is the same run as the init column of claim 1.",
+    "desc": "Multi-aspect, init embeddings. Expected ordering: pre_aT > pre_aF > scr_aT. The pre_aT cell is the claim-1 init run: same experiment, so it always shows the same state as there.",
     "columns": [
      "pre_aT",
      "pre_aF",
@@ -640,7 +743,10 @@
      {
       "label": "Falcon3-10B",
       "cells": [
-       "ma/falcon3/init",
+       {
+        "id": "ma/falcon3/init",
+        "label": "from claim 1"
+       },
        "ma/falcon3/init_pre_aF",
        "ma/falcon3/init_scr_aT"
       ]
@@ -648,7 +754,10 @@
      {
       "label": "Ministral-3-8B",
       "cells": [
-       "ma/ministral3/init",
+       {
+        "id": "ma/ministral3/init",
+        "label": "from claim 1"
+       },
        "ma/ministral3/init_pre_aF",
        "ma/ministral3/init_scr_aT"
       ]
@@ -656,7 +765,10 @@
      {
       "label": "Gemma-3-12B",
       "cells": [
-       "ma/gemma3/init",
+       {
+        "id": "ma/gemma3/init",
+        "label": "from claim 1"
+       },
        "ma/gemma3/init_pre_aF",
        "ma/gemma3/init_scr_aT"
       ]
@@ -664,7 +776,10 @@
      {
       "label": "Olmo-3-7B",
       "cells": [
-       "ma/olmo3/init",
+       {
+        "id": "ma/olmo3/init",
+        "label": "from claim 1"
+       },
        "ma/olmo3/init_pre_aF",
        "ma/olmo3/init_scr_aT"
       ]
@@ -672,7 +787,10 @@
      {
       "label": "Qwen3.5-4B",
       "cells": [
-       "ma/qwen35_4b/init",
+       {
+        "id": "ma/qwen35_4b/init",
+        "label": "from claim 1"
+       },
        "ma/qwen35_4b/init_pre_aF",
        "ma/qwen35_4b/init_scr_aT"
       ]
@@ -680,7 +798,10 @@
      {
       "label": "Qwen3.5-9B",
       "cells": [
-       "ma/qwen35_9b/init",
+       {
+        "id": "ma/qwen35_9b/init",
+        "label": "from claim 1"
+       },
        "ma/qwen35_9b/init_pre_aF",
        "ma/qwen35_9b/init_scr_aT"
       ]
@@ -689,5 +810,5 @@
    }
   ]
  },
- "updated_at": "2026-10-06T17:27:01Z"
+ "updated_at": "2026-10-07T07:56:18Z"
 }
