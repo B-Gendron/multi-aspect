@@ -83,10 +83,13 @@
    "status": "todo"
   },
   "sa/ministral3/init/cefr": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-08T08:02:18Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-08T08:02:29Z",
+   "exit_code": 1,
+   "note": "exit code 1: ValueError: Tokenizer class TokenizersBackend does not exist or is not currently imported."
   },
   "sa/ministral3/init/pol": {
    "status": "todo"
@@ -816,5 +819,5 @@
    }
   ]
  },
- "updated_at": "2026-10-08T08:02:18Z"
+ "updated_at": "2026-10-08T08:02:29Z"
 }
