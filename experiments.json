@@ -128,7 +128,7 @@
    "status": "todo"
   },
   "clm/gemma3/cefr": {
-   "status": "failed",
+   "status": "done",
    "started_at": "2026-10-07T07:56:18Z",
    "host": "henrihost",
    "finished_at": "2026-10-08T07:47:50Z",
@@ -819,5 +819,5 @@
    }
   ]
  },
- "updated_at": "2026-10-08T07:49:00Z"
+ "updated_at": "2026-10-08T07:49:19Z"
 }
