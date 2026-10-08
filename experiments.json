@@ -687,9 +687,9 @@
     "title": "Claim 2: adapter initialization and training",
     "desc": "Multi-aspect, init embeddings. Expected ordering: pre_aT > pre_aF > scr_aT. The pre_aT cell is the claim-1 init run: same experiment, so it always shows the same state as there.",
     "columns": [
-     "pre_aT",
-     "pre_aF",
-     "scr_aT"
+     "init_eT_pre_aT",
+     "init_eT_pre_aF",
+     "init_eT_scr_aT"
     ],
     "rows": [
      {
@@ -762,5 +762,5 @@
    }
   ]
  },
- "updated_at": "2026-10-08T15:50:23Z"
+ "updated_at": "2026-10-08T15:53:44Z"
 }
