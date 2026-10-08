@@ -83,13 +83,10 @@
    "status": "todo"
   },
   "sa/ministral3/init/cefr": {
-   "status": "failed",
-   "started_at": "2026-10-08T07:48:52Z",
+   "status": "running",
+   "started_at": "2026-10-08T08:02:18Z",
    "host": "henrihost",
-   "gpu": "0",
-   "finished_at": "2026-10-08T07:49:00Z",
-   "exit_code": 1,
-   "note": "exit code 1: No module named 'mergekit'"
+   "gpu": "0"
   },
   "sa/ministral3/init/pol": {
    "status": "todo"
@@ -819,5 +816,5 @@
    }
   ]
  },
- "updated_at": "2026-10-08T07:49:19Z"
+ "updated_at": "2026-10-08T08:02:18Z"
 }
