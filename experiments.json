@@ -83,10 +83,13 @@
    "status": "todo"
   },
   "sa/ministral3/init/cefr": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-08T08:07:32Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-08T08:09:45Z",
+   "exit_code": 1,
+   "note": "exit code 1: wandb: Find logs at: ./wandb/run-20261008_080751-r1ah3rbo/logs"
   },
   "sa/ministral3/init/pol": {
    "status": "todo"
@@ -816,5 +819,5 @@
    }
   ]
  },
- "updated_at": "2026-10-08T08:07:32Z"
+ "updated_at": "2026-10-08T08:09:46Z"
 }
