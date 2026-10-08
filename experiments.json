@@ -83,10 +83,13 @@
    "status": "todo"
   },
   "sa/ministral3/init/cefr": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-08T08:06:04Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-08T08:06:27Z",
+   "exit_code": 1,
+   "note": "exit code 1: AttributeError: 'Mistral3ForConditionalGeneration' object has no attribute 'warnings_issued'"
   },
   "sa/ministral3/init/pol": {
    "status": "todo"
@@ -816,5 +819,5 @@
    }
   ]
  },
- "updated_at": "2026-10-08T08:06:04Z"
+ "updated_at": "2026-10-08T08:06:27Z"
 }
