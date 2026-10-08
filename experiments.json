@@ -10,9 +10,6 @@
   "clm/falcon3/polarity": {
    "status": "todo"
   },
-  "merge/falcon3": {
-   "status": "todo"
-  },
   "sa/falcon3/noemb/cefr": {
    "status": "todo"
   },
@@ -38,9 +35,6 @@
    "status": "todo"
   },
   "sa/falcon3/clm/load": {
-   "status": "todo"
-  },
-  "prep/falcon3": {
    "status": "todo"
   },
   "ma/falcon3/noemb": {
@@ -70,9 +64,6 @@
   "clm/ministral3/polarity": {
    "status": "done"
   },
-  "merge/ministral3": {
-   "status": "todo"
-  },
   "sa/ministral3/noemb/cefr": {
    "status": "todo"
   },
@@ -101,9 +92,6 @@
    "status": "todo"
   },
   "sa/ministral3/clm/load": {
-   "status": "todo"
-  },
-  "prep/ministral3": {
    "status": "todo"
   },
   "ma/ministral3/noemb": {
@@ -138,9 +126,6 @@
   "clm/gemma3/polarity": {
    "status": "todo"
   },
-  "merge/gemma3": {
-   "status": "todo"
-  },
   "sa/gemma3/noemb/cefr": {
    "status": "todo"
   },
@@ -166,9 +151,6 @@
    "status": "todo"
   },
   "sa/gemma3/clm/load": {
-   "status": "todo"
-  },
-  "prep/gemma3": {
    "status": "todo"
   },
   "ma/gemma3/noemb": {
@@ -198,9 +180,6 @@
   "clm/olmo3/polarity": {
    "status": "done"
   },
-  "merge/olmo3": {
-   "status": "todo"
-  },
   "sa/olmo3/noemb/cefr": {
    "status": "todo"
   },
@@ -226,9 +205,6 @@
    "status": "todo"
   },
   "sa/olmo3/clm/load": {
-   "status": "todo"
-  },
-  "prep/olmo3": {
    "status": "todo"
   },
   "ma/olmo3/noemb": {
@@ -270,9 +246,6 @@
    "finished_at": "2026-10-06T17:20:42Z",
    "exit_code": 0
   },
-  "merge/qwen35_4b": {
-   "status": "todo"
-  },
   "sa/qwen35_4b/noemb/cefr": {
    "status": "todo"
   },
@@ -298,9 +271,6 @@
    "status": "todo"
   },
   "sa/qwen35_4b/clm/load": {
-   "status": "todo"
-  },
-  "prep/qwen35_4b": {
    "status": "todo"
   },
   "ma/qwen35_4b/noemb": {
@@ -342,9 +312,6 @@
    "finished_at": "2026-10-07T04:40:00Z",
    "exit_code": 0
   },
-  "merge/qwen35_9b": {
-   "status": "todo"
-  },
   "sa/qwen35_9b/noemb/cefr": {
    "status": "todo"
   },
@@ -370,9 +337,6 @@
    "status": "todo"
   },
   "sa/qwen35_9b/clm/load": {
-   "status": "todo"
-  },
-  "prep/qwen35_9b": {
    "status": "todo"
   },
   "ma/qwen35_9b/noemb": {
@@ -453,12 +417,11 @@
    {
     "id": "clm",
     "title": "CLM control-token embeddings",
-    "desc": "clm_train_embs.py per aspect, then merge_clm_embeddings.py. Qwen configs use gradient checkpointing.",
+    "desc": "clm_train_embs.py per aspect. Qwen configs use gradient checkpointing.",
     "columns": [
      "CEFR",
      "Load",
-     "Polarity",
-     "Merged"
+     "Polarity"
     ],
     "rows": [
      {
@@ -466,8 +429,7 @@
       "cells": [
        "clm/falcon3/cefr",
        "clm/falcon3/load",
-       "clm/falcon3/polarity",
-       "merge/falcon3"
+       "clm/falcon3/polarity"
       ]
      },
      {
@@ -475,8 +437,7 @@
       "cells": [
        "clm/ministral3/cefr",
        "clm/ministral3/load",
-       "clm/ministral3/polarity",
-       "merge/ministral3"
+       "clm/ministral3/polarity"
       ]
      },
      {
@@ -484,8 +445,7 @@
       "cells": [
        "clm/gemma3/cefr",
        "clm/gemma3/load",
-       "clm/gemma3/polarity",
-       "merge/gemma3"
+       "clm/gemma3/polarity"
       ]
      },
      {
@@ -493,8 +453,7 @@
       "cells": [
        "clm/olmo3/cefr",
        "clm/olmo3/load",
-       "clm/olmo3/polarity",
-       "merge/olmo3"
+       "clm/olmo3/polarity"
       ]
      },
      {
@@ -502,8 +461,7 @@
       "cells": [
        "clm/qwen35_4b/cefr",
        "clm/qwen35_4b/load",
-       "clm/qwen35_4b/polarity",
-       "merge/qwen35_4b"
+       "clm/qwen35_4b/polarity"
       ]
      },
      {
@@ -511,8 +469,7 @@
       "cells": [
        "clm/qwen35_9b/cefr",
        "clm/qwen35_9b/load",
-       "clm/qwen35_9b/polarity",
-       "merge/qwen35_9b"
+       "clm/qwen35_9b/polarity"
       ]
      }
     ]
@@ -520,7 +477,7 @@
    {
     "id": "sa",
     "title": "Prerequisites: single-aspect runs",
-    "desc": "One run per cell. The pre_* multi-aspect runs start from the noEmb, init and CLM adapters (rand multi-aspect runs reuse the init ones); the rand runs are tracked here for completeness. Last column: best checkpoints picked and PRETRAINED_TRIPLE_PATHS filled in train.py (manual).",
+    "desc": "One run per cell. The pre_* multi-aspect runs start from the noEmb, init and CLM adapters (rand multi-aspect runs reuse the init ones); the rand runs are tracked here for completeness.",
     "groups": [
      {
       "label": "noEmb",
@@ -537,10 +494,6 @@
      {
       "label": "CLM",
       "size": 3
-     },
-     {
-      "label": "",
-      "size": 1
      }
     ],
     "columns": [
@@ -555,8 +508,7 @@
      "Load",
      "CEFR",
      "Polarity",
-     "Load",
-     "Ckpts picked"
+     "Load"
     ],
     "rows": [
      {
@@ -573,8 +525,7 @@
        "sa/falcon3/init/load",
        "sa/falcon3/clm/cefr",
        "sa/falcon3/clm/pol",
-       "sa/falcon3/clm/load",
-       "prep/falcon3"
+       "sa/falcon3/clm/load"
       ]
      },
      {
@@ -591,8 +542,7 @@
        "sa/ministral3/init/load",
        "sa/ministral3/clm/cefr",
        "sa/ministral3/clm/pol",
-       "sa/ministral3/clm/load",
-       "prep/ministral3"
+       "sa/ministral3/clm/load"
       ]
      },
      {
@@ -609,8 +559,7 @@
        "sa/gemma3/init/load",
        "sa/gemma3/clm/cefr",
        "sa/gemma3/clm/pol",
-       "sa/gemma3/clm/load",
-       "prep/gemma3"
+       "sa/gemma3/clm/load"
       ]
      },
      {
@@ -627,8 +576,7 @@
        "sa/olmo3/init/load",
        "sa/olmo3/clm/cefr",
        "sa/olmo3/clm/pol",
-       "sa/olmo3/clm/load",
-       "prep/olmo3"
+       "sa/olmo3/clm/load"
       ]
      },
      {
@@ -645,8 +593,7 @@
        "sa/qwen35_4b/init/load",
        "sa/qwen35_4b/clm/cefr",
        "sa/qwen35_4b/clm/pol",
-       "sa/qwen35_4b/clm/load",
-       "prep/qwen35_4b"
+       "sa/qwen35_4b/clm/load"
       ]
      },
      {
@@ -663,8 +610,7 @@
        "sa/qwen35_9b/init/load",
        "sa/qwen35_9b/clm/cefr",
        "sa/qwen35_9b/clm/pol",
-       "sa/qwen35_9b/clm/load",
-       "prep/qwen35_9b"
+       "sa/qwen35_9b/clm/load"
       ]
      }
     ]
@@ -816,5 +762,5 @@
    }
   ]
  },
- "updated_at": "2026-10-08T08:12:44Z"
+ "updated_at": "2026-10-08T15:50:23Z"
 }
