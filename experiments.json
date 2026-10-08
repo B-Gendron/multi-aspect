@@ -74,7 +74,7 @@
    "status": "todo"
   },
   "sa/ministral3/init/cefr": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-08T08:12:44Z",
    "host": "henrihost",
    "gpu": "0",
@@ -767,5 +767,5 @@
    }
   ]
  },
- "updated_at": "2026-10-08T18:51:45Z"
+ "updated_at": "2026-10-08T21:16:08Z"
 }
