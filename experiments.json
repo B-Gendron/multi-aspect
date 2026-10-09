@@ -85,10 +85,12 @@
    "status": "todo"
   },
   "sa/ministral3/init/load": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-08T18:51:45Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-09T15:03:25Z",
+   "exit_code": 0
   },
   "sa/ministral3/clm/cefr": {
    "status": "todo"
@@ -767,5 +769,5 @@
    }
   ]
  },
- "updated_at": "2026-10-08T21:16:08Z"
+ "updated_at": "2026-10-09T15:03:25Z"
 }
