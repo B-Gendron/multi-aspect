@@ -85,7 +85,7 @@
    "status": "todo"
   },
   "sa/ministral3/init/load": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-08T18:51:45Z",
    "host": "henrihost",
    "gpu": "0",
@@ -769,5 +769,5 @@
    }
   ]
  },
- "updated_at": "2026-10-09T15:03:25Z"
+ "updated_at": "2026-10-09T15:04:13Z"
 }
