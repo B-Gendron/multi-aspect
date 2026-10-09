@@ -29,7 +29,13 @@
    "total": 800,
    "elapsed_s": 69425,
    "t": "2026-10-09T14:09:25Z"
+  },
+  "sa/ministral3/init/pol": {
+   "step": 1,
+   "total": 800,
+   "elapsed_s": 90,
+   "t": "2026-10-09T15:17:32Z"
   }
  },
- "updated_at": "2026-10-09T14:09:26Z"
+ "updated_at": "2026-10-09T15:17:33Z"
 }
