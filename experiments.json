@@ -82,7 +82,7 @@
    "exit_code": 0
   },
   "sa/ministral3/init/pol": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-09T15:15:31Z",
    "host": "henrihost",
    "gpu": "0",
@@ -779,5 +779,5 @@
    }
   ]
  },
- "updated_at": "2026-10-10T20:53:30Z"
+ "updated_at": "2026-10-10T20:53:32Z"
 }
