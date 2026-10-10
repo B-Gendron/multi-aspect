@@ -35,7 +35,13 @@
    "total": 800,
    "elapsed_s": 69414,
    "t": "2026-10-10T10:33:10Z"
+  },
+  "sa/ministral3/rand/cefr": {
+   "step": 2,
+   "total": 800,
+   "elapsed_s": 83,
+   "t": "2026-10-10T11:30:30Z"
   }
  },
- "updated_at": "2026-10-10T10:33:11Z"
+ "updated_at": "2026-10-10T11:30:31Z"
 }
