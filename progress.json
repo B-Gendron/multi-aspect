@@ -41,7 +41,13 @@
    "total": 800,
    "elapsed_s": 33379,
    "t": "2026-10-10T20:45:49Z"
+  },
+  "sa/ministral3/rand/pol": {
+   "step": 1,
+   "total": 800,
+   "elapsed_s": 96,
+   "t": "2026-10-10T20:55:47Z"
   }
  },
- "updated_at": "2026-10-10T20:45:49Z"
+ "updated_at": "2026-10-10T20:55:48Z"
 }
