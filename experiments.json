@@ -379,7 +379,7 @@
    "status": "todo"
   },
   "sa/ministral3/rand/cefr": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-10T11:28:29Z",
    "host": "henrihost",
    "gpu": "0",
@@ -779,5 +779,5 @@
    }
   ]
  },
- "updated_at": "2026-10-10T20:49:34Z"
+ "updated_at": "2026-10-10T20:53:30Z"
 }
