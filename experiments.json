@@ -65,7 +65,10 @@
    "status": "done"
   },
   "sa/ministral3/noemb/cefr": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-10T20:54:11Z",
+   "host": "henrihost",
+   "gpu": "1"
   },
   "sa/ministral3/noemb/pol": {
    "status": "todo"
@@ -782,5 +785,5 @@
    }
   ]
  },
- "updated_at": "2026-10-10T20:53:46Z"
+ "updated_at": "2026-10-10T20:54:11Z"
 }
