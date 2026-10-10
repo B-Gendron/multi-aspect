@@ -379,10 +379,12 @@
    "status": "todo"
   },
   "sa/ministral3/rand/cefr": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-10T11:28:29Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-10T20:49:34Z",
+   "exit_code": 0
   },
   "sa/ministral3/rand/pol": {
    "status": "todo"
@@ -777,5 +779,5 @@
    }
   ]
  },
- "updated_at": "2026-10-10T11:28:29Z"
+ "updated_at": "2026-10-10T20:49:34Z"
 }
