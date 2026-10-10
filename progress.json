@@ -47,7 +47,13 @@
    "total": 800,
    "elapsed_s": 96,
    "t": "2026-10-10T20:55:47Z"
+  },
+  "sa/ministral3/noemb/cefr": {
+   "step": 2,
+   "total": 800,
+   "elapsed_s": 86,
+   "t": "2026-10-10T20:56:12Z"
   }
  },
- "updated_at": "2026-10-10T20:55:48Z"
+ "updated_at": "2026-10-10T20:56:13Z"
 }
