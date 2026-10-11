@@ -395,10 +395,12 @@
    "exit_code": 0
   },
   "sa/ministral3/rand/pol": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-10T20:53:45Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-11T17:13:48Z",
+   "exit_code": 0
   },
   "sa/ministral3/rand/load": {
    "status": "todo"
@@ -790,5 +792,5 @@
    }
   ]
  },
- "updated_at": "2026-10-11T08:59:10Z"
+ "updated_at": "2026-10-11T17:13:48Z"
 }
