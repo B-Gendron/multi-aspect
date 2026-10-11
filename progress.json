@@ -53,7 +53,13 @@
    "total": 800,
    "elapsed_s": 33388,
    "t": "2026-10-11T06:11:31Z"
+  },
+  "sa/ministral3/noemb/pol": {
+   "step": 1,
+   "total": 800,
+   "elapsed_s": 95,
+   "t": "2026-10-11T09:00:34Z"
   }
  },
- "updated_at": "2026-10-11T08:11:09Z"
+ "updated_at": "2026-10-11T09:00:34Z"
 }
