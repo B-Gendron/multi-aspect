@@ -59,7 +59,13 @@
    "total": 800,
    "elapsed_s": 29766,
    "t": "2026-10-11T17:15:51Z"
+  },
+  "sa/ministral3/noemb/load": {
+   "step": 1,
+   "total": 800,
+   "elapsed_s": 97,
+   "t": "2026-10-11T17:35:14Z"
   }
  },
- "updated_at": "2026-10-11T17:15:52Z"
+ "updated_at": "2026-10-11T17:35:15Z"
 }
