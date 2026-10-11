@@ -73,7 +73,10 @@
    "exit_code": 0
   },
   "sa/ministral3/noemb/pol": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-11T08:58:32Z",
+   "host": "henrihost",
+   "gpu": "1"
   },
   "sa/ministral3/noemb/load": {
    "status": "todo"
@@ -787,5 +790,5 @@
    }
   ]
  },
- "updated_at": "2026-10-11T06:20:59Z"
+ "updated_at": "2026-10-11T08:58:32Z"
 }
