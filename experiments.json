@@ -79,7 +79,10 @@
    "gpu": "1"
   },
   "sa/ministral3/noemb/load": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-11T17:33:12Z",
+   "host": "henrihost",
+   "gpu": "0"
   },
   "sa/ministral3/init/cefr": {
    "status": "done",
@@ -792,5 +795,5 @@
    }
   ]
  },
- "updated_at": "2026-10-11T17:32:49Z"
+ "updated_at": "2026-10-11T17:33:13Z"
 }
