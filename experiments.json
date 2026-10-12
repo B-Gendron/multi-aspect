@@ -411,7 +411,10 @@
    "exit_code": 0
   },
   "sa/ministral3/rand/load": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-12T05:42:10Z",
+   "host": "henrihost",
+   "gpu": "0"
   },
   "sa/gemma3/rand/cefr": {
    "status": "todo"
@@ -800,5 +803,5 @@
    }
   ]
  },
- "updated_at": "2026-10-12T05:41:40Z"
+ "updated_at": "2026-10-12T05:42:10Z"
 }
