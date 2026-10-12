@@ -223,9 +223,12 @@
    "gpu": "1"
   },
   "sa/olmo3/noemb/load": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-12T16:41:06Z",
-   "host": "grat-1.nancy.grid5000.fr"
+   "host": "grat-1.nancy.grid5000.fr",
+   "finished_at": "2026-10-12T16:43:03Z",
+   "exit_code": 1,
+   "note": "exit code 1: wandb.errors.errors.UsageError: No API key configured. Use `wandb login` to log in."
   },
   "sa/olmo3/init/cefr": {
    "status": "todo"
@@ -813,5 +816,5 @@
    }
   ]
  },
- "updated_at": "2026-10-12T16:41:06Z"
+ "updated_at": "2026-10-12T16:43:03Z"
 }
