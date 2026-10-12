@@ -65,7 +65,13 @@
    "total": 800,
    "elapsed_s": 36944,
    "t": "2026-10-12T03:50:34Z"
+  },
+  "sa/ministral3/rand/load": {
+   "step": 1,
+   "total": 800,
+   "elapsed_s": 90,
+   "t": "2026-10-12T05:44:11Z"
   }
  },
- "updated_at": "2026-10-12T05:16:15Z"
+ "updated_at": "2026-10-12T05:44:12Z"
 }
