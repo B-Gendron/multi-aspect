@@ -79,10 +79,13 @@
    "gpu": "1"
   },
   "sa/ministral3/noemb/load": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-11T17:33:12Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-12T04:44:29Z",
+   "exit_code": 1,
+   "note": "exit code 1: wandb: Find logs at: ./wandb/run-20261011_173333-7hkvqlih/logs"
   },
   "sa/ministral3/init/cefr": {
    "status": "done",
@@ -795,5 +798,5 @@
    }
   ]
  },
- "updated_at": "2026-10-11T17:33:13Z"
+ "updated_at": "2026-10-12T04:44:30Z"
 }
