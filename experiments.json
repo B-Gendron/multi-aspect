@@ -260,7 +260,7 @@
    "note": "no space left on device"
   },
   "sa/olmo3/clm/pol": {
-   "status": "failed",
+   "status": "running",
    "note": "index out of range (présence de caractères spéciaux donnant une des génération nulles..."
   },
   "sa/olmo3/clm/load": {
@@ -843,5 +843,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T18:11:28Z"
+ "updated_at": "2026-10-13T18:11:30Z"
 }
