@@ -248,7 +248,7 @@
    "status": "running"
   },
   "sa/olmo3/clm/pol": {
-   "status": "running"
+   "status": "failed"
   },
   "sa/olmo3/clm/load": {
    "status": "running"
@@ -824,5 +824,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T14:36:52Z"
+ "updated_at": "2026-10-13T14:48:21Z"
 }
