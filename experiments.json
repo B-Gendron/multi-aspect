@@ -155,7 +155,7 @@
    "status": "todo"
   },
   "sa/gemma3/noemb/cefr": {
-   "status": "todo"
+   "status": "planned"
   },
   "sa/gemma3/noemb/pol": {
    "status": "todo"
@@ -821,5 +821,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T10:53:23Z"
+ "updated_at": "2026-10-13T11:09:37Z"
 }
