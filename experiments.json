@@ -422,7 +422,7 @@
    "exit_code": 0
   },
   "sa/ministral3/rand/load": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-12T05:42:10Z",
    "host": "henrihost",
    "gpu": "0",
@@ -816,5 +816,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T06:12:40Z"
+ "updated_at": "2026-10-13T06:13:39Z"
 }
