@@ -272,7 +272,7 @@
     }
     function renderProgress() {
         var k = counts(), c = k.c, n = k.n, bar = $("bar"); bar.textContent = "";
-        ["done", "awaiting_check", "running", "failed"].forEach(function (s) {
+        ["done", "awaiting_check", "running", "planned", "failed"].forEach(function (s) {
             var d = document.createElement("div"); d.style.width = (100 * c[s] / n) + "%";
             d.style.background = STATUSES.filter(function (x) { return x.key === s; })[0].color; bar.appendChild(d);
         });
