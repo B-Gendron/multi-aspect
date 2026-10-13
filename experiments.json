@@ -123,10 +123,13 @@
    "status": "todo"
   },
   "ma/ministral3/noemb": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-13T15:00:50Z",
    "host": "henrihost",
-   "gpu": "1"
+   "gpu": "1",
+   "finished_at": "2026-10-13T15:00:55Z",
+   "exit_code": -15,
+   "note": "interrupted (signal 15)"
   },
   "ma/ministral3/rand": {
    "status": "todo"
@@ -828,5 +831,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T15:00:52Z"
+ "updated_at": "2026-10-13T15:00:56Z"
 }
