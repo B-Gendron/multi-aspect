@@ -19,6 +19,7 @@
             --green: #27ae60; --green-bg: #e8f6ee;
             --red: #c0392b; --red-bg: #fbeae5;
             --todo: #adb5bd;
+            --planned: #8e6bbf; --planned-bg: #f1ecf9;
         }
         * { box-sizing: border-box; }
         body {
@@ -84,6 +85,7 @@
         .editable .cell:hover { box-shadow: 0 0 0 3px rgba(44,62,80,.12); }
         .cell:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
         .s-todo { --c: var(--todo); }
+        .s-planned { --c: var(--planned); --bg-c: var(--planned-bg); }
         .s-running { --c: var(--blue); --bg-c: var(--blue-bg); }
         .s-awaiting_check { --c: #b9770e; --bg-c: var(--amber-bg); border-color: var(--amber); }
         .s-done { --c: var(--green); --bg-c: var(--green-bg); }
@@ -174,12 +176,13 @@
     var API = "https://api.github.com/repos/" + REPO + "/contents/" + PATH;
     var STATUSES = [
         { key: "todo",           label: "To do",                          color: "var(--todo)" },
+        { key: "planned",        label: "Planned",                        color: "var(--planned)" },
         { key: "running",        label: "Running",                        color: "var(--blue)" },
-        { key: "awaiting_check", label: "Finished — final check awaiting", color: "var(--amber)" },
-        { key: "done",           label: "Done (verified)",                color: "var(--green)" },
+        { key: "awaiting_check", label: "Finished", color: "var(--amber)" },
+        { key: "done",           label: "Done",                           color: "var(--green)" },
         { key: "failed",         label: "Failed",                         color: "var(--red)" }
     ];
-    var SHORT = { todo: "", running: "running", awaiting_check: "check", done: "✓", failed: "✕" };
+    var SHORT = { todo: "", planned: "plan", running: "running", awaiting_check: "check", done: "✓", failed: "✕" };
     var state = null;             // {experiments, layout, updated_at}
     var progress = {};            // run id -> {step,total,elapsed_s,t}, published by the training machine (data branch)
     var token = null;
@@ -259,7 +262,7 @@
     // ---------- rendering
     function cid(c) { return c && typeof c === "object" ? c.id : c; }
     function counts() {
-        var seen = {}, c = { todo: 0, running: 0, awaiting_check: 0, done: 0, failed: 0 }, n = 0;
+        var seen = {}, c = { todo: 0, planned: 0, running: 0, awaiting_check: 0, done: 0, failed: 0 }, n = 0;
         state.layout.sections.forEach(function (s) { s.rows.forEach(function (r) { r.cells.forEach(function (cell) {
             var id = cid(cell);
             if (!id || seen[id]) return; seen[id] = 1; n++;
@@ -273,7 +276,7 @@
             var d = document.createElement("div"); d.style.width = (100 * c[s] / n) + "%";
             d.style.background = STATUSES.filter(function (x) { return x.key === s; })[0].color; bar.appendChild(d);
         });
-        $("plabel").innerHTML = c.done + " / " + n + " done <span>· " + c.awaiting_check + " awaiting final check · " + c.running + " running · " + c.failed + " failed</span>";
+        $("plabel").innerHTML = c.done + " / " + n + " done <span>· " + c.awaiting_check + " finished · " + c.running + " running · " + c.failed + " failed</span>";
         var lg = $("legend"); lg.textContent = "";
         STATUSES.forEach(function (s) {
             var sp = document.createElement("span"), i = document.createElement("i"); i.style.background = s.color;
