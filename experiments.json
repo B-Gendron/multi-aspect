@@ -232,7 +232,7 @@
    "status": "running"
   },
   "sa/olmo3/init/pol": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/olmo3/init/load": {
    "status": "running",
@@ -818,5 +818,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T06:55:19Z"
+ "updated_at": "2026-10-13T06:55:20Z"
 }
