@@ -467,7 +467,7 @@
    "finished_at": "2026-10-13T17:39:35Z"
   },
   "sa/olmo3/rand/pol": {
-   "status": "running"
+   "status": "failed"
   },
   "sa/olmo3/rand/load": {
    "status": "running"
@@ -841,5 +841,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:39:35Z"
+ "updated_at": "2026-10-13T17:40:47Z"
 }
