@@ -434,7 +434,7 @@
    "exit_code": 0
   },
   "sa/gemma3/rand/cefr": {
-   "status": "running"
+   "status": "failed"
   },
   "sa/gemma3/rand/pol": {
    "status": "todo"
@@ -820,5 +820,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T10:25:37Z"
+ "updated_at": "2026-10-13T10:51:45Z"
 }
