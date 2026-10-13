@@ -244,7 +244,8 @@
    "finished_at": "2026-10-13T17:19:39Z"
   },
   "sa/olmo3/init/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:38:02Z"
   },
   "sa/olmo3/init/load": {
    "status": "failed",
@@ -839,5 +840,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:36:42Z"
+ "updated_at": "2026-10-13T17:38:02Z"
 }
