@@ -235,12 +235,9 @@
    "status": "todo"
   },
   "sa/olmo3/init/load": {
-   "status": "failed",
-   "started_at": "2026-10-13T06:29:21Z",
-   "host": "grat-1.nancy.grid5000.fr",
-   "finished_at": "2026-10-13T06:29:26Z",
-   "exit_code": -7,
-   "note": "exit code -7: "
+   "status": "running",
+   "started_at": "2026-10-13T06:42:55Z",
+   "host": "grat-1.nancy.grid5000.fr"
   },
   "sa/olmo3/clm/cefr": {
    "status": "todo"
@@ -821,5 +818,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T06:29:27Z"
+ "updated_at": "2026-10-13T06:42:55Z"
 }
