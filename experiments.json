@@ -161,7 +161,7 @@
    "status": "planned"
   },
   "sa/gemma3/noemb/load": {
-   "status": "todo"
+   "status": "planned"
   },
   "sa/gemma3/init/cefr": {
    "status": "running"
@@ -821,5 +821,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T11:09:39Z"
+ "updated_at": "2026-10-13T11:09:40Z"
 }
