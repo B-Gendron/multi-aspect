@@ -451,7 +451,8 @@
    "note": "altération de la génération"
   },
   "sa/gemma3/rand/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:28:22Z"
   },
   "sa/gemma3/rand/load": {
    "status": "running"
@@ -834,5 +835,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:26:28Z"
+ "updated_at": "2026-10-13T17:28:22Z"
 }
