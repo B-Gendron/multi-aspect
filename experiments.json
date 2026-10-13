@@ -248,7 +248,7 @@
    "status": "planned"
   },
   "sa/olmo3/clm/load": {
-   "status": "todo"
+   "status": "planned"
   },
   "ma/olmo3/noemb": {
    "status": "todo"
@@ -821,5 +821,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T11:09:43Z"
+ "updated_at": "2026-10-13T11:09:45Z"
 }
