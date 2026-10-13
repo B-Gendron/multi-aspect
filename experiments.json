@@ -242,7 +242,7 @@
    "host": "grat-1.nancy.grid5000.fr"
   },
   "sa/olmo3/clm/cefr": {
-   "status": "todo"
+   "status": "planned"
   },
   "sa/olmo3/clm/pol": {
    "status": "todo"
@@ -821,5 +821,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T11:09:40Z"
+ "updated_at": "2026-10-13T11:09:42Z"
 }
