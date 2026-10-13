@@ -263,7 +263,8 @@
    "note": "index out of range (présence de caractères spéciaux donnant une des génération nulles..."
   },
   "sa/olmo3/clm/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:36:42Z"
   },
   "ma/olmo3/noemb": {
    "status": "todo"
@@ -838,5 +839,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:36:40Z"
+ "updated_at": "2026-10-13T17:36:42Z"
 }
