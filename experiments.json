@@ -242,7 +242,7 @@
    "host": "grat-1.nancy.grid5000.fr",
    "finished_at": "2026-10-13T11:54:13Z",
    "exit_code": -11,
-   "note": "exit code -11: IndexError: list index out of range"
+   "note": "too many API calls, because huggingface hub wasn't offline (everything is cached so no need to be online). Should be solved for the planned jobs."
   },
   "sa/olmo3/clm/cefr": {
    "status": "planned"
@@ -824,5 +824,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T11:54:14Z"
+ "updated_at": "2026-10-13T13:03:18Z"
 }
