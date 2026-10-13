@@ -470,7 +470,8 @@
    "status": "failed"
   },
   "sa/olmo3/rand/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:40:49Z"
   },
   "sa/qwen35_4b/rand/cefr": {
    "status": "todo"
@@ -841,5 +842,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:40:47Z"
+ "updated_at": "2026-10-13T17:40:49Z"
 }
