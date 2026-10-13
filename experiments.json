@@ -444,7 +444,7 @@
    "status": "running"
   },
   "sa/olmo3/rand/pol": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/olmo3/rand/load": {
    "status": "todo"
@@ -818,5 +818,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T07:02:37Z"
+ "updated_at": "2026-10-13T07:02:39Z"
 }
