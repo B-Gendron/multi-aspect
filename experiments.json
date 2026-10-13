@@ -123,13 +123,10 @@
    "status": "todo"
   },
   "ma/ministral3/noemb": {
-   "status": "failed",
-   "started_at": "2026-10-13T15:00:21Z",
+   "status": "running",
+   "started_at": "2026-10-13T15:00:50Z",
    "host": "henrihost",
-   "gpu": "1",
-   "finished_at": "2026-10-13T15:00:39Z",
-   "exit_code": 1,
-   "note": "exit code 1: AssertionError: PRETRAINED_TRIPLE_PATHS['ministral3'] has no 'clm' entry yet."
+   "gpu": "1"
   },
   "ma/ministral3/rand": {
    "status": "todo"
@@ -831,5 +828,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T15:00:40Z"
+ "updated_at": "2026-10-13T15:00:52Z"
 }
