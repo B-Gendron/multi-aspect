@@ -248,7 +248,7 @@
    "status": "running"
   },
   "sa/olmo3/clm/pol": {
-   "status": "planned"
+   "status": "running"
   },
   "sa/olmo3/clm/load": {
    "status": "planned"
@@ -824,5 +824,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T14:36:39Z"
+ "updated_at": "2026-10-13T14:36:41Z"
 }
