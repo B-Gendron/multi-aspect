@@ -432,7 +432,7 @@
    "exit_code": 0
   },
   "sa/gemma3/rand/cefr": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/gemma3/rand/pol": {
    "status": "todo"
@@ -818,5 +818,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T09:01:02Z"
+ "updated_at": "2026-10-13T09:01:04Z"
 }
