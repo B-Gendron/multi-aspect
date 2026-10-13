@@ -85,7 +85,7 @@
         .editable .cell:hover { box-shadow: 0 0 0 3px rgba(44,62,80,.12); }
         .cell:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
         .s-todo { --c: var(--todo); }
-        .s-planned { --c: var(--planned); --bg-c: var(--planned-bg); }
+        .s-planned { --c: var(--planned); --bg-c: var(--planned-bg); border-style: dashed; }
         .s-running { --c: var(--blue); --bg-c: var(--blue-bg); }
         .s-awaiting_check { --c: #b9770e; --bg-c: var(--amber-bg); border-color: var(--amber); }
         .s-done { --c: var(--green); --bg-c: var(--green-bg); }
@@ -182,7 +182,7 @@
         { key: "done",           label: "Done",                           color: "var(--green)" },
         { key: "failed",         label: "Failed",                         color: "var(--red)" }
     ];
-    var SHORT = { todo: "", planned: "plan", running: "running", awaiting_check: "check", done: "✓", failed: "✕" };
+    var SHORT = { todo: "", planned: "planned", running: "running", awaiting_check: "check", done: "✓", failed: "✕" };
     var state = null;             // {experiments, layout, updated_at}
     var progress = {};            // run id -> {step,total,elapsed_s,t}, published by the training machine (data branch)
     var token = null;
