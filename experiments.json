@@ -158,7 +158,7 @@
    "status": "planned"
   },
   "sa/gemma3/noemb/pol": {
-   "status": "todo"
+   "status": "planned"
   },
   "sa/gemma3/noemb/load": {
    "status": "todo"
@@ -821,5 +821,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T11:09:37Z"
+ "updated_at": "2026-10-13T11:09:39Z"
 }
