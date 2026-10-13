@@ -174,7 +174,8 @@
    "finished_at": "2026-10-13T17:03:11Z"
   },
   "sa/gemma3/init/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:34:43Z"
   },
   "sa/gemma3/init/load": {
    "status": "done",
@@ -836,5 +837,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:29:40Z"
+ "updated_at": "2026-10-13T17:34:43Z"
 }
