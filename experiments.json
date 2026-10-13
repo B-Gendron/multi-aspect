@@ -455,7 +455,8 @@
    "finished_at": "2026-10-13T17:28:22Z"
   },
   "sa/gemma3/rand/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:29:40Z"
   },
   "sa/olmo3/rand/cefr": {
    "status": "running"
@@ -835,5 +836,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:28:22Z"
+ "updated_at": "2026-10-13T17:29:40Z"
 }
