@@ -168,7 +168,8 @@
    "note": "Special characters?"
   },
   "sa/gemma3/init/cefr": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:03:11Z"
   },
   "sa/gemma3/init/pol": {
    "status": "running"
@@ -829,5 +830,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T15:09:17Z"
+ "updated_at": "2026-10-13T17:03:11Z"
 }
