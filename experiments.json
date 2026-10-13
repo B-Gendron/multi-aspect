@@ -467,7 +467,8 @@
    "finished_at": "2026-10-13T17:39:35Z"
   },
   "sa/olmo3/rand/pol": {
-   "status": "failed"
+   "status": "failed",
+   "note": "no space left on device"
   },
   "sa/olmo3/rand/load": {
    "status": "done",
@@ -842,5 +843,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:40:49Z"
+ "updated_at": "2026-10-13T17:40:54Z"
 }
