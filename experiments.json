@@ -235,7 +235,9 @@
    "status": "todo"
   },
   "sa/olmo3/init/load": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-13T06:29:21Z",
+   "host": "grat-1.nancy.grid5000.fr"
   },
   "sa/olmo3/clm/cefr": {
    "status": "todo"
@@ -816,5 +818,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T06:13:39Z"
+ "updated_at": "2026-10-13T06:29:21Z"
 }
