@@ -158,7 +158,8 @@
    "status": "todo"
   },
   "sa/gemma3/noemb/cefr": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:26:03Z"
   },
   "sa/gemma3/noemb/pol": {
    "status": "running"
@@ -832,5 +833,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:24:13Z"
+ "updated_at": "2026-10-13T17:26:03Z"
 }
