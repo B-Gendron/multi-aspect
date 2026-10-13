@@ -175,7 +175,8 @@
    "status": "running"
   },
   "sa/gemma3/init/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:24:13Z"
   },
   "sa/gemma3/clm/cefr": {
    "status": "todo"
@@ -831,5 +832,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:19:39Z"
+ "updated_at": "2026-10-13T17:24:13Z"
 }
