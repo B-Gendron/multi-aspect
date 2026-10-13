@@ -463,7 +463,8 @@
    "finished_at": "2026-10-13T17:29:40Z"
   },
   "sa/olmo3/rand/cefr": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-13T17:39:35Z"
   },
   "sa/olmo3/rand/pol": {
    "status": "running"
@@ -840,5 +841,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T17:38:02Z"
+ "updated_at": "2026-10-13T17:39:35Z"
 }
