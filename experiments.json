@@ -217,10 +217,12 @@
    "exit_code": 0
   },
   "sa/olmo3/noemb/pol": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-12T14:53:13Z",
    "host": "henrihost",
-   "gpu": "1"
+   "gpu": "1",
+   "finished_at": "2026-10-13T10:25:37Z",
+   "exit_code": 0
   },
   "sa/olmo3/noemb/load": {
    "status": "running",
@@ -818,5 +820,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T09:23:02Z"
+ "updated_at": "2026-10-13T10:25:37Z"
 }
