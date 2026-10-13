@@ -164,7 +164,8 @@
    "status": "running"
   },
   "sa/gemma3/noemb/load": {
-   "status": "failed"
+   "status": "failed",
+   "note": "Special characters?"
   },
   "sa/gemma3/init/cefr": {
    "status": "running"
@@ -828,5 +829,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T15:08:41Z"
+ "updated_at": "2026-10-13T15:09:17Z"
 }
