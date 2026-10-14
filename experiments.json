@@ -234,7 +234,7 @@
    "exit_code": 0
   },
   "sa/olmo3/noemb/load": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-13T06:12:40Z",
    "host": "henrihost",
    "gpu": "0",
@@ -846,5 +846,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T05:21:14Z"
+ "updated_at": "2026-10-14T05:22:19Z"
 }
