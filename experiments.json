@@ -258,8 +258,9 @@
    "note": "too many API calls, because huggingface hub wasn't offline (everything is cached so no need to be online). Should be solved for the planned jobs."
   },
   "sa/olmo3/clm/cefr": {
-   "status": "running",
-   "note": "no space left on device"
+   "status": "done",
+   "note": "no space left on device",
+   "finished_at": "2026-10-14T05:19:55Z"
   },
   "sa/olmo3/clm/pol": {
    "status": "failed",
@@ -845,5 +846,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T02:23:53Z"
+ "updated_at": "2026-10-14T05:19:55Z"
 }
