@@ -253,7 +253,7 @@
    "finished_at": "2026-10-13T17:38:02Z"
   },
   "sa/olmo3/init/load": {
-   "status": "running",
+   "status": "done",
    "started_at": "2026-10-13T06:42:55Z",
    "host": "grat-1.nancy.grid5000.fr",
    "finished_at": "2026-10-13T11:54:13Z",
@@ -849,5 +849,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T09:45:52Z"
+ "updated_at": "2026-10-14T11:04:09Z"
 }
