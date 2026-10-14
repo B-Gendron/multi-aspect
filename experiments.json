@@ -123,7 +123,7 @@
    "status": "todo"
   },
   "ma/ministral3/noemb": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-13T15:03:14Z",
    "host": "henrihost",
    "gpu": "1",
@@ -852,5 +852,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T12:48:24Z"
+ "updated_at": "2026-10-14T13:15:27Z"
 }
