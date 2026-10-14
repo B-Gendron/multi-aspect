@@ -331,7 +331,7 @@
    "status": "running"
   },
   "sa/qwen35_4b/clm/cefr": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/qwen35_4b/clm/pol": {
    "status": "running"
@@ -850,5 +850,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T12:39:57Z"
+ "updated_at": "2026-10-14T12:39:59Z"
 }
