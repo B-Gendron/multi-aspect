@@ -334,7 +334,7 @@
    "status": "todo"
   },
   "sa/qwen35_4b/clm/pol": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/qwen35_4b/clm/load": {
    "status": "todo"
@@ -850,5 +850,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T12:39:53Z"
+ "updated_at": "2026-10-14T12:39:55Z"
 }
