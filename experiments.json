@@ -316,7 +316,7 @@
    "status": "running"
   },
   "sa/qwen35_4b/noemb/pol": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/qwen35_4b/noemb/load": {
    "status": "todo"
@@ -850,5 +850,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T12:39:40Z"
+ "updated_at": "2026-10-14T12:39:41Z"
 }
