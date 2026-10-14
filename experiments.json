@@ -488,7 +488,7 @@
    "status": "running"
   },
   "sa/qwen35_4b/rand/load": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/qwen35_9b/rand/cefr": {
    "status": "todo"
@@ -850,5 +850,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T12:39:52Z"
+ "updated_at": "2026-10-14T12:39:53Z"
 }
