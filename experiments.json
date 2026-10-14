@@ -129,13 +129,10 @@
    "gpu": "1"
   },
   "ma/ministral3/rand": {
-   "status": "failed",
-   "started_at": "2026-10-14T05:22:56Z",
+   "status": "running",
+   "started_at": "2026-10-14T06:38:20Z",
    "host": "henrihost",
-   "gpu": "0",
-   "finished_at": "2026-10-14T06:13:21Z",
-   "exit_code": 1,
-   "note": "exit code 1: wandb: Find logs at: ./wandb/run-20261014_052317-sijuu3xs/logs"
+   "gpu": "0"
   },
   "ma/ministral3/init": {
    "status": "todo"
@@ -852,5 +849,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T06:13:22Z"
+ "updated_at": "2026-10-14T06:38:20Z"
 }
