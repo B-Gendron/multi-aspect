@@ -234,10 +234,12 @@
    "exit_code": 0
   },
   "sa/olmo3/noemb/load": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-13T06:12:40Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-14T02:23:53Z",
+   "exit_code": 0
   },
   "sa/olmo3/init/cefr": {
    "status": "done",
@@ -843,5 +845,5 @@
    }
   ]
  },
- "updated_at": "2026-10-13T18:50:21Z"
+ "updated_at": "2026-10-14T02:23:53Z"
 }
