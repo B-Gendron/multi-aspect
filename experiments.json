@@ -263,7 +263,7 @@
    "finished_at": "2026-10-14T05:19:55Z"
   },
   "sa/olmo3/clm/pol": {
-   "status": "failed",
+   "status": "running",
    "note": "index out of range (présence de caractères spéciaux donnant une des génération nulles..."
   },
   "sa/olmo3/clm/load": {
@@ -846,5 +846,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T05:19:55Z"
+ "updated_at": "2026-10-14T05:21:14Z"
 }
