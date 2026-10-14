@@ -482,7 +482,7 @@
    "finished_at": "2026-10-13T17:40:49Z"
   },
   "sa/qwen35_4b/rand/cefr": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/qwen35_4b/rand/pol": {
    "status": "todo"
@@ -850,5 +850,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T12:39:43Z"
+ "updated_at": "2026-10-14T12:39:45Z"
 }
