@@ -325,7 +325,7 @@
    "status": "running"
   },
   "sa/qwen35_4b/init/pol": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/qwen35_4b/init/load": {
    "status": "todo"
@@ -850,5 +850,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T12:39:49Z"
+ "updated_at": "2026-10-14T12:39:50Z"
 }
