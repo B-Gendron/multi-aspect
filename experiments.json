@@ -313,7 +313,7 @@
    "exit_code": 0
   },
   "sa/qwen35_4b/noemb/cefr": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/qwen35_4b/noemb/pol": {
    "status": "todo"
@@ -850,5 +850,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T11:12:18Z"
+ "updated_at": "2026-10-14T12:39:40Z"
 }
