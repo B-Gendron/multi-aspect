@@ -129,7 +129,10 @@
    "gpu": "1"
   },
   "ma/ministral3/rand": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-14T05:22:56Z",
+   "host": "henrihost",
+   "gpu": "0"
   },
   "ma/ministral3/init": {
    "status": "todo"
@@ -846,5 +849,5 @@
    }
   ]
  },
- "updated_at": "2026-10-14T05:22:19Z"
+ "updated_at": "2026-10-14T05:22:57Z"
 }
