@@ -341,7 +341,7 @@
    "status": "planned"
   },
   "sa/qwen35_4b/clm/load": {
-   "status": "running"
+   "status": "planned"
   },
   "ma/qwen35_4b/noemb": {
    "status": "todo"
@@ -854,5 +854,5 @@
    }
   ]
  },
- "updated_at": "2026-10-15T06:26:05Z"
+ "updated_at": "2026-10-15T06:26:07Z"
 }
