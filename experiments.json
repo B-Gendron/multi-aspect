@@ -331,7 +331,8 @@
    "status": "failed"
   },
   "sa/qwen35_4b/init/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-15T06:08:33Z"
   },
   "sa/qwen35_4b/clm/cefr": {
    "status": "running"
@@ -853,5 +854,5 @@
    }
   ]
  },
- "updated_at": "2026-10-15T06:05:29Z"
+ "updated_at": "2026-10-15T06:08:33Z"
 }
