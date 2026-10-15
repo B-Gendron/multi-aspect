@@ -315,7 +315,7 @@
    "exit_code": 0
   },
   "sa/qwen35_4b/noemb/cefr": {
-   "status": "running"
+   "status": "planned"
   },
   "sa/qwen35_4b/noemb/pol": {
    "status": "running"
@@ -854,5 +854,5 @@
    }
   ]
  },
- "updated_at": "2026-10-15T06:26:07Z"
+ "updated_at": "2026-10-15T06:26:15Z"
 }
