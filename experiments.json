@@ -137,7 +137,10 @@
    "gpu": "0"
   },
   "ma/ministral3/init": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-15T06:58:35Z",
+   "host": "henrihost",
+   "gpu": "1"
   },
   "ma/ministral3/clm": {
    "status": "todo"
@@ -854,5 +857,5 @@
    }
   ]
  },
- "updated_at": "2026-10-15T06:26:15Z"
+ "updated_at": "2026-10-15T06:58:36Z"
 }
