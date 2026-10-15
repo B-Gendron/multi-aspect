@@ -131,10 +131,12 @@
    "exit_code": 0
   },
   "ma/ministral3/rand": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-14T06:38:20Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-15T09:41:43Z",
+   "exit_code": 0
   },
   "ma/ministral3/init": {
    "status": "running",
@@ -857,5 +859,5 @@
    }
   ]
  },
- "updated_at": "2026-10-15T07:45:14Z"
+ "updated_at": "2026-10-15T09:41:43Z"
 }
