@@ -131,7 +131,7 @@
    "exit_code": 0
   },
   "ma/ministral3/rand": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-14T06:38:20Z",
    "host": "henrihost",
    "gpu": "0",
@@ -859,5 +859,5 @@
    }
   ]
  },
- "updated_at": "2026-10-15T09:41:43Z"
+ "updated_at": "2026-10-15T09:42:17Z"
 }
