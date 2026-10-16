@@ -416,7 +416,7 @@
    "status": "planned"
   },
   "sa/qwen35_9b/init/load": {
-   "status": "planned"
+   "status": "running"
   },
   "sa/qwen35_9b/clm/cefr": {
    "status": "planned"
@@ -873,5 +873,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T13:53:22Z"
+ "updated_at": "2026-10-16T13:53:24Z"
 }
