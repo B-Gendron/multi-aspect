@@ -496,7 +496,8 @@
    "status": "failed"
   },
   "sa/qwen35_4b/rand/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-16T05:45:54Z"
   },
   "sa/qwen35_4b/rand/load": {
    "status": "failed"
@@ -861,5 +862,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T05:44:48Z"
+ "updated_at": "2026-10-16T05:45:54Z"
 }
