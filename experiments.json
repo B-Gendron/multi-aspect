@@ -139,7 +139,7 @@
    "exit_code": 0
   },
   "ma/ministral3/init": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-15T06:58:35Z",
    "host": "henrihost",
    "gpu": "1",
@@ -870,5 +870,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T09:43:08Z"
+ "updated_at": "2026-10-16T09:44:52Z"
 }
