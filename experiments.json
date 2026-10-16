@@ -353,7 +353,8 @@
    "finished_at": "2026-10-16T08:35:25Z"
   },
   "sa/qwen35_4b/clm/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-16T08:35:29Z"
   },
   "ma/qwen35_4b/noemb": {
    "status": "todo"
@@ -867,5 +868,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T08:35:25Z"
+ "updated_at": "2026-10-16T08:35:29Z"
 }
