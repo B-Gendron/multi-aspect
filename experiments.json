@@ -281,10 +281,13 @@
    "finished_at": "2026-10-13T17:36:42Z"
   },
   "ma/olmo3/noemb": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-16T05:56:45Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-16T05:57:14Z",
+   "exit_code": 1,
+   "note": "exit code 1: ValueError: Can't find 'adapter_config.json' at './checkpoints/ministral3_sa_cefr_noemb/checkpoint-620/adapter_0'"
   },
   "ma/olmo3/rand": {
    "status": "todo"
@@ -866,5 +869,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T05:56:45Z"
+ "updated_at": "2026-10-16T05:57:15Z"
 }
