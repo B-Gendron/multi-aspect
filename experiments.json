@@ -281,10 +281,13 @@
    "finished_at": "2026-10-13T17:36:42Z"
   },
   "ma/olmo3/noemb": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-16T05:58:04Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-16T05:58:23Z",
+   "exit_code": 1,
+   "note": "exit code 1: ValueError: Can't find 'adapter_config.json' at './checkpoints/olmo3_sa_pol_noemb/checkpoint-640/adapter_0'"
   },
   "ma/olmo3/rand": {
    "status": "todo"
@@ -866,5 +869,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T05:58:05Z"
+ "updated_at": "2026-10-16T05:58:23Z"
 }
