@@ -281,13 +281,10 @@
    "finished_at": "2026-10-13T17:36:42Z"
   },
   "ma/olmo3/noemb": {
-   "status": "failed",
-   "started_at": "2026-10-16T06:17:57Z",
+   "status": "running",
+   "started_at": "2026-10-16T06:19:57Z",
    "host": "henrihost",
-   "gpu": "0",
-   "finished_at": "2026-10-16T06:18:19Z",
-   "exit_code": 1,
-   "note": "exit code 1: wandb.errors.CommError: 'NoneType' object has no attribute 'get'"
+   "gpu": "0"
   },
   "ma/olmo3/rand": {
    "status": "todo"
@@ -869,5 +866,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T06:18:20Z"
+ "updated_at": "2026-10-16T06:19:57Z"
 }
