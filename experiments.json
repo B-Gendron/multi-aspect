@@ -517,7 +517,7 @@
    "status": "planned"
   },
   "sa/qwen35_9b/rand/pol": {
-   "status": "todo"
+   "status": "planned"
   },
   "sa/qwen35_9b/rand/load": {
    "status": "todo"
@@ -873,5 +873,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T11:11:05Z"
+ "updated_at": "2026-10-16T11:11:07Z"
 }
