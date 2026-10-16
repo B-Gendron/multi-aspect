@@ -327,7 +327,7 @@
    "finished_at": "2026-10-16T05:44:16Z"
   },
   "sa/qwen35_4b/noemb/pol": {
-   "status": "planned"
+   "status": "running"
   },
   "sa/qwen35_4b/noemb/load": {
    "status": "done",
@@ -868,5 +868,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T09:32:42Z"
+ "updated_at": "2026-10-16T09:35:14Z"
 }
