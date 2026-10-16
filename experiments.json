@@ -410,7 +410,7 @@
    "status": "planned"
   },
   "sa/qwen35_9b/init/cefr": {
-   "status": "planned"
+   "status": "running"
   },
   "sa/qwen35_9b/init/pol": {
    "status": "planned"
@@ -873,5 +873,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T11:11:17Z"
+ "updated_at": "2026-10-16T13:53:22Z"
 }
