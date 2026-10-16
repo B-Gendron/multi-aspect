@@ -499,7 +499,7 @@
    "finished_at": "2026-10-13T17:40:49Z"
   },
   "sa/qwen35_4b/rand/cefr": {
-   "status": "failed"
+   "status": "planned"
   },
   "sa/qwen35_4b/rand/pol": {
    "status": "done",
@@ -868,5 +868,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T09:35:14Z"
+ "updated_at": "2026-10-16T09:36:25Z"
 }
