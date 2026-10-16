@@ -289,7 +289,10 @@
    "gpu": "0"
   },
   "ma/olmo3/rand": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-16T09:45:20Z",
+   "host": "henrihost",
+   "gpu": "1"
   },
   "ma/olmo3/init": {
    "status": "todo"
@@ -870,5 +873,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T09:44:52Z"
+ "updated_at": "2026-10-16T09:45:21Z"
 }
