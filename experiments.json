@@ -320,7 +320,7 @@
    "exit_code": 0
   },
   "sa/qwen35_4b/noemb/cefr": {
-   "status": "planned"
+   "status": "failed"
   },
   "sa/qwen35_4b/noemb/pol": {
    "status": "failed"
@@ -859,5 +859,5 @@
    }
   ]
  },
- "updated_at": "2026-10-15T12:49:15Z"
+ "updated_at": "2026-10-16T05:41:28Z"
 }
