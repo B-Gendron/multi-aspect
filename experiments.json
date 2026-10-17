@@ -519,7 +519,8 @@
    "status": "running"
   },
   "sa/qwen35_9b/rand/cefr": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-17T08:07:31Z"
   },
   "sa/qwen35_9b/rand/pol": {
    "status": "planned"
@@ -878,5 +879,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T08:04:10Z"
+ "updated_at": "2026-10-17T08:07:31Z"
 }
