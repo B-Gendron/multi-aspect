@@ -423,7 +423,8 @@
    "status": "running"
   },
   "sa/qwen35_9b/clm/cefr": {
-   "status": "planned"
+   "status": "done",
+   "finished_at": "2026-10-17T08:08:43Z"
   },
   "sa/qwen35_9b/clm/pol": {
    "status": "planned"
@@ -879,5 +880,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T08:07:31Z"
+ "updated_at": "2026-10-17T08:08:43Z"
 }
