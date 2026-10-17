@@ -518,7 +518,8 @@
    "finished_at": "2026-10-16T05:45:54Z"
   },
   "sa/qwen35_4b/rand/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-17T08:11:05Z"
   },
   "sa/qwen35_9b/rand/cefr": {
    "status": "done",
@@ -881,5 +882,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T08:09:53Z"
+ "updated_at": "2026-10-17T08:11:05Z"
 }
