@@ -14,7 +14,7 @@
    "status": "running"
   },
   "sa/falcon3/noemb/pol": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/falcon3/noemb/load": {
    "status": "running"
@@ -894,5 +894,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T10:48:49Z"
+ "updated_at": "2026-10-17T10:48:50Z"
 }
