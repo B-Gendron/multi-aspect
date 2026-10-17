@@ -11,7 +11,8 @@
    "status": "todo"
   },
   "sa/falcon3/noemb/cefr": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-17T19:13:28Z"
   },
   "sa/falcon3/noemb/pol": {
    "status": "running"
@@ -899,5 +900,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T11:44:40Z"
+ "updated_at": "2026-10-17T19:13:28Z"
 }
