@@ -538,7 +538,8 @@
    "finished_at": "2026-10-17T09:45:22Z"
   },
   "sa/qwen35_9b/rand/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-17T09:52:36Z"
   }
  },
  "layout": {
@@ -891,5 +892,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T09:52:35Z"
+ "updated_at": "2026-10-17T09:52:36Z"
 }
