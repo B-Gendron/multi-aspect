@@ -17,7 +17,7 @@
    "status": "todo"
   },
   "sa/falcon3/noemb/load": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/falcon3/init/cefr": {
    "status": "todo"
@@ -894,5 +894,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T10:48:43Z"
+ "updated_at": "2026-10-17T10:48:46Z"
 }
