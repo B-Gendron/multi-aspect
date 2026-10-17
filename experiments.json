@@ -23,7 +23,7 @@
    "status": "todo"
   },
   "sa/falcon3/init/pol": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/falcon3/init/load": {
    "status": "todo"
@@ -894,5 +894,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T10:48:53Z"
+ "updated_at": "2026-10-17T10:48:55Z"
 }
