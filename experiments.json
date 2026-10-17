@@ -346,7 +346,8 @@
    "finished_at": "2026-10-15T06:03:49Z"
   },
   "sa/qwen35_4b/init/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-17T08:12:01Z"
   },
   "sa/qwen35_4b/init/load": {
    "status": "done",
@@ -882,5 +883,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T08:11:05Z"
+ "updated_at": "2026-10-17T08:12:01Z"
 }
