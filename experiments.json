@@ -291,10 +291,12 @@
    "exit_code": 0
   },
   "ma/olmo3/rand": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-16T09:45:20Z",
    "host": "henrihost",
-   "gpu": "1"
+   "gpu": "1",
+   "finished_at": "2026-10-17T11:27:30Z",
+   "exit_code": 0
   },
   "ma/olmo3/init": {
    "status": "running",
@@ -894,5 +896,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T10:49:02Z"
+ "updated_at": "2026-10-17T11:27:30Z"
 }
