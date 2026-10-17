@@ -371,7 +371,10 @@
    "finished_at": "2026-10-16T08:35:29Z"
   },
   "ma/qwen35_4b/noemb": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-17T11:44:39Z",
+   "host": "henrihost",
+   "gpu": "1"
   },
   "ma/qwen35_4b/rand": {
    "status": "todo"
@@ -896,5 +899,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T11:43:12Z"
+ "updated_at": "2026-10-17T11:44:40Z"
 }
