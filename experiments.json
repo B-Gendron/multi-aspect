@@ -436,7 +436,8 @@
    "finished_at": "2026-10-17T08:08:43Z"
   },
   "sa/qwen35_9b/clm/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-17T09:52:38Z"
   },
   "sa/qwen35_9b/clm/load": {
    "status": "running"
@@ -892,5 +893,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T09:52:36Z"
+ "updated_at": "2026-10-17T09:52:38Z"
 }
