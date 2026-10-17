@@ -468,7 +468,7 @@
    "status": "running"
   },
   "sa/falcon3/rand/load": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/ministral3/rand/cefr": {
    "status": "done",
@@ -894,5 +894,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T10:48:52Z"
+ "updated_at": "2026-10-17T10:48:53Z"
 }
