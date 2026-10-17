@@ -532,7 +532,8 @@
    "finished_at": "2026-10-17T08:07:31Z"
   },
   "sa/qwen35_9b/rand/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-17T09:45:22Z"
   },
   "sa/qwen35_9b/rand/load": {
    "status": "running"
@@ -888,5 +889,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T08:17:13Z"
+ "updated_at": "2026-10-17T09:45:22Z"
 }
