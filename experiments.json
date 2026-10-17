@@ -462,7 +462,7 @@
    "status": "todo"
   },
   "sa/falcon3/rand/cefr": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/falcon3/rand/pol": {
    "status": "running"
@@ -894,5 +894,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T10:48:50Z"
+ "updated_at": "2026-10-17T10:48:52Z"
 }
