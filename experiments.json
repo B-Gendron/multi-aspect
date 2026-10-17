@@ -283,10 +283,12 @@
    "finished_at": "2026-10-13T17:36:42Z"
   },
   "ma/olmo3/noemb": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-16T06:21:46Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-17T03:45:43Z",
+   "exit_code": 0
   },
   "ma/olmo3/rand": {
    "status": "running",
@@ -875,5 +877,5 @@
    }
   ]
  },
- "updated_at": "2026-10-16T19:37:49Z"
+ "updated_at": "2026-10-17T03:45:44Z"
 }
