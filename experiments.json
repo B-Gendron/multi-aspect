@@ -422,7 +422,8 @@
    "status": "running"
   },
   "sa/qwen35_9b/init/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-17T08:13:50Z"
   },
   "sa/qwen35_9b/clm/cefr": {
    "status": "done",
@@ -883,5 +884,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T08:12:01Z"
+ "updated_at": "2026-10-17T08:13:50Z"
 }
