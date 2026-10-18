@@ -15,7 +15,8 @@
    "finished_at": "2026-10-17T19:13:28Z"
   },
   "sa/falcon3/noemb/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-18T05:56:38Z"
   },
   "sa/falcon3/noemb/load": {
    "status": "running"
@@ -902,5 +903,5 @@
    }
   ]
  },
- "updated_at": "2026-10-17T19:13:31Z"
+ "updated_at": "2026-10-18T05:56:38Z"
 }
