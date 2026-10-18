@@ -269,8 +269,7 @@
    "started_at": "2026-10-13T06:42:55Z",
    "host": "grat-1.nancy.grid5000.fr",
    "finished_at": "2026-10-13T11:54:13Z",
-   "exit_code": -11,
-   "note": "too many API calls, because huggingface hub wasn't offline (everything is cached so no need to be online). Should be solved for the planned jobs."
+   "exit_code": -11
   },
   "sa/olmo3/clm/cefr": {
    "status": "done",
@@ -913,5 +912,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T11:04:01Z"
+ "updated_at": "2026-10-18T11:04:07Z"
 }
