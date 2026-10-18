@@ -305,7 +305,7 @@
    "exit_code": 0
   },
   "ma/olmo3/init": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-17T08:17:13Z",
    "host": "henrihost",
    "gpu": "0",
@@ -918,5 +918,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T10:59:32Z"
+ "updated_at": "2026-10-18T10:59:56Z"
 }
