@@ -184,7 +184,7 @@
    "note": "no space left on device"
   },
   "sa/gemma3/noemb/load": {
-   "status": "failed",
+   "status": "running",
    "note": "Special characters?"
   },
   "sa/gemma3/init/cefr": {
@@ -912,5 +912,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T10:58:13Z"
+ "updated_at": "2026-10-18T10:58:15Z"
 }
