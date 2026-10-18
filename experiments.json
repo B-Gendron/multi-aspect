@@ -273,7 +273,6 @@
   },
   "sa/olmo3/clm/cefr": {
    "status": "done",
-   "note": "no space left on device",
    "finished_at": "2026-10-14T05:19:55Z"
   },
   "sa/olmo3/clm/pol": {
@@ -912,5 +911,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T11:04:07Z"
+ "updated_at": "2026-10-18T11:04:10Z"
 }
