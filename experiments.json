@@ -168,7 +168,7 @@
    "exit_code": -15
   },
   "clm/gemma3/load": {
-   "status": "todo"
+   "status": "running"
   },
   "clm/gemma3/polarity": {
    "status": "todo"
@@ -909,5 +909,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T13:28:20Z"
+ "updated_at": "2026-10-18T19:19:20Z"
 }
