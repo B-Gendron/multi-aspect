@@ -202,7 +202,7 @@
    "status": "running"
   },
   "sa/gemma3/clm/pol": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/gemma3/clm/load": {
    "status": "todo"
@@ -912,5 +912,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T19:46:17Z"
+ "updated_at": "2026-10-18T19:46:19Z"
 }
