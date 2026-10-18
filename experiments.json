@@ -513,7 +513,7 @@
    "exit_code": 0
   },
   "sa/gemma3/rand/cefr": {
-   "status": "failed",
+   "status": "running",
    "note": "altération de la génération"
   },
   "sa/gemma3/rand/pol": {
@@ -912,5 +912,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T10:58:15Z"
+ "updated_at": "2026-10-18T10:58:16Z"
 }
