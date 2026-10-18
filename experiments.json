@@ -387,7 +387,10 @@
    "exit_code": 0
   },
   "ma/qwen35_4b/rand": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-18T10:59:08Z",
+   "host": "henrihost",
+   "gpu": "0"
   },
   "ma/qwen35_4b/init": {
    "status": "todo"
@@ -912,5 +915,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T10:58:16Z"
+ "updated_at": "2026-10-18T10:59:08Z"
 }
