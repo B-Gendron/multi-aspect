@@ -27,7 +27,8 @@
    "finished_at": "2026-10-17T19:13:31Z"
   },
   "sa/falcon3/init/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-18T05:59:26Z"
   },
   "sa/falcon3/init/load": {
    "status": "running"
@@ -906,5 +907,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T05:58:15Z"
+ "updated_at": "2026-10-18T05:59:26Z"
 }
