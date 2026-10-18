@@ -475,7 +475,8 @@
    "finished_at": "2026-10-17T19:13:29Z"
   },
   "sa/falcon3/rand/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-18T05:58:14Z"
   },
   "sa/falcon3/rand/load": {
    "status": "running"
@@ -904,5 +905,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T05:56:59Z"
+ "updated_at": "2026-10-18T05:58:14Z"
 }
