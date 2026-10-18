@@ -19,7 +19,8 @@
    "finished_at": "2026-10-18T05:56:38Z"
   },
   "sa/falcon3/noemb/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-18T05:56:59Z"
   },
   "sa/falcon3/init/cefr": {
    "status": "done",
@@ -903,5 +904,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T05:56:38Z"
+ "updated_at": "2026-10-18T05:56:59Z"
 }
