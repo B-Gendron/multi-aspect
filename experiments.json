@@ -317,8 +317,7 @@
   },
   "clm/qwen35_4b/cefr": {
    "status": "done",
-   "finished_at": "2026-10-04T13:05:00Z",
-   "note": "completed all 20 epochs (235,720 steps, 44h), final eval loss 2.067; embeddings in embeddings/clm_multitoken/qwen35_4b_cefr.pt"
+   "finished_at": "2026-10-04T13:05:00Z"
   },
   "clm/qwen35_4b/load": {
    "status": "done",
@@ -910,5 +909,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T11:04:17Z"
+ "updated_at": "2026-10-18T11:04:22Z"
 }
