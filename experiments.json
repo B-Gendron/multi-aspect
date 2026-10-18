@@ -205,7 +205,7 @@
    "status": "running"
   },
   "sa/gemma3/clm/load": {
-   "status": "todo"
+   "status": "running"
   },
   "ma/gemma3/noemb": {
    "status": "todo"
@@ -912,5 +912,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T19:46:19Z"
+ "updated_at": "2026-10-18T19:46:20Z"
 }
