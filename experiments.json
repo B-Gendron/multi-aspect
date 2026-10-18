@@ -533,7 +533,6 @@
   },
   "sa/olmo3/rand/pol": {
    "status": "done",
-   "note": "no space left on device",
    "finished_at": "2026-10-14T11:12:18Z"
   },
   "sa/olmo3/rand/load": {
@@ -915,5 +914,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T11:03:53Z"
+ "updated_at": "2026-10-18T11:03:57Z"
 }
