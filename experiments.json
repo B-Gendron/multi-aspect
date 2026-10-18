@@ -180,7 +180,7 @@
    "finished_at": "2026-10-13T17:26:03Z"
   },
   "sa/gemma3/noemb/pol": {
-   "status": "failed",
+   "status": "running",
    "note": "no space left on device"
   },
   "sa/gemma3/noemb/load": {
@@ -912,5 +912,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T10:24:36Z"
+ "updated_at": "2026-10-18T10:58:13Z"
 }
