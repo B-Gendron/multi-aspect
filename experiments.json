@@ -479,7 +479,8 @@
    "finished_at": "2026-10-18T05:58:14Z"
   },
   "sa/falcon3/rand/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-18T05:58:15Z"
   },
   "sa/ministral3/rand/cefr": {
    "status": "done",
@@ -905,5 +906,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T05:58:14Z"
+ "updated_at": "2026-10-18T05:58:15Z"
 }
