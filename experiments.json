@@ -210,7 +210,7 @@
    "status": "running"
   },
   "ma/gemma3/noemb": {
-   "status": "todo"
+   "status": "planned"
   },
   "ma/gemma3/rand": {
    "status": "running"
@@ -914,5 +914,5 @@
    }
   ]
  },
- "updated_at": "2026-10-19T06:33:18Z"
+ "updated_at": "2026-10-19T06:33:19Z"
 }
