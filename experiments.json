@@ -200,7 +200,8 @@
    "finished_at": "2026-10-13T17:24:13Z"
   },
   "sa/gemma3/clm/cefr": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-19T06:01:28Z"
   },
   "sa/gemma3/clm/pol": {
    "status": "running"
@@ -913,5 +914,5 @@
    }
   ]
  },
- "updated_at": "2026-10-18T19:48:34Z"
+ "updated_at": "2026-10-19T06:01:28Z"
 }
