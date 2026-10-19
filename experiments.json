@@ -204,7 +204,8 @@
    "finished_at": "2026-10-19T06:01:28Z"
   },
   "sa/gemma3/clm/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-19T08:09:57Z"
   },
   "sa/gemma3/clm/load": {
    "status": "running"
@@ -914,5 +915,5 @@
    }
   ]
  },
- "updated_at": "2026-10-19T08:09:46Z"
+ "updated_at": "2026-10-19T08:09:57Z"
 }
