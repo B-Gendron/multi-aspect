@@ -393,10 +393,12 @@
    "gpu": "0"
   },
   "ma/qwen35_4b/init": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-18T10:59:17Z",
    "host": "henrihost",
-   "gpu": "1"
+   "gpu": "1",
+   "finished_at": "2026-10-19T15:07:49Z",
+   "exit_code": 0
   },
   "ma/qwen35_4b/clm": {
    "status": "todo"
@@ -916,5 +918,5 @@
    }
   ]
  },
- "updated_at": "2026-10-19T11:17:18Z"
+ "updated_at": "2026-10-19T15:07:50Z"
 }
