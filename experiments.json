@@ -387,7 +387,7 @@
    "exit_code": 0
   },
   "ma/qwen35_4b/rand": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-18T10:59:08Z",
    "host": "henrihost",
    "gpu": "0",
@@ -920,5 +920,5 @@
    }
   ]
  },
- "updated_at": "2026-10-19T15:50:56Z"
+ "updated_at": "2026-10-19T15:56:55Z"
 }
