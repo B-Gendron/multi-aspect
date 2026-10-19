@@ -227,7 +227,7 @@
    "status": "running"
   },
   "ma/gemma3/init_scr_aT": {
-   "status": "todo"
+   "status": "planned"
   },
   "clm/olmo3/cefr": {
    "status": "done"
@@ -916,5 +916,5 @@
    }
   ]
  },
- "updated_at": "2026-10-19T08:13:06Z"
+ "updated_at": "2026-10-19T08:13:08Z"
 }
