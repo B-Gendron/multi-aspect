@@ -221,7 +221,7 @@
    "status": "running"
   },
   "ma/gemma3/clm": {
-   "status": "todo"
+   "status": "planned"
   },
   "ma/gemma3/init_pre_aF": {
    "status": "running"
@@ -916,5 +916,5 @@
    }
   ]
  },
- "updated_at": "2026-10-19T08:15:50Z"
+ "updated_at": "2026-10-19T08:15:57Z"
 }
