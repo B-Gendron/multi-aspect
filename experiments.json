@@ -321,7 +321,7 @@
    "status": "running"
   },
   "ma/olmo3/init_scr_aT": {
-   "status": "todo"
+   "status": "running"
   },
   "clm/qwen35_4b/cefr": {
    "status": "done",
@@ -927,5 +927,5 @@
    }
   ]
  },
- "updated_at": "2026-10-20T12:02:12Z"
+ "updated_at": "2026-10-20T12:02:14Z"
 }
