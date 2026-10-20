@@ -123,7 +123,7 @@
    "status": "running"
   },
   "sa/ministral3/clm/pol": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/ministral3/clm/load": {
    "status": "running"
@@ -928,5 +928,5 @@
    }
   ]
  },
- "updated_at": "2026-10-20T16:26:37Z"
+ "updated_at": "2026-10-20T16:26:40Z"
 }
