@@ -472,7 +472,7 @@
    "finished_at": "2026-10-17T09:52:39Z"
   },
   "ma/qwen35_9b/noemb": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-19T15:57:52Z",
    "host": "henrihost",
    "gpu": "1",
@@ -929,5 +929,5 @@
    }
   ]
  },
- "updated_at": "2026-10-20T14:57:13Z"
+ "updated_at": "2026-10-20T15:39:27Z"
 }
