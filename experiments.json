@@ -224,7 +224,7 @@
    "status": "to_redo"
   },
   "ma/gemma3/init_pre_aF": {
-   "status": "running"
+   "status": "to_redo"
   },
   "ma/gemma3/init_scr_aT": {
    "status": "running"
@@ -926,5 +926,5 @@
    }
   ]
  },
- "updated_at": "2026-10-20T05:45:24Z"
+ "updated_at": "2026-10-20T05:45:26Z"
 }
