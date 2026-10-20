@@ -4,8 +4,7 @@
    "status": "done"
   },
   "clm/falcon3/load": {
-   "status": "running",
-   "note": "memory overflow on a single GPU"
+   "status": "running"
   },
   "clm/falcon3/polarity": {
    "status": "running"
@@ -926,5 +925,5 @@
    }
   ]
  },
- "updated_at": "2026-10-20T08:38:43Z"
+ "updated_at": "2026-10-20T08:38:52Z"
 }
