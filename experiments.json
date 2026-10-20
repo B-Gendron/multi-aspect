@@ -126,7 +126,7 @@
    "status": "todo"
   },
   "sa/ministral3/clm/load": {
-   "status": "todo"
+   "status": "running"
   },
   "ma/ministral3/noemb": {
    "status": "done",
@@ -928,5 +928,5 @@
    }
   ]
  },
- "updated_at": "2026-10-20T16:26:34Z"
+ "updated_at": "2026-10-20T16:26:37Z"
 }
