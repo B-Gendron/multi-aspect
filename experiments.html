@@ -20,6 +20,7 @@
             --red: #c0392b; --red-bg: #fbeae5;
             --todo: #adb5bd;
             --planned: #8e6bbf; --planned-bg: #f1ecf9;
+            --redo: #d6336c; --redo-bg: #fde8ef;
         }
         * { box-sizing: border-box; }
         body {
@@ -86,6 +87,7 @@
         .cell:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
         .s-todo { --c: var(--todo); }
         .s-planned { --c: var(--planned); --bg-c: var(--planned-bg); border-style: dashed; }
+        .s-to_redo { --c: var(--redo); --bg-c: var(--redo-bg); }
         .s-running { --c: var(--blue); --bg-c: var(--blue-bg); }
         .s-awaiting_check { --c: #b9770e; --bg-c: var(--amber-bg); border-color: var(--amber); }
         .s-done { --c: var(--green); --bg-c: var(--green-bg); }
@@ -180,9 +182,10 @@
         { key: "running",        label: "Running",                        color: "var(--blue)" },
         { key: "awaiting_check", label: "Finished", color: "var(--amber)" },
         { key: "done",           label: "Done",                           color: "var(--green)" },
+        { key: "to_redo",        label: "To redo",                        color: "var(--redo)" },
         { key: "failed",         label: "Failed",                         color: "var(--red)" }
     ];
-    var SHORT = { todo: "", planned: "planned", running: "running", awaiting_check: "check", done: "✓", failed: "✕" };
+    var SHORT = { todo: "", planned: "planned", to_redo: "to redo", running: "running", awaiting_check: "check", done: "✓", failed: "✕" };
     var state = null;             // {experiments, layout, updated_at}
     var progress = {};            // run id -> {step,total,elapsed_s,t}, published by the training machine (data branch)
     var token = null;
@@ -262,7 +265,7 @@
     // ---------- rendering
     function cid(c) { return c && typeof c === "object" ? c.id : c; }
     function counts() {
-        var seen = {}, c = { todo: 0, planned: 0, running: 0, awaiting_check: 0, done: 0, failed: 0 }, n = 0;
+        var seen = {}, c = { todo: 0, planned: 0, to_redo: 0, running: 0, awaiting_check: 0, done: 0, failed: 0 }, n = 0;
         state.layout.sections.forEach(function (s) { s.rows.forEach(function (r) { r.cells.forEach(function (cell) {
             var id = cid(cell);
             if (!id || seen[id]) return; seen[id] = 1; n++;
@@ -272,7 +275,7 @@
     }
     function renderProgress() {
         var k = counts(), c = k.c, n = k.n, bar = $("bar"); bar.textContent = "";
-        ["done", "awaiting_check", "running", "planned", "failed"].forEach(function (s) {
+        ["done", "awaiting_check", "running", "planned", "to_redo", "failed"].forEach(function (s) {
             var d = document.createElement("div"); d.style.width = (100 * c[s] / n) + "%";
             d.style.background = STATUSES.filter(function (x) { return x.key === s; })[0].color; bar.appendChild(d);
         });
