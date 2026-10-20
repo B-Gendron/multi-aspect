@@ -215,7 +215,7 @@
    "status": "to_redo"
   },
   "ma/gemma3/rand": {
-   "status": "running"
+   "status": "to_redo"
   },
   "ma/gemma3/init": {
    "status": "running"
@@ -926,5 +926,5 @@
    }
   ]
  },
- "updated_at": "2026-10-20T05:45:19Z"
+ "updated_at": "2026-10-20T05:45:21Z"
 }
