@@ -212,7 +212,7 @@
    "finished_at": "2026-10-19T08:09:58Z"
   },
   "ma/gemma3/noemb": {
-   "status": "running"
+   "status": "to_redo"
   },
   "ma/gemma3/rand": {
    "status": "running"
@@ -926,5 +926,5 @@
    }
   ]
  },
- "updated_at": "2026-10-19T15:57:52Z"
+ "updated_at": "2026-10-20T05:45:19Z"
 }
