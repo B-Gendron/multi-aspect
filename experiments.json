@@ -403,10 +403,12 @@
    "exit_code": 0
   },
   "ma/qwen35_4b/clm": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-19T15:57:34Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-20T20:29:30Z",
+   "exit_code": 0
   },
   "ma/qwen35_4b/init_pre_aF": {
    "status": "todo"
@@ -928,5 +930,5 @@
    }
   ]
  },
- "updated_at": "2026-10-20T16:26:40Z"
+ "updated_at": "2026-10-20T20:29:31Z"
 }
