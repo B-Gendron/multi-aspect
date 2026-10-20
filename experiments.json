@@ -8,7 +8,8 @@
    "finished_at": "2026-10-20T11:57:35Z"
   },
   "clm/falcon3/polarity": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-20T11:57:37Z"
   },
   "sa/falcon3/noemb/cefr": {
    "status": "done",
@@ -926,5 +927,5 @@
    }
   ]
  },
- "updated_at": "2026-10-20T11:57:35Z"
+ "updated_at": "2026-10-20T11:57:37Z"
 }
