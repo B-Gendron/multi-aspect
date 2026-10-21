@@ -423,7 +423,10 @@
    "gpu": "0"
   },
   "ma/qwen35_4b/init_scr_aT": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-21T07:36:55Z",
+   "host": "henrihost",
+   "gpu": "1"
   },
   "clm/qwen35_9b/cefr": {
    "status": "done",
@@ -939,5 +942,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T07:36:44Z"
+ "updated_at": "2026-10-21T07:36:55Z"
 }
