@@ -321,7 +321,8 @@
    "status": "todo"
   },
   "ma/olmo3/init_pre_aF": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-21T07:22:30Z"
   },
   "ma/olmo3/init_scr_aT": {
    "status": "running"
@@ -934,5 +935,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T07:14:40Z"
+ "updated_at": "2026-10-21T07:22:30Z"
 }
