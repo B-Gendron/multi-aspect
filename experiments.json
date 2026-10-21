@@ -128,7 +128,8 @@
    "finished_at": "2026-10-21T07:09:58Z"
   },
   "sa/ministral3/clm/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-21T07:10:00Z"
   },
   "ma/ministral3/noemb": {
    "status": "done",
@@ -932,5 +933,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T07:09:58Z"
+ "updated_at": "2026-10-21T07:10:00Z"
 }
