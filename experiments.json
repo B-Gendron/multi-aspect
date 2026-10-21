@@ -156,7 +156,7 @@
    "exit_code": 0
   },
   "ma/ministral3/clm": {
-   "status": "running"
+   "status": "planned"
   },
   "ma/ministral3/init_pre_aF": {
    "status": "running"
@@ -942,5 +942,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T07:50:00Z"
+ "updated_at": "2026-10-21T09:05:51Z"
 }
