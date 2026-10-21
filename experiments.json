@@ -124,7 +124,8 @@
    "finished_at": "2026-10-21T07:09:56Z"
   },
   "sa/ministral3/clm/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-21T07:09:58Z"
   },
   "sa/ministral3/clm/load": {
    "status": "running"
@@ -931,5 +932,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T07:09:56Z"
+ "updated_at": "2026-10-21T07:09:58Z"
 }
