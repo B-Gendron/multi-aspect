@@ -159,7 +159,7 @@
    "status": "running"
   },
   "ma/ministral3/init_pre_aF": {
-   "status": "planned"
+   "status": "running"
   },
   "ma/ministral3/init_scr_aT": {
    "status": "planned"
@@ -942,5 +942,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T11:42:36Z"
+ "updated_at": "2026-10-21T11:42:39Z"
 }
