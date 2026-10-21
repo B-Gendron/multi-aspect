@@ -325,7 +325,8 @@
    "finished_at": "2026-10-21T07:22:30Z"
   },
   "ma/olmo3/init_scr_aT": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-21T07:23:23Z"
   },
   "clm/qwen35_4b/cefr": {
    "status": "done",
@@ -935,5 +936,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T07:22:30Z"
+ "updated_at": "2026-10-21T07:23:23Z"
 }
