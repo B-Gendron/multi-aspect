@@ -409,7 +409,7 @@
    "exit_code": 0
   },
   "ma/qwen35_4b/clm": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-19T15:57:34Z",
    "host": "henrihost",
    "gpu": "0",
@@ -936,5 +936,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T07:23:23Z"
+ "updated_at": "2026-10-21T07:27:45Z"
 }
