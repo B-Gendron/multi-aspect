@@ -162,7 +162,7 @@
    "status": "running"
   },
   "ma/ministral3/init_scr_aT": {
-   "status": "planned"
+   "status": "running"
   },
   "clm/gemma3/cefr": {
    "status": "done",
@@ -942,5 +942,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T11:42:39Z"
+ "updated_at": "2026-10-21T11:42:42Z"
 }
