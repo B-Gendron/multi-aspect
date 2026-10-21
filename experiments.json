@@ -318,7 +318,7 @@
    "exit_code": 0
   },
   "ma/olmo3/clm": {
-   "status": "planned"
+   "status": "running"
   },
   "ma/olmo3/init_pre_aF": {
    "status": "done",
@@ -942,5 +942,5 @@
    }
   ]
  },
- "updated_at": "2026-10-21T11:42:33Z"
+ "updated_at": "2026-10-21T11:42:36Z"
 }
