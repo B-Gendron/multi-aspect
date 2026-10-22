@@ -429,10 +429,12 @@
    "exit_code": 0
   },
   "ma/qwen35_4b/init_scr_aT": {
-   "status": "running",
+   "status": "awaiting_check",
    "started_at": "2026-10-21T07:36:55Z",
    "host": "henrihost",
-   "gpu": "1"
+   "gpu": "1",
+   "finished_at": "2026-10-22T11:41:58Z",
+   "exit_code": 0
   },
   "clm/qwen35_9b/cefr": {
    "status": "done",
@@ -954,5 +956,5 @@
    }
   ]
  },
- "updated_at": "2026-10-22T11:16:01Z"
+ "updated_at": "2026-10-22T11:41:58Z"
 }
