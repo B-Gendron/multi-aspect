@@ -499,10 +499,13 @@
    "exit_code": 0
   },
   "ma/qwen35_9b/rand": {
-   "status": "running",
+   "status": "failed",
    "started_at": "2026-10-22T06:21:48Z",
    "host": "henrihost",
-   "gpu": "0"
+   "gpu": "0",
+   "finished_at": "2026-10-22T06:25:04Z",
+   "exit_code": 1,
+   "note": "exit code 1: RuntimeError: Ontology individual creation failed for batch 0: Command '['/usr/bin/python3', '../onto_processing/finetuning_batch_individuals_emo.py', '-i', '0', '-p', '../objects/batch_generations_0_"
   },
   "ma/qwen35_9b/init": {
    "status": "todo"
@@ -951,5 +954,5 @@
    }
   ]
  },
- "updated_at": "2026-10-22T06:21:48Z"
+ "updated_at": "2026-10-22T06:25:05Z"
 }
