@@ -51,7 +51,7 @@
    "status": "running"
   },
   "ma/falcon3/init": {
-   "status": "planned"
+   "status": "running"
   },
   "ma/falcon3/clm": {
    "status": "todo"
@@ -954,5 +954,5 @@
    }
   ]
  },
- "updated_at": "2026-10-22T11:15:46Z"
+ "updated_at": "2026-10-22T11:15:50Z"
 }
