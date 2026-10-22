@@ -45,7 +45,7 @@
    "status": "todo"
   },
   "ma/falcon3/noemb": {
-   "status": "todo"
+   "status": "planned"
   },
   "ma/falcon3/rand": {
    "status": "planned"
@@ -954,5 +954,5 @@
    }
   ]
  },
- "updated_at": "2026-10-22T10:44:14Z"
+ "updated_at": "2026-10-22T10:44:19Z"
 }
