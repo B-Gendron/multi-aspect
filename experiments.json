@@ -160,7 +160,8 @@
    "finished_at": "2026-10-22T05:58:52Z"
   },
   "ma/ministral3/init_pre_aF": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-22T05:59:15Z"
   },
   "ma/ministral3/init_scr_aT": {
    "status": "running"
@@ -946,5 +947,5 @@
    }
   ]
  },
- "updated_at": "2026-10-22T05:59:11Z"
+ "updated_at": "2026-10-22T05:59:15Z"
 }
