@@ -48,7 +48,7 @@
    "status": "planned"
   },
   "ma/falcon3/rand": {
-   "status": "planned"
+   "status": "running"
   },
   "ma/falcon3/init": {
    "status": "planned"
@@ -954,5 +954,5 @@
    }
   ]
  },
- "updated_at": "2026-10-22T10:49:28Z"
+ "updated_at": "2026-10-22T11:15:41Z"
 }
