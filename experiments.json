@@ -60,7 +60,7 @@
    "status": "planned"
   },
   "ma/falcon3/init_scr_aT": {
-   "status": "todo"
+   "status": "planned"
   },
   "clm/ministral3/cefr": {
    "status": "done"
@@ -954,5 +954,5 @@
    }
   ]
  },
- "updated_at": "2026-10-22T10:44:39Z"
+ "updated_at": "2026-10-22T10:44:41Z"
 }
