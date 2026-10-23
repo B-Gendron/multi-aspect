@@ -49,7 +49,8 @@
    "finished_at": "2026-10-23T16:58:02Z"
   },
   "ma/falcon3/rand": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-23T16:58:08Z"
   },
   "ma/falcon3/init": {
    "status": "done",
@@ -955,5 +956,5 @@
    }
   ]
  },
- "updated_at": "2026-10-23T16:58:07Z"
+ "updated_at": "2026-10-23T16:58:08Z"
 }
