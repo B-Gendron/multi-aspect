@@ -42,7 +42,7 @@
    "status": "todo"
   },
   "sa/falcon3/clm/load": {
-   "status": "todo"
+   "status": "running"
   },
   "ma/falcon3/noemb": {
    "status": "done",
@@ -956,5 +956,5 @@
    }
   ]
  },
- "updated_at": "2026-10-23T17:10:53Z"
+ "updated_at": "2026-10-23T17:10:56Z"
 }
