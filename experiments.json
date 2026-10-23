@@ -36,7 +36,7 @@
    "finished_at": "2026-10-18T06:00:04Z"
   },
   "sa/falcon3/clm/cefr": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/falcon3/clm/pol": {
    "status": "todo"
@@ -956,5 +956,5 @@
    }
   ]
  },
- "updated_at": "2026-10-23T16:58:08Z"
+ "updated_at": "2026-10-23T17:10:53Z"
 }
