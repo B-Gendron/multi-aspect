@@ -59,7 +59,8 @@
    "status": "todo"
   },
   "ma/falcon3/init_pre_aF": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-23T16:58:07Z"
   },
   "ma/falcon3/init_scr_aT": {
    "status": "running"
@@ -954,5 +955,5 @@
    }
   ]
  },
- "updated_at": "2026-10-23T16:58:05Z"
+ "updated_at": "2026-10-23T16:58:07Z"
 }
