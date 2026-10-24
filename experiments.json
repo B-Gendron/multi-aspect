@@ -222,7 +222,7 @@
    "finished_at": "2026-10-19T08:09:57Z"
   },
   "sa/gemma3/clm/load": {
-   "status": "done",
+   "status": "to_redo",
    "finished_at": "2026-10-19T08:09:58Z"
   },
   "ma/gemma3/noemb": {
@@ -963,5 +963,5 @@
    }
   ]
  },
- "updated_at": "2026-10-24T07:51:11Z"
+ "updated_at": "2026-10-24T07:51:20Z"
 }
