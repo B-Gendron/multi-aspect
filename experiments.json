@@ -43,7 +43,8 @@
    "status": "running"
   },
   "sa/falcon3/clm/load": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-24T07:21:28Z"
   },
   "ma/falcon3/noemb": {
    "status": "done",
@@ -961,5 +962,5 @@
    }
   ]
  },
- "updated_at": "2026-10-24T07:21:25Z"
+ "updated_at": "2026-10-24T07:21:28Z"
 }
