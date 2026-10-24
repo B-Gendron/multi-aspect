@@ -40,7 +40,8 @@
    "finished_at": "2026-10-24T07:21:25Z"
   },
   "sa/falcon3/clm/pol": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-24T07:21:34Z"
   },
   "sa/falcon3/clm/load": {
    "status": "done",
@@ -962,5 +963,5 @@
    }
   ]
  },
- "updated_at": "2026-10-24T07:21:28Z"
+ "updated_at": "2026-10-24T07:21:34Z"
 }
