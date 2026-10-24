@@ -202,7 +202,7 @@
    "finished_at": "2026-10-18T19:48:34Z"
   },
   "sa/gemma3/init/cefr": {
-   "status": "done",
+   "status": "to_redo",
    "finished_at": "2026-10-13T17:03:11Z"
   },
   "sa/gemma3/init/pol": {
@@ -963,5 +963,5 @@
    }
   ]
  },
- "updated_at": "2026-10-24T07:50:51Z"
+ "updated_at": "2026-10-24T07:50:59Z"
 }
