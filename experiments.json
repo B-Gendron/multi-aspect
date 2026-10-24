@@ -198,7 +198,7 @@
    "finished_at": "2026-10-18T19:41:26Z"
   },
   "sa/gemma3/noemb/load": {
-   "status": "done",
+   "status": "to_redo",
    "finished_at": "2026-10-18T19:48:34Z"
   },
   "sa/gemma3/init/cefr": {
@@ -963,5 +963,5 @@
    }
   ]
  },
- "updated_at": "2026-10-24T07:38:51Z"
+ "updated_at": "2026-10-24T07:49:38Z"
 }
