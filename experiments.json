@@ -573,7 +573,7 @@
    "finished_at": "2026-10-13T17:28:22Z"
   },
   "sa/gemma3/rand/load": {
-   "status": "to_redo",
+   "status": "done",
    "finished_at": "2026-10-13T17:29:40Z"
   },
   "sa/olmo3/rand/cefr": {
@@ -963,5 +963,5 @@
    }
   ]
  },
- "updated_at": "2026-10-24T07:51:48Z"
+ "updated_at": "2026-10-24T07:52:07Z"
 }
