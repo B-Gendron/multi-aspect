@@ -67,7 +67,8 @@
    "finished_at": "2026-10-23T16:58:07Z"
   },
   "ma/falcon3/init_scr_aT": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-24T07:57:44Z"
   },
   "clm/ministral3/cefr": {
    "status": "done"
@@ -963,5 +964,5 @@
    }
   ]
  },
- "updated_at": "2026-10-24T07:52:07Z"
+ "updated_at": "2026-10-24T07:57:44Z"
 }
