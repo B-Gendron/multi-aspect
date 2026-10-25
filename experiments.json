@@ -524,7 +524,9 @@
    "exit_code": 0
   },
   "ma/qwen35_9b/clm": {
-   "status": "todo"
+   "status": "running",
+   "started_at": "2026-10-25T16:59:32Z",
+   "host": "henrihost"
   },
   "ma/qwen35_9b/init_pre_aF": {
    "status": "todo"
@@ -967,5 +969,5 @@
    }
   ]
  },
- "updated_at": "2026-10-25T16:58:50Z"
+ "updated_at": "2026-10-25T16:59:32Z"
 }
