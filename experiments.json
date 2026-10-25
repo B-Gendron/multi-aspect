@@ -60,7 +60,8 @@
    "finished_at": "2026-10-23T16:58:05Z"
   },
   "ma/falcon3/clm": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-25T06:44:24Z"
   },
   "ma/falcon3/init_pre_aF": {
    "status": "done",
@@ -964,5 +965,5 @@
    }
   ]
  },
- "updated_at": "2026-10-24T08:20:59Z"
+ "updated_at": "2026-10-25T06:44:24Z"
 }
