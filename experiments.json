@@ -517,7 +517,7 @@
    "exit_code": 0
   },
   "ma/qwen35_9b/init": {
-   "status": "awaiting_check",
+   "status": "done",
    "started_at": "2026-10-24T07:16:09Z",
    "host": "henrihost",
    "finished_at": "2026-10-25T12:35:28Z",
@@ -967,5 +967,5 @@
    }
   ]
  },
- "updated_at": "2026-10-25T12:35:28Z"
+ "updated_at": "2026-10-25T16:58:50Z"
 }
