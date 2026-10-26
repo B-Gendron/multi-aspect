@@ -196,7 +196,7 @@
    "finished_at": "2026-10-13T17:26:03Z"
   },
   "sa/gemma3/noemb/pol": {
-   "status": "running",
+   "status": "done",
    "finished_at": "2026-10-18T19:41:26Z"
   },
   "sa/gemma3/noemb/load": {
@@ -969,5 +969,5 @@
    }
   ]
  },
- "updated_at": "2026-10-26T13:16:45Z"
+ "updated_at": "2026-10-26T13:16:46Z"
 }
