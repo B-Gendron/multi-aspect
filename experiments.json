@@ -212,7 +212,7 @@
    "finished_at": "2026-10-13T17:34:43Z"
   },
   "sa/gemma3/init/load": {
-   "status": "to_redo",
+   "status": "running",
    "finished_at": "2026-10-13T17:24:13Z"
   },
   "sa/gemma3/clm/cefr": {
@@ -969,5 +969,5 @@
    }
   ]
  },
- "updated_at": "2026-10-26T07:20:30Z"
+ "updated_at": "2026-10-26T07:20:32Z"
 }
