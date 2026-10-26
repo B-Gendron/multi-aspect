@@ -234,7 +234,7 @@
    "status": "running"
   },
   "ma/gemma3/init": {
-   "status": "to_redo"
+   "status": "running"
   },
   "ma/gemma3/clm": {
    "status": "to_redo"
@@ -969,5 +969,5 @@
    }
   ]
  },
- "updated_at": "2026-10-26T14:37:45Z"
+ "updated_at": "2026-10-26T14:37:50Z"
 }
