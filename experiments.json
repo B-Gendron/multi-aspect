@@ -243,7 +243,8 @@
    "finished_at": "2026-10-27T12:47:26Z"
   },
   "ma/gemma3/init_pre_aF": {
-   "status": "running"
+   "status": "done",
+   "finished_at": "2026-10-27T12:50:13Z"
   },
   "ma/gemma3/init_scr_aT": {
    "status": "running"
@@ -976,5 +977,5 @@
    }
   ]
  },
- "updated_at": "2026-10-27T12:47:26Z"
+ "updated_at": "2026-10-27T12:50:13Z"
 }
