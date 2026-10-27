@@ -537,7 +537,7 @@
    "exit_code": 0
   },
   "ma/qwen35_9b/init_pre_aF": {
-   "status": "awaiting_check",
+   "status": "to_redo",
    "started_at": "2026-10-26T21:16:06Z",
    "host": "henrihost",
    "finished_at": "2026-10-27T19:27:11Z",
@@ -981,5 +981,5 @@
    }
   ]
  },
- "updated_at": "2026-10-27T20:45:49Z"
+ "updated_at": "2026-10-27T20:47:19Z"
 }
