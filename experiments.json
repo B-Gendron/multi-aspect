@@ -544,7 +544,7 @@
    "exit_code": 0
   },
   "ma/qwen35_9b/init_scr_aT": {
-   "status": "todo"
+   "status": "running"
   },
   "sa/falcon3/rand/cefr": {
    "status": "done",
@@ -981,5 +981,5 @@
    }
   ]
  },
- "updated_at": "2026-10-27T19:27:12Z"
+ "updated_at": "2026-10-27T20:45:49Z"
 }
