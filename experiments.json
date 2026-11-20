@@ -56,8 +56,9 @@
    "finished_at": "2026-10-23T16:58:08Z"
   },
   "ma/falcon3/init": {
-   "status": "done",
-   "finished_at": "2026-10-23T16:58:05Z"
+   "status": "running",
+   "started_at": "2026-11-20T06:39:25Z",
+   "host": "granite-14.nancy.grid5000.fr"
   },
   "ma/falcon3/clm": {
    "status": "done",
@@ -982,5 +983,5 @@
    }
   ]
  },
- "updated_at": "2026-10-28T08:36:36Z"
+ "updated_at": "2026-11-20T06:39:26Z"
 }
